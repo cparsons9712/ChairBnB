@@ -3,17 +3,33 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Spots extends Model {
+  class Spot extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Spot.hasMany(
+        models.Booking,{
+      }),
+      Spot.hasMany(
+        models.Review,{
+      }),
+      Spot.hasMany(
+        models.Image, {
+          foreignKey: 'refId',
+          constraints: false,
+          scope: {
+            type: 'Spot'
+          }
+      }),
+      Spot.belongsTo(models.user, {
+        foreignKey: 'ownerId'
+      })
     }
   }
-  Spots.init({
+  Spot.init({
     ownerId: DataTypes.INTEGER,
     address: {
       type: DataTypes.STRING,
@@ -56,7 +72,14 @@ module.exports = (sequelize, DataTypes) => {
     previewImageId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Spots',
+    validate: {
+      bothCoordsOrNone() {
+        if ((this.lat === null) !== (this.lng === null)) {
+          throw new Error('Please enter complete coordinates or leave them out.');
+        }
+      }
+    },
+    modelName: 'Spot',
   });
-  return Spots;
+  return Spot;
 };
