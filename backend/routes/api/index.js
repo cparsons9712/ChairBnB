@@ -3,7 +3,7 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const userRouter = require ('./user.js')
 const spotsRouter = require('./spots.js')
-
+const imagesRouter = require('./images.js')
 
 
 const { restoreUser } = require("../../utils/auth.js");
@@ -20,6 +20,8 @@ router.use('/users', usersRouter);
 router.use('/user', userRouter)
 
 router.use('/spots', spotsRouter)
+
+router.use('/images', imagesRouter)
 
 
 

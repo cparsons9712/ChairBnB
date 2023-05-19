@@ -11,10 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Booking.hasOne(models.Spot, {
-        foreignKey: 'spotId'
+        foreignKey: 'id',
+        otherKey: 'spotId'
       })
       Booking.hasOne(models.User, {
-        foreignKey: 'userId'
+        foreignKey: 'id',
+        otherKey:'UserId'
       })
     }
   }
