@@ -55,9 +55,6 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false
       },
-      previewImageId: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

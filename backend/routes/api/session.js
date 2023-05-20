@@ -2,7 +2,7 @@ const express = require('express');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User , Spot, Review, Image, sequelize} = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -18,7 +18,10 @@ const validateLogin = [
   handleValidationErrors
 ];
 
-//sign in
+
+/*******************************************
+    SIGN IN A USER
+******************************************/
 router.post(
   '/',
   validateLogin,
@@ -57,8 +60,10 @@ router.post(
     });
   }
 );
+/*******************************************
+    SIGN OUT
+******************************************/
 
-//signout
 router.delete(
     '/',
     (_req, res) => {
@@ -66,8 +71,9 @@ router.delete(
       return res.json({ message: 'success' });
     }
 );
-
-//get session user
+/*******************************************
+   GET CURRENT SIGNED IN USER
+******************************************/
 router.get('/', (req,res) => {
   const { user } = req;
   if (user) {
@@ -84,6 +90,39 @@ router.get('/', (req,res) => {
   } else return res.json ({ user: null})
 });
 
+/*******************************************
+    GET USER'S SPOTS
+******************************************/
+router.get('/spots', async (req, res) =>{
+  const spots = await Spot.findAll({
+    where: {ownerId: req.user.id},
+    include: [
+      {
+        model: Review,
+        attributes: []
+      },
+      {
+        model: Image,
+        attributes: [],
+        where: {
+          preview: true
+        }
+      }
+    ],
+    //this key adds new key value pairs into our object
+    attributes: {
+      include: [
+        [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview'],
+        [sequelize.col('Images.url'), 'previewImage']
+      ],
+    },
+    //this tells the function that the above values should be limited to each id
+    group: ['Spot.id']
+
+  })
+
+  return res.json(spots)
+})
 
 
 module.exports = router;

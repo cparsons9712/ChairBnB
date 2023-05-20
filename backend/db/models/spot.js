@@ -26,11 +26,13 @@ module.exports = (sequelize, DataTypes) => {
           constraints: false,
           scope: {
             type: 'Spot'
-          }
+          },
+          as: 'SpotImages'
       }),
       Spot.belongsTo(models.User, {
         foreignKey: 'id',
-        otherKey: 'userId'
+        otherKey: 'userId',
+        as: 'Owner'
       })
     }
   }
@@ -73,8 +75,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     description: DataTypes.TEXT,
-    price: DataTypes.DECIMAL,
-    previewImageId: DataTypes.INTEGER
+    price: DataTypes.DECIMAL
+
   }, {
     sequelize,
     validate: {
