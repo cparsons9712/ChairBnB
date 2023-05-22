@@ -120,7 +120,7 @@ router.get('/spots', async (req, res) =>{
       ],
     },
     // //this tells the function that the above values should be limited to each id
-     group: ['Spot.id']
+     group: ['Spot.id', 'SpotImages.url']
 
   })
 
