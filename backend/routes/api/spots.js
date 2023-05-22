@@ -10,32 +10,58 @@ const router = express.Router();
     GET ALL SPOTS
 ******************************************/
 router.get('/', async (req, res, next) => {
-    const spots = await Spot.findAll({
-      include: [
-        {
-          model: Review,
-          attributes: []
-        },
-        {
-          model: Image,
-          attributes: [],
-          where: {
-            preview: true
-          },
-          as: 'SpotImages'
-        }
-      ],
-      attributes: {
-        include: [
-          [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview'],
-          [sequelize.col('SpotImages.url'), 'previewImage']
-        ],
-      },
-      group: ['Spot.id', 'SpotImages.url'],
-    });
+    const spots = await Spot.findAll()
+    let resultsSpot = []
+    for (let spot of spots){
+        spot = spot.toJSON()
 
-    return res.json(spots);
-  });
+       let starsum = await Review.sum('stars', {where: {spotId: spot.id}})
+
+       let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}})
+
+       spot.avgRating = starsum/count
+
+
+        let image = await Image.findOne({
+            where: {refId: spot.id, preview: true},
+            attributes: ['url']
+        })
+        
+        spot.previewImage = image
+
+        resultsSpot.push(spot)
+    }
+    res.json(resultsSpot)
+})
+    // loop through to avg the review
+
+
+    //   include: [
+    //     {
+    //       model: Review,
+    //       attributes: []
+    //     },
+    //     {
+    //       model: Image,
+    //       attributes: [],
+    //       where: {
+    //         preview: true
+    //       },
+    //       as: 'SpotImages'
+    //     }
+    //   ],
+    //   attributes: {
+    //     include: [
+    //       [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview'],
+    //       [sequelize.col('SpotImages.url'), 'previewImage']
+    //     ],
+    //   },
+    //   group: ['Spot.id', 'SpotImages.url'],
+ //return res.json(spots);
+
+
+
+
 /*******************************************
     GET SPOT BY ID
 ******************************************/
@@ -84,18 +110,18 @@ router.get('/:id', async (req,res)=>{
     CREATE A SPOT
 ******************************************/
 router.post('/', async (req, res, next)=> {
-    try{
-        const {address, city, state, country, lat, lng, name, description, price} = req.body;
-        const ownerId = req.user.id
+    const {address, city, state, country, lat, lng, name, description, price} = req.body
+    if(!req.user){
+        const autherr = new Error()
+        autherr.status = 403
+        autherr.message = "Authentication required"
+        return next(autherr)
+    }else {
         const newSpot = await Spot.create({
-            ownerId, address, city, state,country, lat, lng, name, description, price
-        });
-        res.json({
-            message: newSpot,
-            data: newSpot
+            ownerId: +req.user.id,
+            address, city, state, country, lat, lng, name, description, price
         })
-    } catch(err){
-        next(err)
+        res.json(newSpot)
     }
 })
 /*******************************************
@@ -132,8 +158,51 @@ router.post('/:id/images', async (req, res, next)=> {
         res.json(newImage)
     }
 })
+/*******************************************
+    EDIT A SPOT
+******************************************/
+router.put('/:id', async(req,res, next)=> {
+    try{
+        if(!req.user){
+            res.json({"message": "Authentication required"})
+        }
+        let spot = await Spot.findByPk(req.params.id)
+        let {address, city, state, country, lat, lng, name, description, price} = req.body
+        if(!spot){
+            res.json({ "message": "Spot couldn't be found"})
+        }
+        if(spot.ownerId !== req.user.id){
+            res.json({"message": "Forbidden"})
+        }
+        await spot.update({address, city, state, country, lat, lng, name, description, price})
+        res.json (spot)
+    }catch(err){
+        next(err)
+    }
 
+})
+/*******************************************
+    DELETE A SPOT
+******************************************/
+router.delete('/:id', async(req,res, next)=> {
+    try{
+        if(!req.user){
+            res.json({"message": "Authentication required"})
+        }
+        let spot = await Spot.findByPk(req.params.id)
+        if(!spot){
+            res.json({ "message": "Spot couldn't be found"})
+        }
+        if(spot.ownerId !== req.user.id){
+            res.json({"message": "Forbidden"})
+        }
+        await spot.destroy()
+        return res.json({"message": "Successfully deleted"})
+    }catch(err){
+        next(err)
+    }
 
+})
 /*******************************************
     DELETE A SPOT IMAGE
 ******************************************/
