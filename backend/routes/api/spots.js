@@ -72,7 +72,7 @@ router.get('/:id', async (req,res)=>{
         ],
       },
       //this tells the function that the above values should be limited to each id
-      group: ['SpotImages.id']})
+      group: ['SpotImages.id', 'Spot.id']})
 
     res.json(spot)
 })
