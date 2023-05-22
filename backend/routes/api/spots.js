@@ -69,7 +69,14 @@ router.get('/:id', async (req,res)=>{
         ],
       },
       //this tells the function that the above values should be limited to each id
-      group: ['SpotImages.id', 'Spot.id', 'Owner.id']})
+      group: ['SpotImages.id', 'Spot.id', 'Owner.id']
+    })
+
+    if(!spot){
+        res.json({
+            "message": "Spot couldn't be found"
+          })
+    }
 
     res.json(spot)
 })

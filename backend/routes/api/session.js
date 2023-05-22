@@ -95,7 +95,9 @@ router.get('/', (req,res) => {
 ******************************************/
 router.get('/spots', async (req, res) =>{
   if(!req.user){
-    return res.json("USER MUST BE SIGNED IN")
+    return res.json({
+      "message": "Authentication required"
+    })
   }
   console.log(req.user)
   const spots = await Spot.findAll({
