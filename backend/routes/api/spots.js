@@ -31,7 +31,7 @@ router.get('/', async (req, res, next) => {
           [sequelize.col('SpotImages.url'), 'previewImage']
         ],
       },
-      group: ['Spot.id', 'SpotImages.url'], 
+      group: ['Spot.id', 'SpotImages.url'],
     });
 
     return res.json(spots);
@@ -69,7 +69,7 @@ router.get('/:id', async (req,res)=>{
         ],
       },
       //this tells the function that the above values should be limited to each id
-      group: ['SpotImages.id', 'Spot.id']})
+      group: ['SpotImages.id', 'Spot.id', 'Owner.id']})
 
     res.json(spot)
 })
