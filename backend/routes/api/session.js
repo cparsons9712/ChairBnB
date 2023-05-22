@@ -94,31 +94,35 @@ router.get('/', (req,res) => {
     GET USER'S SPOTS
 ******************************************/
 router.get('/spots', async (req, res) =>{
+  if(!req.user){
+    return res.json("USER MUST BE SIGNED IN")
+  }
+  console.log(req.user)
   const spots = await Spot.findAll({
-    where: {ownerId: +req.user.id},
-    include: [
-      {
-        model: Review,
-        attributes: [],
-        where:{ spotId : +req.params.id}
-      },
-      {
-        model: Image,
-        attributes: ['id', 'url', 'preview'],
-        where: {refId: +req.params.id },
-        as: 'SpotImages'
+    where: {ownerId: req.user.id},
+    // include: [
+    //   {
+    //     model: Review,
+    //     attributes: [],
+    //     where:{ spotId : +req.params.id}
+    //   },
+    //   {
+    //     model: Image,
+    //     attributes: ['id', 'url', 'preview'],
+    //     where: {refId: +req.params.id },
+    //     as: 'SpotImages'
 
-      },
-    ],
-    //this key adds new key value pairs into our object
-    attributes: {
-      include: [
-        [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview'],
-        [sequelize.col('Images.url'), 'previewImage']
-      ],
-    },
-    //this tells the function that the above values should be limited to each id
-    group: ['Spot.id','SpotImages.id']
+    //   },
+    // ],
+    // //this key adds new key value pairs into our object
+    // attributes: {
+    //   include: [
+    //     [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview'],
+    //     [sequelize.col('Images.url'), 'previewImage']
+    //   ],
+    // },
+    // //this tells the function that the above values should be limited to each id
+    // group: ['Spot.id','SpotImages.id']
 
   })
 
