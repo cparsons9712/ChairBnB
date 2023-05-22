@@ -100,7 +100,7 @@ router.get('/spots', async (req, res) =>{
       {
         model: Review,
         attributes: [],
-        where:{ spotId : req.params.id}
+        where:{ spotId : +req.params.id}
       },
       {
         model: Image,
