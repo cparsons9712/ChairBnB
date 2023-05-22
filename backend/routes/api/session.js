@@ -106,7 +106,8 @@ router.get('/spots', async (req, res) =>{
         attributes: [],
         where: {
           preview: true
-        }
+        },
+        as: 'SpotImages'
       }
     ],
     //this key adds new key value pairs into our object
