@@ -11,8 +11,7 @@ const router = express.Router();
 ******************************************/
 router.get('/', async (req, res, next) => {
     const spots = await Spot.findAll({
-        // this key holds an array of objects containing each table that has additional data we need
-        include: [
+      include: [
         {
           model: Review,
           attributes: []
@@ -26,15 +25,13 @@ router.get('/', async (req, res, next) => {
           as: 'SpotImages'
         }
       ],
-      //this key adds new key value pairs into our object
       attributes: {
         include: [
           [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview'],
           [sequelize.col('SpotImages.url'), 'previewImage']
         ],
       },
-      //this tells the function that the above values should be limited to each id
-      group: ['Spot.id', 'spotImages.url']
+      group: ['Spot.id', 'SpotImages.url'], 
     });
 
     return res.json(spots);
