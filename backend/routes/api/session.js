@@ -99,16 +99,16 @@ router.get('/spots', async (req, res) =>{
     include: [
       {
         model: Review,
-        attributes: []
+        attributes: [],
+        where:{ spotId : req.params.id}
       },
       {
         model: Image,
-        attributes: [],
-        where: {
-          preview: true
-        },
+        attributes: ['id', 'url', 'preview'],
+        where: {refId: +req.params.id },
         as: 'SpotImages'
-      }
+
+      },
     ],
     //this key adds new key value pairs into our object
     attributes: {
@@ -118,7 +118,7 @@ router.get('/spots', async (req, res) =>{
       ],
     },
     //this tells the function that the above values should be limited to each id
-    group: ['Spot.id']
+    group: ['Spot.id','SpotImages.id']
 
   })
 

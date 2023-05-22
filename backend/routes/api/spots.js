@@ -40,7 +40,8 @@ router.get('/', async (req, res, next) => {
     GET SPOT BY ID
 ******************************************/
 router.get('/:id', async (req,res)=>{
-    const spot = await Spot.findByPk(+req.params.id, {include: [
+    const spot = await Spot.findByPk(+req.params.id, {
+        include: [
         {
           model: Review,
           attributes: [],
