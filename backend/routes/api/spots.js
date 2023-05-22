@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 
        let starsum = await Review.sum('stars', {where: {spotId: spot.id}})
 
-       let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}})
+       let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}, attributes: ['stars']})
 
        spot.avgRating = starsum/count
 
@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
             where: {refId: spot.id, preview: true},
             attributes: ['url']
         })
-        
+
         spot.previewImage = image
 
         resultsSpot.push(spot)
