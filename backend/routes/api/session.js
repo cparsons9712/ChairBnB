@@ -95,7 +95,7 @@ router.get('/', (req,res) => {
 ******************************************/
 router.get('/spots', async (req, res) =>{
   const spots = await Spot.findAll({
-    where: {ownerId: req.user.id},
+    where: {ownerId: +req.user.id},
     include: [
       {
         model: Review,
