@@ -52,7 +52,6 @@ router.get('/:id', async (req,res)=>{
           attributes: ['id', 'url', 'preview'],
           where: {refId: +req.params.id },
           as: 'SpotImages'
-
         },
         {
             model: User,

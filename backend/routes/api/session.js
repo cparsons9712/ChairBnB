@@ -100,29 +100,27 @@ router.get('/spots', async (req, res) =>{
   console.log(req.user)
   const spots = await Spot.findAll({
     where: {ownerId: req.user.id},
-    // include: [
-    //   {
-    //     model: Review,
-    //     attributes: [],
-    //     where:{ spotId : +req.params.id}
-    //   },
-    //   {
-    //     model: Image,
-    //     attributes: ['id', 'url', 'preview'],
-    //     where: {refId: +req.params.id },
-    //     as: 'SpotImages'
-
-    //   },
-    // ],
+    include: [
+      {
+        model: Review,
+        attributes: [],
+      },
+      {
+        model: Image,
+        attributes: [],
+        where: {preview: true},
+        as: 'SpotImages'
+      },
+     ],
     // //this key adds new key value pairs into our object
-    // attributes: {
-    //   include: [
-    //     [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview'],
-    //     [sequelize.col('Images.url'), 'previewImage']
-    //   ],
-    // },
+    attributes: {
+      include: [
+        [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview'],
+        [sequelize.col('SpotImages.url'), 'previewImage']
+      ],
+    },
     // //this tells the function that the above values should be limited to each id
-    // group: ['Spot.id','SpotImages.id']
+     group: ['Spot.id']
 
   })
 
