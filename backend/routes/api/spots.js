@@ -39,7 +39,42 @@ router.get('/', async (req, res, next) => {
 
     return res.json(spots);
   });
+/*******************************************
+    GET SPOT BY ID
+******************************************/
+router.get('/:id', async (req,res)=>{
+    const spot = await Spot.findByPk(+req.params.id, {include: [
+        {
+          model: Review,
+          attributes: [],
+          where:{ spotId : req.params.id}
+        },
+        {
+          model: Image,
+          attributes: ['id', 'url', 'preview'],
+          as: 'SpotImages'
 
+        },
+        {
+            model: User,
+            attributes: ['id', 'firstName', 'LastName'],
+            as: "Owner"
+          },
+      ],
+      //this key adds new key value pairs into our object
+      attributes: {
+        include: [
+            [sequelize.fn('COUNT', sequelize.col('Reviews.stars')), 'numReviews'],
+
+            [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview']
+
+        ],
+      },
+      //this tells the function that the above values should be limited to each id
+      group: ['SpotImages.id']})
+
+    res.json(spot)
+})
 /*******************************************
     CREATE A SPOT
 ******************************************/
@@ -130,42 +165,7 @@ router.delete('/images/:id', async (req, res, next)=> {
     }
 })
 
-/*******************************************
-    GET SPOT BY ID
-******************************************/
-router.get('/:id', async (req,res)=>{
-    const spot = await Spot.findByPk(+req.params.id, {include: [
-        {
-          model: Review,
-          attributes: [],
-          where:{ spotId : req.params.id}
-        },
-        {
-          model: Image,
-          attributes: ['id', 'url', 'preview'],
-          as: 'SpotImages'
 
-        },
-        {
-            model: User,
-            attributes: ['id', 'firstName', 'LastName'],
-            as: "Owner"
-          },
-      ],
-      //this key adds new key value pairs into our object
-      attributes: {
-        include: [
-            [sequelize.fn('COUNT', sequelize.col('Reviews.stars')), 'numReviews'],
-
-            [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview']
-
-        ],
-      },
-      //this tells the function that the above values should be limited to each id
-      group: ['SpotImages.id']})
-
-    res.json(spot)
-})
 
 
 

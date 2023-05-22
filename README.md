@@ -10,6 +10,8 @@ https://dbdiagram.io/d/645181a6dca9fb07c4645429
 
 ## API Documentation
 
+`All URLS are prefixed with /api`
+
 ## USER AUTHENTICATION/AUTHORIZATION
 
 ### All endpoints that require authentication
@@ -54,7 +56,7 @@ Returns the information about the current user that is logged in.
 * Require Authentication: true
 * Request
   * Method: `GET`
-  * URL: `/user`
+  * URL: `/session`
   * Body: none
 
 * Successful Response when there is a logged in user
@@ -94,8 +96,8 @@ information.
 
 * Require Authentication: false
 * Request
-  * Method: get
-  * URL: /login
+  * Method: `POST`
+  * URL: `/session`
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -160,8 +162,8 @@ user's information.
 
 * Require Authentication: false
 * Request
-  * Method: POST
-  * URL: /users
+  * Method: `POST`
+  * URL: `/session`
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -291,7 +293,7 @@ Returns all the spots owned (created) by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: `/user/spots`
+  * URL: `/session/spots`
   * Body: none
 
 * Successful Response
@@ -1320,8 +1322,8 @@ Delete an existing image for a Spot.
 * Require Authentication: true
 * Require proper authorization: Spot must belong to the current user
 * Request
-  * Method: DELETE
-  * URL: /images/:id
+  * Method: `DELETE`
+  * URL: `spots/images/:id`
   * Body: none
 
 * Successful Response
@@ -1355,8 +1357,8 @@ Delete an existing image for a Review.
 * Require Authentication: true
 * Require proper authorization: Review must belong to the current user
 * Request
-  * Method: DELETE
-  * URL: /images/:id
+  * Method: `DELETE`
+  * URL: `reviews/images/:id`
   * Body: none
 
 * Successful Response
