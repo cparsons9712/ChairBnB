@@ -91,7 +91,8 @@ router.post('/', async (req, res, next)=> {
             ownerId, address, city, state,country, lat, lng, name, description, price
         });
         res.json({
-            newSpot
+            message: newSpot,
+            data: newSpot
         })
     } catch(err){
         next(err)
