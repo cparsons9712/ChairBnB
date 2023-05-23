@@ -8,7 +8,9 @@ const router = express.Router();
     GET ALL SPOTS
 ******************************************/
 router.get('/', async (req, res, next) => {
+    const {page, size, minLat, maxLat, minLng, maxLng,minPrice,maxPrice} = req.query
     const spots = await Spot.findAll()
+
     let resultsSpot = []
     // go threw each spot to formatt correctly
     for (let spot of spots){
