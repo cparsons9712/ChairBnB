@@ -73,7 +73,20 @@ router.get('/:spotId/reviews', async (req,res,next)=>{
         where: {spotId : req.params.spotId }
     })
     for (let review of reviews){
-        
+        review = review.toJSON()
+        const user = await User.findOne({
+            where: {id:review.userId},
+            attributes: ['id', 'firstName', 'lastName']
+        })
+        review.User = user
+        const images = await Image.findAll({
+            where: {type: 'Review', refId: review.id},
+            attributes: ['id', 'url']
+        })
+        review.ReviewImages= images;
+
+
+        editedReviews.push(review)
     }
     res.json(editedReviews)
 })
