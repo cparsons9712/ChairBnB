@@ -129,5 +129,24 @@ router.get('/spots', async (req, res) =>{
   return res.json(spots)
 })
 
+/*******************************************
+    GET USER'S REVIEWS
+******************************************/
+router.get('/reviews', async (req, res)=>{
+  const editedReviews = [];
+  let reviews = await Review.findAll({
+    where: {userId: req.user.id}
+  })
+  console.log(reviews)
+    for (let review in reviews){
+      review = JSON.stringify(review.dataValues)
+      console.log(review)
+      let user = {'id': req.user.id, 'firstName' :req.user.firstName}
+      review.User = user
+
+      editedReviews.push(review)
+    }
+    res.json(editedReviews)
+})
 
 module.exports = router;
