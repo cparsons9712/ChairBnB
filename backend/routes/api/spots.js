@@ -1,8 +1,6 @@
 const express = require('express');
 const { Image, Spot, Review, User, sequelize } = require('../../db/models');
-const { Op } = require("sequelize");
-const spot = require('../../db/models/spot');
-const handleValidationErrors = require('../../utils/validation')
+
 
 const router = express.Router();
 
@@ -12,98 +10,56 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
     const spots = await Spot.findAll()
     let resultsSpot = []
+    // go threw each spot to formatt correctly
     for (let spot of spots){
         spot = spot.toJSON()
-
-       let starsum = await Review.sum('stars', {where: {spotId: spot.id}})
-
-       let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}, attributes: ['stars']})
-
-       spot.avgRating = starsum/count
-
-
-        let image = await Image.findOne({
-            where: {refId: spot.id, preview: true},
-            attributes: ['url']
-        })
-
-        spot.previewImage = image
-
+        // get the average rating
+       let starsum = await Review.sum('stars', {where: {spotId: spot.id}}) // add up all star values for spot
+       let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}, attributes: ['stars']}) // count the number of reviews
+       spot.avgRating = starsum/count // math to get the average
+        // get the url for the preview image
+        fetchurl = spot => {
+            return Image.findOne({refId: spot}).then(image => image.url);
+        };
+        fetchurl(spot.id).then(url => spot.previewImage = url);
+        // add the spot to the array
         resultsSpot.push(spot)
     }
     res.json(resultsSpot)
 })
-    // loop through to avg the review
-
-
-    //   include: [
-    //     {
-    //       model: Review,
-    //       attributes: []
-    //     },
-    //     {
-    //       model: Image,
-    //       attributes: [],
-    //       where: {
-    //         preview: true
-    //       },
-    //       as: 'SpotImages'
-    //     }
-    //   ],
-    //   attributes: {
-    //     include: [
-    //       [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview'],
-    //       [sequelize.col('SpotImages.url'), 'previewImage']
-    //     ],
-    //   },
-    //   group: ['Spot.id', 'SpotImages.url'],
- //return res.json(spots);
-
-
-
 
 /*******************************************
     GET SPOT BY ID
 ******************************************/
 router.get('/:id', async (req,res)=>{
-    const spot = await Spot.findByPk(+req.params.id, {
-        include: [
-        {
-          model: Review,
-          attributes: [],
-          where:{ spotId : req.params.id}
-        },
-        {
-          model: Image,
-          attributes: ['id', 'url', 'preview'],
-          where: {refId: +req.params.id },
-          as: 'SpotImages'
-        },
-        {
-            model: User,
-            attributes: ['id', 'firstName', 'lastName'],
-            as: "Owner"
-          },
-      ],
-      //this key adds new key value pairs into our object
-      attributes: {
-        include: [
-            [sequelize.fn('COUNT', sequelize.col('Reviews.stars')), 'numReviews'],
-
-            [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview']
-
-        ],
-      },
-      //this tells the function that the above values should be limited to each id
-      group: ['SpotImages.id', 'Spot.id', 'Owner.id']
-    })
-
+    // find the spot by id
+    let spot = await Spot.findByPk(+req.params.id)
+    spot = spot.toJSON()
+    // throw error if spot is not found
     if(!spot){
-        res.json({
-            "message": "Spot couldn't be found"
-          })
+        res.json({"message": "Spot couldn't be found"})
     }
-
+    // find and count the reviews with spotId of spot.id
+    let starsum = await Review.sum('stars', {where: {spotId: spot.id}}) // add up all star values for spot
+    let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}, attributes: ['stars']})
+    // add count to spot as numReviews
+    spot.numReviews = count;
+    // get the average of rating and add as avgStarRating
+    spot.avgStarRating = starsum/count
+    // find the images where refId is the spotId, grab id, url, preview
+    const images = await Image.findAll({
+        where: {refId: +req.params.id},
+        attributes: ['id', 'url', 'preview']
+    })
+    // add the images to spot as SpotImages
+    spot.SpotImages = images
+    // find user by the spot's OwnerId, grab id, firstname and last name
+    const owner = await User.findOne({
+        where: {id: spot.ownerId},
+        attributes: ['id', 'firstName', 'lastName']
+    })
+    // add to spot as "owner"
+    spot.owner = owner
     res.json(spot)
 })
 /*******************************************
