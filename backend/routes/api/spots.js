@@ -1,5 +1,6 @@
 const express = require('express');
 const { Image, Spot, Review, User, sequelize } = require('../../db/models');
+const { Op } = require("sequelize");
 
 
 const router = express.Router();
@@ -8,8 +9,25 @@ const router = express.Router();
     GET ALL SPOTS
 ******************************************/
 router.get('/', async (req, res, next) => {
-    const {page, size, minLat, maxLat, minLng, maxLng,minPrice,maxPrice} = req.query
-    const spots = await Spot.findAll()
+    let {page, size, minLat, maxLat, minLng, maxLng,minPrice,maxPrice} = req.query
+    const where = {}
+    if(size){
+        if(!isNaN(size) && size > 0 && size < 21){size = +size}
+        else if (size > 20) {size = 20}
+        else {size = 20}
+    }else {size = 20};
+
+    if(page){
+        if (!isNaN(page) && page <= 11){page =+page}
+        else if (page > 10){page = 10}
+        else {page = 1}
+    }else {page = 1}
+    const offset = size * (page -1)
+
+    const spots = await Spot.findAll({
+        limit: size,
+        offset: offset
+    })
 
     let resultsSpot = []
     // go threw each spot to formatt correctly
