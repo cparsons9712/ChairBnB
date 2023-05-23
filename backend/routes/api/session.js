@@ -133,16 +133,44 @@ router.get('/spots', async (req, res) =>{
     GET USER'S REVIEWS
 ******************************************/
 router.get('/reviews', async (req, res)=>{
+  if(!req.user){
+    res.json({"message": "Authentication Required!"})
+  }
+
   const editedReviews = [];
-  let reviews = await Review.findAll({
-    where: {userId: req.user.id}
-  })
-  console.log(reviews)
-    for (let review in reviews){
-      review = JSON.stringify(review.dataValues)
+  // let reviews = await Review.findAll({
+  //   where: {userId: req.user.id}
+  // })
+  let user = await User.findByPk(req.user.id)
+  let reviews = await user.getReviews()
+
+
+  // reviews = reviews.json()
+
+    for (let review of reviews){
+     review = review.toJSON()
       console.log(review)
-      let user = {'id': req.user.id, 'firstName' :req.user.firstName}
+      // get user information
+      let user = {'id': req.user.id, 'firstName' :req.user.firstName, 'lastName' :req.user.lastName}
       review.User = user
+      // get spot information -- include preview image
+      let spot = await Spot.findOne({
+        where: {id: review.spotId},
+        attributes: ['id','ownerId','address', 'city','state', 'country', 'lat', 'lng', 'name', 'price']
+      })
+
+      let prevImg = await Image.findOne({
+        where:{refId: spot.id, type: 'Spot'}
+      })
+      spot = spot.toJSON()
+      spot.previewImage = prevImg.url
+      review.Spot = spot
+      //get review images
+      let reviewImgs = await Image.findAll({
+        where: {refId: review.id, type: 'Review'},
+        attributes: ['id', 'url']
+      })
+      review.ReviewImages = reviewImgs
 
       editedReviews.push(review)
     }

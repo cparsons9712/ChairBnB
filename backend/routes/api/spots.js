@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
        spot.avgRating = starsum/count // math to get the average
         // get the url for the preview image
         fetchurl = spot => {
-            return Image.findOne({refId: spot}).then(image => image.url);
+            return Image.findOne({refId: spot, preview: true}).then(image => image.url);
         };
         fetchurl(spot.id).then(url => spot.previewImage = url);
         // add the spot to the array
@@ -64,6 +64,21 @@ router.get('/:id', async (req,res)=>{
     spot.owner = owner
     res.json(spot)
 })
+/*******************************************
+    GET REVIEWS BY SPOT ID
+******************************************/
+router.get('/:spotId/reviews', async (req,res,next)=>{
+    const editedReviews = []
+    let reviews = await Review.findAll({
+        where: {spotId : req.params.spotId }
+    })
+    for (let review of reviews){
+        
+    }
+    res.json(editedReviews)
+})
+
+
 /*******************************************
     CREATE A SPOT
 ******************************************/
