@@ -99,7 +99,7 @@ router.get('/:spotId/reviews', async (req,res,next)=>{
 
         editedReviews.push(review)
     }
-    res.json(editedReviews)
+    return res.json(editedReviews)
 })
 
 

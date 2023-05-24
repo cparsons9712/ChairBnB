@@ -134,8 +134,9 @@ router.get('/reviews', async (req, res)=>{
   // let reviews = await Review.findAll({
   //   where: {userId: req.user.id}
   // })
-  let user = await User.findByPk(req.user.id)
-  let reviews = await user.getReviews()
+  let reviews = await Review.findAll({
+    where: {userId: req.user.id}
+  })
 
 
   // reviews = reviews.json()
