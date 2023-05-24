@@ -93,7 +93,7 @@ router.get('/', (req,res) => {
 /*******************************************
     GET USER'S SPOTS
 ******************************************/
-router.get('/spots', async (req, res) =>{
+router.get('/spots', async (req, res, next) =>{
   if(!req.user){
     const autherr = new Error()
     autherr.status = 401

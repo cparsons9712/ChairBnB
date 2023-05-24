@@ -34,7 +34,7 @@ router.get("/", async (req, res, next) => {
     // add the spot to the array
     resultsSpot.push(spot);
   }
-  res.json(resultsSpot);
+  res.json({"Spots":resultsSpot});
 });
 
 /*******************************************
