@@ -6,6 +6,46 @@ const router = express.Router();
 /******************************************
 EDIT A REVIEW
 *********************************************/
+router.put('/:id', async (req,res, next)=>{
+    if(!req.user){
+        const aerror = new Error()
+        aerror.status = 403
+        aerror.title = "Sign-in Error"
+        aerror.message = "Authentication Required"
+        return next(aerror)
+    }
+    const oldreview = await Review.findByPk(req.params.id)
+    if(!oldreview){
+        const rerror = new Error()
+        rerror.title = "No Such Review"
+        rerror.status = 404
+        rerror.message = "Review not found"
+        return next(rerror)
+    }
+    if(oldreview.userId !== req.user.id){
+        const perror = new Error()
+        perror.status = 403
+        perror.title = "Permission Error"
+        perror.message = "Forbidden"
+        return next(perror)
+    }
+    const {review, stars} = req.body
+    if(stars < 1 || stars > 5){
+        const serror = new Error()
+        serror.status = 400
+        serror.title = "Input Error"
+        serror.message = "Stars must be an integer from 1 to 5"
+        return next(serror)
+    }
+    try {
+        const newReview = await oldreview.update({
+            description: review, stars
+        })
+        return res.json(newReview)
+    }catch(err){
+        return next(err)
+    }
+})
 
 /******************************************
 ADD A REVIEW IMAGE BY REVIEW ID
@@ -58,6 +98,38 @@ router.post('/:id/images', async (req, res, next)=> {
         return next(err);
     }
 })
+/******************************************
+DELETE A REVIEW
+*********************************************/
+router.delete('/:id', async (req, res, next)=>{
+    if(!req.user){
+        const autherr = new Error()
+        autherr.status = 403
+        autherr.message = "Authentication required"
+        return next(autherr)
+    }
+    const review = await Review.findByPk(req.params.id)
+    if(!review){
+        const nonerr = new Error()
+        nonerr.status = 404
+        nonerr.message = "Review couldn't be found"
+        return next(nonerr)
+    }
+    if(review.userId !== req.user.id){
+        const perr = new Error()
+        perr.status = 403
+        perr.message = "Forbidden"
+        return next(perr)
+    }
+    try{
+        await review.destroy()
+        return res.json({"message": "Successfully deleted"})
+    }catch(err){
+        next(err)
+    }
+})
+
+
 /******************************************
 DELETE A REVIEW'S IMAGE
 *********************************************/
