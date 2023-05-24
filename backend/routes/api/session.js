@@ -107,15 +107,21 @@ router.get('/spots', async (req, res) =>{
   // go threw each spot to formatt correctly
   for (let spot of spots){
       spot = spot.toJSON()
+      console.log('LOOP')
       // get the average rating
      let starsum = await Review.sum('stars', {where: {spotId: spot.id}}) // add up all star values for spot
      let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}, attributes: ['stars']}) // count the number of reviews
      spot.avgRating = starsum/count // math to get the average
       // get the url for the preview image
-      fetchurl = spot => {
-          return Image.findOne({refId: spot, preview: true}).then(image => image.url);
-      };
-      fetchurl(spot.id).then(url => spot.previewImage = url);
+      let spotId = spot.id
+    let image = await Image.findOne({where:{refId: spotId, preview: true, type: 'Spot' }
+    })
+    if(image){
+      image = image.toJSON()
+     spot.previewImage = image.url
+    }
+
+
       // add the spot to the array
       resultsSpot.push(spot)
   }
@@ -152,12 +158,18 @@ router.get('/reviews', async (req, res)=>{
         where: {id: review.spotId},
         attributes: ['id','ownerId','address', 'city','state', 'country', 'lat', 'lng', 'name', 'price']
       })
-
-      let prevImg = await Image.findOne({
-        where:{refId: spot.id, type: 'Spot'}
-      })
       spot = spot.toJSON()
-      spot.previewImage = prevImg.url
+      let prevImg = await Image.findOne({
+        where:{refId: spot.id, type: 'Spot', preview: true}
+      })
+      if(prevImg){
+        prevImg = prevImg.toJSON()
+        spot.previewImage = prevImg.url
+      } else{
+        spot.previewImage = null
+      }
+
+
       review.Spot = spot
       //get review images
       let reviewImgs = await Image.findAll({
