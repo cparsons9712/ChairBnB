@@ -9,7 +9,7 @@ EDIT A REVIEW
 router.put('/:id', async (req,res, next)=>{
     if(!req.user){
         const aerror = new Error()
-        aerror.status = 403
+        aerror.status = 401
         aerror.title = "Sign-in Error"
         aerror.message = "Authentication Required"
         return next(aerror)
@@ -30,11 +30,21 @@ router.put('/:id', async (req,res, next)=>{
         return next(perror)
     }
     const {review, stars} = req.body
-    if(stars < 1 || stars > 5){
+    if(stars < 1 || stars > 5 || !review || !stars){
         const serror = new Error()
         serror.status = 400
         serror.title = "Input Error"
-        serror.message = "Stars must be an integer from 1 to 5"
+        const errors = {}
+        if(! review){
+            errors.review = "Review is required"
+        }
+        if(!stars){
+            errors.stars = "Stars are required"
+        }
+        if(stars > 5 || stars < 1){
+            errors.stars = "Stars must be a number between 1 and 5"
+        }
+        serror.errors = errors
         return next(serror)
     }
     try {
@@ -56,7 +66,7 @@ router.post('/:id/images', async (req, res, next)=> {
     // Throw an error if a user is not signed in
     if(!req.user){
         const autherr = new Error()
-        autherr.status = 403
+        autherr.status = 401
         autherr.message = "Authentication required"
         return next(autherr)
     }
@@ -104,7 +114,7 @@ DELETE A REVIEW
 router.delete('/:id', async (req, res, next)=>{
     if(!req.user){
         const autherr = new Error()
-        autherr.status = 403
+        autherr.status = 401
         autherr.message = "Authentication required"
         return next(autherr)
     }
@@ -138,7 +148,7 @@ router.delete('/images/:id', async (req, res, next)=> {
     // Throw an error if a user is not signed in
     if(!req.user){
         const autherr = new Error()
-        autherr.status = 403
+        autherr.status = 401
         autherr.message = "Authentication required"
         return next(autherr)
     }
@@ -151,7 +161,8 @@ router.delete('/images/:id', async (req, res, next)=> {
             // Throw an error if the current user does not own the spot
         if( userId !== image.Review.userId){
             const permerr = new Error();
-            permerr.status = 403;permerr.message = "Forbidden";
+            permerr.status = 403;
+            permerr.message = "Forbidden";
             return next(permerr)
         }// Otherwise delete the image and send a response
         else {

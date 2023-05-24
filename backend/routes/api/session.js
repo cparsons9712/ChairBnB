@@ -119,6 +119,8 @@ router.get('/spots', async (req, res, next) =>{
     if(image){
       image = image.toJSON()
      spot.previewImage = image.url
+    }else{
+      spot.previewImage = null
     }
 
 
@@ -133,7 +135,10 @@ router.get('/spots', async (req, res, next) =>{
 ******************************************/
 router.get('/reviews', async (req, res)=>{
   if(!req.user){
-    res.json({"message": "Authentication Required!"})
+    const autherr = new Error()
+    autherr.status = 401
+    autherr.message = "Authentication required"
+    return next(autherr)
   }
 
   const editedReviews = [];
@@ -180,7 +185,7 @@ router.get('/reviews', async (req, res)=>{
 
       editedReviews.push(review)
     }
-    res.json(editedReviews)
+    res.json({"Reviews" : editedReviews})
 })
 
 module.exports = router;

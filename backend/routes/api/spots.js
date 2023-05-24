@@ -86,7 +86,11 @@ router.get("/:id", async (req, res, next) => {
 router.get("/:spotId/reviews", async (req, res, next) => {
   const spot = await Spot.findByPk(req.params.spotId);
   if (!spot) {
-    return res.json({ message: "Spot couldn't be found" });
+    const spot = new Error();
+    spot.title = "Invalid Spot";
+    spot.status = 404;
+    spot.message = "Spot couldn't be found";
+    return next(spot);
   }
   const editedReviews = [];
   let reviews = await Review.findAll({
@@ -118,7 +122,7 @@ router.post("/", async (req, res, next) => {
     req.body;
   if (!req.user) {
     const autherr = new Error();
-    autherr.status = 403;
+    autherr.status = 401;
     autherr.message = "Authentication required";
     return next(autherr);
   } else {
@@ -187,7 +191,7 @@ router.post("/", async (req, res, next) => {
 router.post("/:id/reviews", async (req, res, next) => {
   if (!req.user) {
     const aerror = new Error();
-    aerror.status = 403;
+    aerror.status = 401;
     aerror.message = "Authentication Required";
     return next(aerror);
   }
@@ -244,7 +248,7 @@ router.post("/:id/images", async (req, res, next) => {
   const { url, preview } = req.body;
   if (!req.user) {
     const autherr = new Error();
-    autherr.status = 403;
+    autherr.status = 401;
     autherr.message = "Authentication required";
     return next(autherr);
   }
@@ -276,10 +280,10 @@ router.post("/:id/images", async (req, res, next) => {
     EDIT A SPOT
 ******************************************/
 router.put("/:id", async (req, res, next) => {
-  try {
+
     if (!req.user) {
       const autherr = new Error();
-      autherr.status = 403;
+      autherr.status = 401;
       autherr.message = "Authentication required";
       return next(autherr);
     }
@@ -298,6 +302,7 @@ router.put("/:id", async (req, res, next) => {
       perror.message = "Forbidden";
       return next(perror);
     }
+    try {
     await spot.update({
       address,
       city,
@@ -310,8 +315,47 @@ router.put("/:id", async (req, res, next) => {
       price,
     });
     res.json(spot);
-  } catch (spot) {
-    next(spot);
+  } catch (err) {
+
+    const newerr = new Error();
+    newerr.status = 400;
+    newerr.title = "Invalid Inputs";
+    const errors = {};
+
+    if (!address) {
+      errors.address = "Street address is required";
+    }
+    if (!city) {
+      errors.city = "City is required";
+    }
+    if (!state) {
+      errors.state = "State is required";
+    }
+    if (!country) {
+      errors.country = "Country is required";
+    }
+    if (lat < -90 || lat > 90) {
+      errors.lat = "Latitude is not valid";
+    }
+    if (lng < -180 || lat > 180) {
+      errors.lng = "Longitude is not valid";
+    }
+    if (!name) {
+      errors.name = "Name is required";
+    } else {
+      if (name.length > 50) {
+        errors.name = "Name must be less than 50 characters";
+      }
+    }
+    if (!description) {
+      errors.description = "Description is required";
+    }
+    if (!price) {
+      errors.price = "Price per day is required";
+    }
+    newerr.errors = errors;
+    newerr.message = "Bad Request";
+    return next(newerr);
   }
 });
 /*******************************************
@@ -322,7 +366,7 @@ router.delete("/:id", async (req, res, next) => {
     if (!req.user) {
       if (!req.user) {
         const autherr = new Error();
-        autherr.status = 403;
+        autherr.status = 401;
         autherr.message = "Authentication required";
         return next(autherr);
       }
@@ -354,7 +398,7 @@ router.delete("/images/:id", async (req, res, next) => {
   // Throw an error if a user is not signed in
   if (!req.user) {
     const autherr = new Error();
-    autherr.status = 403;
+    autherr.status = 401;
     autherr.message = "Authentication required";
     return next(autherr);
   }
