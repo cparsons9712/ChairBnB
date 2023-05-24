@@ -32,9 +32,6 @@ module.exports = (sequelize, DataTypes) => {
     preview: DataTypes.BOOLEAN,
     type: {
       type: DataTypes.STRING,
-      validate: {
-        isIn: ['Spot','Review' ]
-      }
     },
     refId: DataTypes.INTEGER
   }, {

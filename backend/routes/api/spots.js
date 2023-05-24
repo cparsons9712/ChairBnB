@@ -68,6 +68,10 @@ router.get('/:id', async (req,res)=>{
     GET REVIEWS BY SPOT ID
 ******************************************/
 router.get('/:spotId/reviews', async (req,res,next)=>{
+    const spot = await Spot.findByPk(req.params.spotId)
+    if(!spot){
+        return res.json({"message": "Spot couldn't be found"})
+    }
     const editedReviews = []
     let reviews = await Review.findAll({
         where: {spotId : req.params.spotId }
@@ -110,6 +114,36 @@ router.post('/', async (req, res, next)=> {
         res.json(newSpot)
     }
 })
+/*******************************************
+    ADD REVIEW FROM SPOT ID
+******************************************/
+router.post('/:id/reviews', async (req, res, next)=> {
+    if(!req.user){
+        res.status=404
+        return res.json({"message": "Authentication Required"})
+    }
+    const spot = await Spot.findByPk(req.params.id);
+    if(!spot){
+        res.status = 404
+        return res.json({"message": "Spot couldn't be found"})
+    }
+    const currentreview = await Review.findAll({
+        where: {userId: req.user.id, spotId: req.params.id}
+    })
+    if(currentreview){
+        res.status = 500
+        return res.json({"message": "User already has a review for this spot"})
+    }
+    const {review, stars} = req.body
+    const newReview = await Review.create({
+        userId: +req.user.id,
+        spotId: +req.params.id,
+        description: review,
+        stars
+    })
+    res.json(newReview)
+})
+
 /*******************************************
     ADD IMAGE FROM SPOT ID
 ******************************************/

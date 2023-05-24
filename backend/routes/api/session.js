@@ -95,11 +95,11 @@ router.get('/', (req,res) => {
 ******************************************/
 router.get('/spots', async (req, res) =>{
   if(!req.user){
-    return res.json({
-      "message": "Authentication required"
-    })
+    const autherr = new Error()
+    autherr.status = 401
+    autherr.message = "Authentication required"
+    return next(autherr)
   }
-  console.log(req.user)
   const spots = await Spot.findAll({
     where: {ownerId: req.user.id},
     include: [
