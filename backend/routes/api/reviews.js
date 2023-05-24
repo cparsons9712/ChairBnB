@@ -37,13 +37,13 @@ router.put('/:id', async (req,res, next)=>{
         serror.message= "Bad Request"
         const errors = {}
         if(! review){
-            errors.review = "Review is required"
+            errors.review = "Review text is required"
         }
         if(!stars){
             errors.stars = "Stars are required"
         }
         if(stars > 5 || stars < 1){
-            errors.stars = "Stars must be a number between 1 and 5"
+            errors.stars = "Stars must be an integer from 1 to 5"
         }
         serror.errors = errors
         return next(serror)
