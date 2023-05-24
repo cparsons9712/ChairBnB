@@ -34,6 +34,7 @@ router.put('/:id', async (req,res, next)=>{
         const serror = new Error()
         serror.status = 400
         serror.title = "Input Error"
+        serror.message= "Bad Request"
         const errors = {}
         if(! review){
             errors.review = "Review is required"
