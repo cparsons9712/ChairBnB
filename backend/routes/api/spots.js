@@ -33,14 +33,21 @@ router.get('/', async (req, res, next) => {
 /*******************************************
     GET SPOT BY ID
 ******************************************/
-router.get('/:id', async (req,res)=>{
+router.get('/:id', async (req,res,next)=>{
     // find the spot by id
     let spot = await Spot.findByPk(+req.params.id)
-    spot = spot.toJSON()
-    // throw error if spot is not found
+// throw error if spot is not found
     if(!spot){
-        res.json({"message": "Spot couldn't be found"})
+        const spot = new Error()
+        spot.title= "Invalid Spot"
+        spot.status = 404
+        spot.message = "Spot couldn't be found"
+        return next(spot)
     }
+    //convert into POJO for manipulation
+    spot = spot.toJSON()
+
+
     // find and count the reviews with spotId of spot.id
     let starsum = await Review.sum('stars', {where: {spotId: spot.id}}) // add up all star values for spot
     let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}, attributes: ['stars']})
@@ -107,11 +114,43 @@ router.post('/', async (req, res, next)=> {
         autherr.message = "Authentication required"
         return next(autherr)
     }else {
+    try{
         const newSpot = await Spot.create({
             ownerId: +req.user.id,
             address, city, state, country, lat, lng, name, description, price
         })
+
         res.json(newSpot)
+    }catch(spot) {
+        const newerr = new Error()
+        newerr.status = 400
+        newerr.title = "Invalid Inputs"
+        const errors = {}
+
+        if (!address){errors.address = "Street address is required"}
+        if(!city){errors.city = "City is required"}
+        if(!state){errors.state = "State is required"}
+        if(!country){errors.country = "Country is required"}
+        if(lat < -90 || lat > 90 ){
+            errors.lat = "Latitude is not valid"
+        }
+        if(lng < -180 || lat > 180 ){
+            errors.lng = "Longitude is not valid"
+        }
+
+        if(name.length > 50){
+            errors.name = "Name must be less than 50 characters"
+        }
+        if(!description){
+            errors.description = "Description is required"
+        }
+        if(!price){
+            errors.price = "Price per day is required"
+        }
+        newerr.errors = errors
+        newerr.message = "Bad Request"
+        return next(newerr)
+    }
     }
 })
 /*******************************************
@@ -159,16 +198,18 @@ router.post('/:id/images', async (req, res, next)=> {
     const spot = await Spot.findByPk(+req.params.id)
 
     if(!spot){
-        const err = new Error();
-        err.status = 404;
-        err.message =  "Spot couldn't be found";
-        return next(err);
+        const spot = new Error();
+        spot.status = 404;
+        spot.message =  "Spot couldn't be found";
+        return next(spot);
     }
     if(spot.ownerId !== +req.user.id){
         const permerr = new Error();
-        permerr.status = 403;permerr.message = "Forbidden";
+        permerr.status = 403;
+        permerr.message = "Forbidden";
         return next(permerr)
     }else {
+
         const newImage = await Image.create({
             url,
             preview,
@@ -176,6 +217,7 @@ router.post('/:id/images', async (req, res, next)=> {
             refId: +req.params.id,
         })
         res.json(newImage)
+
     }
 })
 /*******************************************
@@ -184,20 +226,29 @@ router.post('/:id/images', async (req, res, next)=> {
 router.put('/:id', async(req,res, next)=> {
     try{
         if(!req.user){
-            res.json({"message": "Authentication required"})
+            const autherr = new Error()
+            autherr.status = 403
+            autherr.message = "Authentication required"
+            return next(autherr)
         }
         let spot = await Spot.findByPk(req.params.id)
         let {address, city, state, country, lat, lng, name, description, price} = req.body
         if(!spot){
-            res.json({ "message": "Spot couldn't be found"})
+            const spoterr = new Error()
+            spoterr.status = 404
+            spoterr.message = "Spot couldn't be found"
+            return next(spoterr)
         }
         if(spot.ownerId !== req.user.id){
-            res.json({"message": "Forbidden"})
+            const perror = new Error()
+            perror.status = 403
+            perror.message = "Forbidden"
+            return next(perror)
         }
         await spot.update({address, city, state, country, lat, lng, name, description, price})
         res.json (spot)
-    }catch(err){
-        next(err)
+    }catch(spot){
+        next(spot)
     }
 
 })
@@ -207,14 +258,25 @@ router.put('/:id', async(req,res, next)=> {
 router.delete('/:id', async(req,res, next)=> {
     try{
         if(!req.user){
-            res.json({"message": "Authentication required"})
+            if(!req.user){
+                const autherr = new Error()
+                autherr.status = 403
+                autherr.message = "Authentication required"
+                return next(autherr)
+            }
         }
         let spot = await Spot.findByPk(req.params.id)
         if(!spot){
-            res.json({ "message": "Spot couldn't be found"})
+            const spoterr = new Error()
+            spoterr.status = 404
+            spoterr.message = "Spot couldn't be found"
+            return next(spoterr)
         }
         if(spot.ownerId !== req.user.id){
-            res.json({"message": "Forbidden"})
+            const perror = new Error()
+            perror.status = 403
+            perror.message = "Forbidden"
+            return next(perror)
         }
         await spot.destroy()
         return res.json({"message": "Successfully deleted"})
@@ -253,10 +315,10 @@ router.delete('/images/:id', async (req, res, next)=> {
         }
     } // throw an error if the image isn't found
     else {
-        const err = new Error();
-        err.status = 404;
-        err.message =  "Image couldn't be found";
-        return next(err);
+        const spot = new Error();
+        spot.status = 404;
+        spot.message =  "Image couldn't be found";
+        return next(spot);
     }
 })
 

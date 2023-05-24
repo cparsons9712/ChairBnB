@@ -100,33 +100,26 @@ router.get('/spots', async (req, res) =>{
     autherr.message = "Authentication required"
     return next(autherr)
   }
-  const spots = await Spot.findAll({
-    where: {ownerId: req.user.id},
-    include: [
-      {
-        model: Review,
-        attributes: [],
-      },
-      {
-        model: Image,
-        attributes: [],
-        where: {preview: true},
-        as: 'SpotImages'
-      },
-     ],
-    // //this key adds new key value pairs into our object
-    attributes: {
-      include: [
-        [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgReview'],
-        [sequelize.col('SpotImages.url'), 'previewImage']
-      ],
-    },
-    // //this tells the function that the above values should be limited to each id
-     group: ['Spot.id', 'SpotImages.url']
+  // find the spot by id
+  let spots = await Spot.findAll({where: {ownerId: req.user.id}})
 
-  })
-
-  return res.json(spots)
+  let resultsSpot = []
+  // go threw each spot to formatt correctly
+  for (let spot of spots){
+      spot = spot.toJSON()
+      // get the average rating
+     let starsum = await Review.sum('stars', {where: {spotId: spot.id}}) // add up all star values for spot
+     let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}, attributes: ['stars']}) // count the number of reviews
+     spot.avgRating = starsum/count // math to get the average
+      // get the url for the preview image
+      fetchurl = spot => {
+          return Image.findOne({refId: spot, preview: true}).then(image => image.url);
+      };
+      fetchurl(spot.id).then(url => spot.previewImage = url);
+      // add the spot to the array
+      resultsSpot.push(spot)
+  }
+  res.json({"Spots": resultsSpot})
 })
 
 /*******************************************
