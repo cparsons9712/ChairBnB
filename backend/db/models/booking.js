@@ -10,13 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Booking.hasOne(models.Spot, {
-        foreignKey: 'id',
-        otherKey: 'spotId'
+      Booking.belongsTo(models.Spot, {
+        foreignKey: 'spotId',
       })
-      Booking.hasOne(models.User, {
-        foreignKey: 'id',
-        otherKey:'UserId'
+      Booking.belongsTo(models.User, {
+        foreignKey: 'userId',
       })
     }
   }

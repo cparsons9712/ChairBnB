@@ -20,8 +20,9 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Users',
-          key: 'id'
-        }
+          key: 'id',
+        },
+        onDelete: 'CASCADE'
       },
       address: {
         type: Sequelize.STRING,
@@ -39,10 +40,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       lat: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(5,2)
       },
       lng: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(5,2)
       },
       name: {
         type: Sequelize.STRING(50)
@@ -52,7 +53,7 @@ module.exports = {
         allowNull: false
       },
       price: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DECIMAL(6,2),
         allowNull: false
       },
       createdAt: {

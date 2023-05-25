@@ -11,13 +11,12 @@ const validateLogin = [
   check('credential')
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage('Please provide a valid email or username.'),
+    .withMessage('Email or username is required'),
   check('password')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a password.'),
+    .withMessage('Password is required'),
   handleValidationErrors
 ];
-
 
 /*******************************************
     SIGN IN A USER
@@ -27,6 +26,7 @@ router.post(
   validateLogin,
   async (req, res, next) => {
     const { credential, password } = req.body;
+
 
     const user = await User.unscoped().findOne({
       where: {
@@ -41,6 +41,7 @@ router.post(
       const err = new Error('Login failed');
       err.status = 401;
       err.title = 'Login failed';
+      err.message = "Invalid credentials"
       err.errors = { credential: 'The provided credentials were invalid.' };
       return next(err);
     }

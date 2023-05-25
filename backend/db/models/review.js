@@ -11,26 +11,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Review.belongsTo(models.Spot, {
-        foreignKey: 'id',
-        otherKey: 'spotId'
+        foreignKey: 'spotId',
       }),
       Review.belongsTo(models.User, {
-        foreignKey: 'id',
-        otherKey: 'userId'
+        foreignKey: 'userId',
       }),
       Review.hasMany(models.Image,{
-        foreignKey: 'type',
+        foreignKey: 'refId',
         constraints: false,
         scope: {
           type: 'Review'
-        }
+        },
+        as: 'ReviewImages'
       })
     }
   }
   Review.init({
     spotId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
-    description: DataTypes.TEXT,
+    review: DataTypes.TEXT,
     stars:{
       type: DataTypes.INTEGER,
       validate: {

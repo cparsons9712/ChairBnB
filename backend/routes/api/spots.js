@@ -1,7 +1,61 @@
 const express = require("express");
 const { Image, Spot, Review, User, sequelize } = require("../../db/models");
-
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
+
+
+const validateSpot = [
+  check('address')
+    .exists({ checkFalsy: true })
+    .withMessage('Street address is required'),
+    check('city')
+    .exists({ checkFalsy: true })
+    .withMessage('City is required'),
+    check('city')
+    .exists({ checkFalsy: true })
+    .withMessage('City is required'),
+    check('state')
+    .exists({ checkFalsy: true })
+    .withMessage('State is required'),
+    check('country')
+    .exists({ checkFalsy: true })
+    .withMessage('Country is required'),
+    check('lat')
+    .custom((value, { req }) => {
+      if( value > -90 && value < 90){
+        return true
+      }
+      else{
+        return false
+      }
+    })
+    .withMessage('Latitude is not valid'),
+    check('lng')
+    .custom((value, { req }) => {
+      if( value > -180 && value < 180){
+        return true
+      }
+      else{
+        return false
+      }
+    })
+    .withMessage('Longitude is not valid'),
+    check('name')
+    .exists({ checkFalsy: true })
+    .isLength({ max: 50 })
+    .withMessage('Name must be less than 50 characters'),
+    check('description')
+    .exists({ checkFalsy: true })
+    .withMessage('Description is required'),
+    check('price')
+    .exists({ checkFalsy: true })
+    .withMessage('Price is required'),
+
+    handleValidationErrors
+  ];
+
+
 
 /*******************************************
     GET ALL SPOTS
@@ -77,7 +131,7 @@ router.get("/:id", async (req, res, next) => {
     attributes: ["id", "firstName", "lastName"],
   });
   // add to spot as "owner"
-  spot.owner = owner;
+  spot.Owner = owner;
   res.json(spot);
 });
 /*******************************************
@@ -111,13 +165,13 @@ router.get("/:spotId/reviews", async (req, res, next) => {
 
     editedReviews.push(review);
   }
-  return res.json(editedReviews);
+  return res.json({"Reviews":editedReviews});
 });
 
 /*******************************************
     CREATE A SPOT
 ******************************************/
-router.post("/", async (req, res, next) => {
+router.post("/", validateSpot,async (req, res, next) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
   if (!req.user) {
@@ -126,7 +180,7 @@ router.post("/", async (req, res, next) => {
     autherr.message = "Authentication required";
     return next(autherr);
   } else {
-    try {
+
       const newSpot = await Spot.create({
         ownerId: +req.user.id,
         address,
@@ -141,48 +195,7 @@ router.post("/", async (req, res, next) => {
       });
 
       res.json(newSpot);
-    } catch (spot) {
-      const newerr = new Error();
-      newerr.status = 400;
-      newerr.title = "Invalid Inputs";
-      const errors = {};
 
-      if (!address) {
-        errors.address = "Street address is required";
-      }
-      if (!city) {
-        errors.city = "City is required";
-      }
-      if (!state) {
-        errors.state = "State is required";
-      }
-      if (!country) {
-        errors.country = "Country is required";
-      }
-      if (lat < -90 || lat > 90) {
-        errors.lat = "Latitude is not valid";
-      }
-      if (lng < -180 || lat > 180) {
-        errors.lng = "Longitude is not valid";
-      }
-      if (!name) {
-        errors.name = "Name is required";
-      } else {
-        if (name.length > 50) {
-          errors.name = "Name must be less than 50 characters";
-        }
-      }
-
-      if (!description) {
-        errors.description = "Description is required";
-      }
-      if (!price) {
-        errors.price = "Price per day is required";
-      }
-      newerr.errors = errors;
-      newerr.message = "Bad Request";
-      return next(newerr);
-    }
   }
 });
 /*******************************************
@@ -235,7 +248,7 @@ router.post("/:id/reviews", async (req, res, next) => {
   const newReview = await Review.create({
     userId: +req.user.id,
     spotId: +req.params.id,
-    description: review,
+    review,
     stars,
   });
   res.json(newReview);
@@ -279,7 +292,7 @@ router.post("/:id/images", async (req, res, next) => {
 /*******************************************
     EDIT A SPOT
 ******************************************/
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", validateSpot,async (req, res, next) => {
 
     if (!req.user) {
       const autherr = new Error();
@@ -302,7 +315,7 @@ router.put("/:id", async (req, res, next) => {
       perror.message = "Forbidden";
       return next(perror);
     }
-    try {
+
     await spot.update({
       address,
       city,
@@ -315,48 +328,7 @@ router.put("/:id", async (req, res, next) => {
       price,
     });
     res.json(spot);
-  } catch (err) {
 
-    const newerr = new Error();
-    newerr.status = 400;
-    newerr.title = "Invalid Inputs";
-    const errors = {};
-
-    if (!address) {
-      errors.address = "Street address is required";
-    }
-    if (!city) {
-      errors.city = "City is required";
-    }
-    if (!state) {
-      errors.state = "State is required";
-    }
-    if (!country) {
-      errors.country = "Country is required";
-    }
-    if (lat < -90 || lat > 90) {
-      errors.lat = "Latitude is not valid";
-    }
-    if (lng < -180 || lat > 180) {
-      errors.lng = "Longitude is not valid";
-    }
-    if (!name) {
-      errors.name = "Name is required";
-    } else {
-      if (name.length > 50) {
-        errors.name = "Name must be less than 50 characters";
-      }
-    }
-    if (!description) {
-      errors.description = "Description is required";
-    }
-    if (!price) {
-      errors.price = "Price per day is required";
-    }
-    newerr.errors = errors;
-    newerr.message = "Bad Request";
-    return next(newerr);
-  }
 });
 /*******************************************
     DELETE A SPOT

@@ -13,12 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       Spot.hasMany(
         models.Booking,{
           foreignKey: 'spotId',
-          otherKey: 'id'
+          onDelete: 'CASCADE',
+          hooks: true
       }),
       Spot.hasMany(
         models.Review,{
           foreignKey: 'spotId',
-          otherKey: 'id'
+          onDelete: 'CASCADE',
+          hooks: true
       }),
       Spot.hasMany(
         models.Image, {
@@ -30,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
           as: 'SpotImages'
       }),
       Spot.belongsTo(models.User, {
-        foreignKey: 'id',
-        otherKey: 'userId',
+        foreignKey: 'ownerId',
+        otherKey: 'id',
         as: 'Owner'
       })
     }
@@ -55,14 +57,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     lat: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(5,2),
       validate: {
         min: -90,
         max: 90
       }
     },
     lng: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(5,2),
       validate: {
         min: -180,
         max: 180
@@ -79,7 +81,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     price: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(6,2),
       allowNull: false
     }
 
