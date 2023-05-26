@@ -190,6 +190,13 @@ router.get('/reviews', async (req, res)=>{
     GET USER'S BOOKINGS
 ******************************************/
 router.get('/bookings', async (req,res) => {
+  if(!req.user){
+    const autherr = new Error()
+    autherr.status = 401
+    autherr.message = "Authentication required"
+    return next(autherr)
+  }
+
   const bookings = await Booking.findAll({where: {userId: req.user.id},
   raw:true})
   const formattedBookings = []
