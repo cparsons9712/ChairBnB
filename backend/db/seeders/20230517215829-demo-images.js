@@ -17,11 +17,13 @@ module.exports = {
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7zoIm3m4lfUj8lBj?e=Rv8BJy',
         type: 'Spot',
+        preview: false,
         refId: 1
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7z679dMzzfX6N6b3?e=oFFplc',
         type: 'Spot',
+        preview: false,
         refId: 1
       },
       {
@@ -43,11 +45,13 @@ module.exports = {
       {
         url: 'https://specialfinds.com/wp-content/uploads/2023/05/photo_74546861-1500x1000-1.jpg',
         type: 'Spot',
+        preview: false,
         refId: 2
       },
       {
         url: 'https://specialfinds.com/wp-content/uploads/2023/05/photo_70971165-1500x1000-1.jpg',
         type: 'Spot',
+        preview: false,
         refId: 2
       },
       {
@@ -64,11 +68,13 @@ module.exports = {
       {
         url: 'https://specialfinds.com/wp-content/uploads/2021/11/promontory-aa7.png',
         type: 'Spot',
+        preview: false,
         refId: 3
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7xz_hKqpDf-V6Oe3?e=wwDAZe',
         type: 'Spot',
+        preview: false,
         refId: 3
       },
       {
@@ -79,21 +85,25 @@ module.exports = {
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yDRbYSp0q3IFDUM?e=PmorBD',
         type: 'Spot',
+        preview: true,
         refId: 4
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yE6dD9fJlUZcjCd?e=1iEkeT',
         type: 'Spot',
+        preview: false,
         refId: 4
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yIYlnreRCeq4f5q?e=KkBoQ4',
         type: 'Spot',
+        preview: false,
         refId: 4
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7x_Q4BxdcHZvbMdj?e=ea7WjU',
         type: 'Spot',
+        preview: false,
         refId: 4
       },
       {
@@ -110,21 +120,25 @@ module.exports = {
       {
         url: 'https://specialfinds.com/wp-content/uploads/2023/04/kitchenarea.jpg',
         type: 'Spot',
+        preview: false,
         refId: 5
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yo5od4bHYXj_hTr?e=SOxrE7',
         type: 'Spot',
+        preview: false,
         refId: 5
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7ytb3uZShsnfZl4Y?e=aDUpYJ',
         type: 'Spot',
+        preview: false,
         refId: 5
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yxhwPDFOsCSyUa-?e=EJYlzI',
         type: 'Spot',
+        preview: false,
         refId: 5
       },
       {
@@ -141,11 +155,13 @@ module.exports = {
       {
         url: 'https://specialfinds.com/wp-content/uploads/2023/03/sw-15th-st-bell-fl-a1.jpg',
         type: 'Spot',
+        preview: false,
         refId: 6
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7zPe3Ar94rI9j6bn?e=t1IKvP',
         type: 'Spot',
+        preview: false,
         refId: 6
       },
       {
@@ -157,16 +173,19 @@ module.exports = {
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr70RcByp5Wl1bKBbp?e=QZFlbg',
         type: 'Spot',
+        preview: false,
         refId: 7
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr70Z3-T1k-mE6zGsh?e=83443c',
         type: 'Spot',
+        preview: false,
         refId: 7
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr70hPgNDU9S6SPImj?e=zcx5AY',
         type: 'Spot',
+        preview: false,
         refId: 7
       },
       {
@@ -178,21 +197,25 @@ module.exports = {
       {
         url: 'https://specialfinds.com/wp-content/uploads/2023/03/interiors-1.jpg',
         type: 'Spot',
+        preview: false,
         refId: 8
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7013KExtkhytuCIH?e=lZgEQ2',
         type: 'Spot',
+        preview: false,
         refId: 8
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr7013KExtkhytuCIH?e=O0UdSz',
         type: 'Spot',
+        preview: false,
         refId: 8
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr70_EOCg5DplJjT0M?e=7eGtCF',
         type: 'Spot',
+        preview: false,
         refId: 8
       },
       {
@@ -209,11 +232,13 @@ module.exports = {
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr71d03hVd3wA3vjlO?e=j1KpGf',
         type: 'Spot',
+        preview: false,
         refId: 9
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr71nvp-K-HlGLqmRi?e=NwtEA9',
         type: 'Spot',
+        preview: false,
         refId: 9
       },
       {
@@ -225,16 +250,19 @@ module.exports = {
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr72CIuF8IGRBD0xp1?e=Yd7oNP',
         type: 'Spot',
+        preview: false,
         refId: 10
       },
       {
         url: 'https://specialfinds.com/wp-content/uploads/2023/02/d3s0237.jpg',
         type: 'Spot',
+        preview: false,
         refId: 10
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr71_QAHVOYXwN_k8R?e=H1Nm13',
         type: 'Spot',
+        preview: false,
         refId: 10
       },
       {
@@ -256,16 +284,19 @@ module.exports = {
       {
         url: 'https://specialfinds.com/wp-content/uploads/2023/01/p1010174-scaled.webp',
         type: 'Spot',
+        preview: false,
         refId: 11
       },
       {
         url: 'https://specialfinds.com/wp-content/uploads/2023/01/p1010403-1-scaled.webp',
         type: 'Spot',
+        preview: false,
         refId: 11
       },
       {
         url: 'https://specialfinds.com/wp-content/uploads/2023/01/p1010422shadows-scaled.webp',
         type: 'Spot',
+        preview: false,
         refId: 11
       },
       {
@@ -282,16 +313,19 @@ module.exports = {
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr72nzb3fFam4Mls-a?e=PnvJa0',
         type: 'Spot',
+        preview: false,
         refId: 12
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr72p7FrgyoQ-M4ak6?e=ukpk53',
         type: 'Spot',
+        preview: false,
         refId: 12
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr72yft_qog73-RSIY?e=5WDhHU',
         type: 'Spot',
+        preview: false,
         refId: 12
       },
       {
@@ -308,11 +342,13 @@ module.exports = {
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr73ATmd6mujPRtt4I?e=dQv9dc',
         type: 'Spot',
+        preview: false,
         refId: 13
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr73Hhvl6OEElN_5ig?e=irbrvn',
         type: 'Spot',
+        preview: false,
         refId: 13
       },
       {
@@ -324,11 +360,13 @@ module.exports = {
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr73bNa4e7_u3E2_8y?e=gdvQeu',
         type: 'Spot',
+        preview: false,
         refId: 14
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr73Ul8GHYK--guFqy?e=OucrB3',
         type: 'Spot',
+        preview: false,
         refId: 14
       },
       {
@@ -345,26 +383,31 @@ module.exports = {
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr73ofjvgKFrclotXz?e=gxuOEj',
         type: 'Spot',
+        preview: false,
         refId: 15
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr73ysHp-kUHurXjZR?e=7dfWti',
         type: 'Spot',
+        preview: false,
         refId: 15
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr734a_JtW1a9ZQTXN?e=l6b4qb',
         type: 'Spot',
+        preview: false,
         refId: 15
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr8ABBVIUw1NRY4tMU?e=xWMTsi',
         type: 'Spot',
+        preview: false,
         refId: 15
       },
       {
         url: 'https://1drv.ms/i/s!AoCHtlc83mlr8AKW1gcJaakUb2Ez?e=jE32Cw',
         type: 'Spot',
+        preview: false,
         refId: 15
       },
     ])

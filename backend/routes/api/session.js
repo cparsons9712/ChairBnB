@@ -2,7 +2,7 @@ const express = require('express');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User , Spot, Review, Image, sequelize} = require('../../db/models');
+const { User , Spot, Review, Image, Booking, sequelize} = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -21,10 +21,7 @@ const validateLogin = [
 /*******************************************
     SIGN IN A USER
 ******************************************/
-router.post(
-  '/',
-  validateLogin,
-  async (req, res, next) => {
+router.post('/',validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
 
 
@@ -186,7 +183,51 @@ router.get('/reviews', async (req, res)=>{
 
       editedReviews.push(review)
     }
-    res.json({"Reviews" : editedReviews})
+    return res.json({"Reviews" : editedReviews})
 })
+
+/*******************************************
+    GET USER'S BOOKINGS
+******************************************/
+router.get('/bookings', async (req,res) => {
+  const bookings = await Booking.findAll({where: {userId: req.user.id},
+  raw:true})
+  const formattedBookings = []
+  for (let booking of bookings){
+
+    let spot = await Spot.findOne({
+      where: {id: booking.spotId},
+      attributes: {exclude: ['description','createdAt', 'updatedAt']},
+      raw:true
+    })
+
+    let previewImage = await Image.findOne({
+      where: {refId: spot.id,  preview: true},
+      raw:true
+    })
+
+    spot.previewImage = previewImage.url
+
+    booking.Spot = spot
+    formattedBookings.push({
+      id: booking.id,
+      spotId: booking.spotId,
+      Spot: spot,
+      userId: booking.userId,
+      startDate: booking.startDate,
+      endDate: booking.endDate,
+      createdAt: booking.createdAt,
+      updatedAt: booking.updatedAt,
+    });
+  }
+
+
+
+return res.json({"Bookings": formattedBookings })
+})
+
+/*******************************************
+    EXPORT ROUTER
+******************************************/
 
 module.exports = router;
