@@ -190,10 +190,12 @@ router.get('/:id/bookings', async (req, res, next) => {
   }
 
   if (spot.ownerId !== req.user.id) {
-    const autherr = new Error();
-    autherr.status = 403;
-    autherr.message = "Forbidden";
-    return next(autherr);
+    let bookings = await Booking.findAll({
+      where: { spotId: req.params.id },
+      attributes: ['spotId', 'startDate', 'endDate'],
+      raw: true
+    });
+    return res.json({'Bookings': bookings})
   }
 
   let formatted = [];
