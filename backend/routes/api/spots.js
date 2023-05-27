@@ -2,7 +2,7 @@ const express = require("express");
 const { Image, Spot, Review, User,Booking, sequelize } = require("../../db/models");
 const { check } = require('express-validator');
 const { handleValidationErrors, validateBooking } = require('../../utils/validation');
-
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -63,69 +63,100 @@ const validateSpot = [
     GET ALL SPOTS
 ******************************************/
 router.get('/', async (req, res, next) => {
-    let {page, size, minLat, maxLat, minLng, maxLng,minPrice,maxPrice} = req.query
-    const where = {}
-    if(size){
-        if(!isNaN(size) && size > 0 && size < 21){size = +size}
-        else if (size > 20) {size = 20}
-        else {size = 20}
-    }else {size = 20};
-
-    if(page){
-        if (!isNaN(page) && page <= 11){page =+page}
-        else if (page > 10){page = 10}
-        else {page = 1}
-    }else {page = 1}
-    const offset = size * (page -1)
-
-    if(minLat && !isNaN(minLat)){
-        where.lat = { [Op.gte]: +minLat}
-    }
-    if (maxLat && !isNaN(maxLat)) {
-        where.lat = {  [Op.lte]: +maxLat };
+  let {page, size, minLat, maxLat, minLng, maxLng,minPrice,maxPrice} = req.query
+  const where = {}
+  const errors = {}
+  if(size){
+      if(!isNaN(size) && size > 0 && size < 21){size = +size}
+      else if (size > 20) {size = 20}
+      else if (size < 1){
+        errors.size = "Size must be greater than or equal to 1"
       }
+      else {size = 20}
+  }else {size = 20};
 
-      if (minLng && !isNaN(minLng)) {
-        where.lng = { [Op.gte]: +minLng };
-      }
+  if(page){
+    if (!isNaN(page) && page <= 11 && page > 1){page =+page}
+    else if (page > 10){page = 10}
+    else if( page < 1){errors.message ="Page must be greater than or equal to 1" }
+    else {page = 1}
+  }else {page = 1}
 
-      if (maxLng && !isNaN(maxLng)) {
-        where.lng = {  [Op.lte]: +maxLng };
-      }
+  const offset = size * (page -1)
 
-      if (minPrice && !isNaN(minPrice)) {
-        where.price = { [Op.gte]: +minPrice };
-      }
+  if(minLat && !isNaN(minLat) ){
+    if(minLat < -90 || minLat > 90){
+      errors.minLat = "Minimum latitude is invalid"
+    }else {where.lat = { [Op.gte]: +minLat}}
+  }
 
-      if (maxPrice && !isNaN(maxPrice)) {
-        where.price = { [Op.lte]: +maxPrice };
-      }
+  if (maxLat && !isNaN(maxLat)) {
+    if(maxLat < -90 || maxLat > 90){
+      errors.maxLat = "Maximum latitude is invalid"
+    }else{ where.lat = {  [Op.lte]: +maxLat };}
+  }
 
-    const spots = await Spot.findAll({
-        limit: size,
-        offset: offset,
-        where
-    })
 
-    let resultsSpot = []
+  if (minLng && !isNaN(minLng)) {
+    if(minLng < -180 || minLng > 180){
+      errors.minLng = "Minimum longitude is invalid"
+    }else{where.lng = { [Op.gte]: +minLng };}
+  }
+
+  if (maxLng && !isNaN(maxLng)) {
+    if(minLng < -180 || minLng > 180){
+      errors.minLng = "Maximum longitude is invalid"
+    }else{where.lng = {  [Op.lte]: +maxLng };}
+  }
+
+  if (minPrice && !isNaN(minPrice)) {
+    if(minPrice < 0){
+        errors.minPrice ="Minimum price must be greater than or equal to 0"
+    }else{where.price = { [Op.gte]: +minPrice };}
+  }
+
+  if (maxPrice && !isNaN(maxPrice)) {
+    if(maxPrice < 0){
+      errors.maxPrice = "Maximum price must be greater than or equal to 0"
+    }else{where.price = { [Op.lte]: +maxPrice };}
+  }
+  if(Object.keys(errors).length !== 0){
+    err = new Error()
+    err.status = 400
+    err.message = "Bad Request"
+    err.errors = errors
+    return next (err)
+  }
+  const spots = await Spot.findAll({
+    limit: size,
+    offset: offset,
+    where
+  })
+
+  let resultsSpot = []
     // go threw each spot to formatt correctly
     for (let spot of spots){
         spot = spot.toJSON()
-        // get the average rating
+        if(spot){        // get the average rating
        let starsum = await Review.sum('stars', {where: {spotId: spot.id}}) // add up all star values for spot
        let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}, attributes: ['stars']}) // count the number of reviews
        spot.avgRating = starsum/count // math to get the average
         // get the url for the preview image
-        fetchurl = spot => {
-            return Image.findOne({where: {refId: spot.id , preview: true}}).then(image => image.url);
-        };
-        fetchurl(spot.id).then(url => spot.previewImage = url);
+
+        const image = await Image.findOne({
+          where: { refId: spot.id, preview: true },
+          attributes: [ "url"],
+          raw: true
+        });
+        if(image){spot.previewImage = image.url;}else {spot.previewImage =  null}
         // add the spot to the array
         resultsSpot.push(spot)
+      }
+
     }
     // add the spot to the array
 
-  return res.json({"Spots":resultsSpot});
+  return res.json({"Spots":resultsSpot, page, size});
 });
 
 /*******************************************
@@ -161,7 +192,8 @@ router.get("/:id", async (req, res, next) => {
     attributes: ["id", "url", "preview"],
   });
   // add the images to spot as SpotImages
-  spot.SpotImages = images;
+  if(images){spot.SpotImages = images;}else {spot.SpotImages =  null}
+
   // find user by the spot's OwnerId, grab id, firstname and last name
   const owner = await User.findOne({
     where: { id: spot.ownerId },
@@ -198,7 +230,8 @@ router.get("/:spotId/reviews", async (req, res, next) => {
       where: { type: "Review", refId: review.id },
       attributes: ["id", "url"],
     });
-    review.ReviewImages = images;
+    if(images){ review.ReviewImages = images;} else {review.ReviewImages = null}
+
 
     editedReviews.push(review);
   }
