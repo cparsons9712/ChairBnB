@@ -107,7 +107,8 @@ router.post('/:id/images', async (req, res, next)=> {
                 type: "Review",
                 refId: req.params.id
             })
-            return res.json(newimage)
+            let response = {id: newimage.id, url: newimage.url}
+            return res.json(response)
         }
     } // throw an error if the image isn't found
     else {

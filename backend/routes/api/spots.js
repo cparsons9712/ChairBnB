@@ -446,7 +446,7 @@ router.post('/:id/bookings',validateBooking,async(req, res, next)=>{
     autherr.message = "Forbidden";
     return next(autherr);
   }
-  if(endDate < startDate){
+  if(endDate <= startDate){
     const err = new Error();
     err.status = 400;
     err.message = "Bad Request"
@@ -461,7 +461,12 @@ router.post('/:id/bookings',validateBooking,async(req, res, next)=>{
   })
 
   for (const dates of existingBookings){
-    if(startDate < dates.endDate && startDate > dates.startDate){
+    let NstartDate = new Date(startDate)
+    let NendDate = new Date(endDate)
+    let EstartDate = new Date(dates.startDate)
+    let EendDate = new Date(dates.endDate)
+
+    if(NstartDate >=  EstartDate && NstartDate <= EstartDate ){
       const err = new Error()
       err.message = "Sorry, this spot is already booked for the specified dates";
       err.status = 403
@@ -469,7 +474,7 @@ router.post('/:id/bookings',validateBooking,async(req, res, next)=>{
       err.errors = errors
       return next (err)
     }
-    if(endDate < dates.endDate && endDate > dates.startDate){
+    if(NendDate >=  EstartDate && NendDate <= EstartDate){
       const err = new Error()
       err.message = "Sorry, this spot is already booked for the specified dates";
       err.status = 403

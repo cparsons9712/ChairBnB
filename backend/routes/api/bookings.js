@@ -64,21 +64,26 @@ router.put('/:id', validateBooking, async (req, res, next) => {
 
   for (const dates of existingBookings) {
     if (dates.id !== oldBooking.id) {
-      if (startDate < dates.endDate && startDate > dates.startDate) {
-        const err = new Error();
+      let NstartDate = new Date(startDate)
+      let NendDate = new Date(endDate)
+      let EstartDate = new Date(dates.startDate)
+      let EendDate = new Date(dates.endDate)
+
+      if(NstartDate >=  EstartDate && NstartDate <= EstartDate ){
+        const err = new Error()
         err.message = "Sorry, this spot is already booked for the specified dates";
-        err.status = 403;
-        errors.startDate = "Start date conflicts with an existing booking";
-        err.errors = errors;
-        return next(err);
+        err.status = 403
+        errors = {startDate: '"Start date conflicts with an existing booking"'}
+        err.errors = errors
+        return next (err)
       }
-      if (endDate < dates.endDate && endDate > dates.startDate) {
-        const err = new Error();
+      if(NendDate >=  EstartDate && NendDate <= EstartDate){
+        const err = new Error()
         err.message = "Sorry, this spot is already booked for the specified dates";
-        err.status = 403;
-        errors.endDate = "End date conflicts with an existing booking";
-        err.errors = errors;
-        return next(err);
+        err.status = 403
+        errors = {endDate: "End date conflicts with an existing booking"}
+        err.errors = errors
+        return next (err)
       }
     }
   }
