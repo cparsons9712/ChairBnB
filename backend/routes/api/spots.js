@@ -124,9 +124,8 @@ router.get('/', async (req, res, next) => {
         resultsSpot.push(spot)
     }
     // add the spot to the array
-    resultsSpot.push(spot);
-  }
-  res.json({"Spots":resultsSpot});
+
+  return res.json({"Spots":resultsSpot});
 });
 
 /*******************************************
