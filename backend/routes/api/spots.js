@@ -62,30 +62,66 @@ const validateSpot = [
 /*******************************************
     GET ALL SPOTS
 ******************************************/
-router.get("/", async (req, res, next) => {
-  const { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
-    req.query;
-  const spots = await Spot.findAll();
+router.get('/', async (req, res, next) => {
+    let {page, size, minLat, maxLat, minLng, maxLng,minPrice,maxPrice} = req.query
+    const where = {}
+    if(size){
+        if(!isNaN(size) && size > 0 && size < 21){size = +size}
+        else if (size > 20) {size = 20}
+        else {size = 20}
+    }else {size = 20};
 
-  let resultsSpot = [];
-  // go threw each spot to formatt correctly
-  for (let spot of spots) {
-    spot = spot.toJSON();
-    // get the average rating
-    let starsum = await Review.sum("stars", { where: { spotId: spot.id } }); // add up all star values for spot
-    let { count } = await Review.findAndCountAll({
-      where: { spotId: spot.id },
-      attributes: ["stars"],
-    }); // count the number of reviews
-    spot.avgRating = starsum / count; // math to get the average
-    // get the url for the preview image
-    let image = await Image.findOne({
-      where: { refId: spot.id, type: "Spot", preview: true },
-    });
-    if (image) {
-      spot.previewImage = image.url;
-    } else {
-      spot.previewImage = null;
+    if(page){
+        if (!isNaN(page) && page <= 11){page =+page}
+        else if (page > 10){page = 10}
+        else {page = 1}
+    }else {page = 1}
+    const offset = size * (page -1)
+
+    if(minLat && !isNaN(minLat)){
+        where.lat = { [Op.gte]: +minLat}
+    }
+    if (maxLat && !isNaN(maxLat)) {
+        where.lat = {  [Op.lte]: +maxLat };
+      }
+
+      if (minLng && !isNaN(minLng)) {
+        where.lng = { [Op.gte]: +minLng };
+      }
+
+      if (maxLng && !isNaN(maxLng)) {
+        where.lng = {  [Op.lte]: +maxLng };
+      }
+
+      if (minPrice && !isNaN(minPrice)) {
+        where.price = { [Op.gte]: +minPrice };
+      }
+
+      if (maxPrice && !isNaN(maxPrice)) {
+        where.price = { [Op.lte]: +maxPrice };
+      }
+
+    const spots = await Spot.findAll({
+        limit: size,
+        offset: offset,
+        where
+    })
+
+    let resultsSpot = []
+    // go threw each spot to formatt correctly
+    for (let spot of spots){
+        spot = spot.toJSON()
+        // get the average rating
+       let starsum = await Review.sum('stars', {where: {spotId: spot.id}}) // add up all star values for spot
+       let {count} = await Review.findAndCountAll( {where: {spotId: spot.id}, attributes: ['stars']}) // count the number of reviews
+       spot.avgRating = starsum/count // math to get the average
+        // get the url for the preview image
+        fetchurl = spot => {
+            return Image.findOne({where: {refId: spot.id , preview: true}}).then(image => image.url);
+        };
+        fetchurl(spot.id).then(url => spot.previewImage = url);
+        // add the spot to the array
+        resultsSpot.push(spot)
     }
     // add the spot to the array
     resultsSpot.push(spot);
