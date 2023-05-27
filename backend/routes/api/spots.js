@@ -447,7 +447,7 @@ router.put("/:id", validateSpot,async (req, res, next) => {
       return next(perror);
     }
 
-    await spot.update({
+    let updatedSpot = await spot.update({
       address,
       city,
       state,
@@ -458,7 +458,7 @@ router.put("/:id", validateSpot,async (req, res, next) => {
       description,
       price,
     });
-    res.json(spot);
+    res.json(updatedSpot);
 
 });
 /*******************************************
