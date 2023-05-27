@@ -125,7 +125,7 @@ router.delete('/:id', async (req,res, next)=>{
   if(oldStart < currentDate){
     const err = new Error();
     err.status = 403;
-    err.message = "Past bookings can't be modified";
+    err.message = "Bookings that have been started can't be deleted";
     return next(err);
   }
   await booking.destroy();
