@@ -83,8 +83,37 @@ return res.json(updatedBooking)
 /*******************************************
 DELETE A BOOKING
 ******************************************/
-router.delete('/:id', async (req,res)=>{
-  
+router.delete('/:id', async (req,res, next)=>{
+  if(!req.user){
+    const err = new Error();
+    err.status = 401;
+    err.message = "Authentication required";
+    return next(err);
+  }
+  const booking = await Booking.findByPk(req.params.id)
+  if(!booking){
+    const err = new Error();
+    err.status = 404;
+    err.message = "Booking couldn't be found";
+    return next(err);
+  }
+
+  const spot = await Spot.findByPk(booking.spotId)
+  if(booking.userId !== req.user.id && spot.ownerId !== req.user.id){
+    const err = new Error();
+    err.status = 403;
+    err.message = "Forbidden";
+    return next(err);
+  }
+  if(sequelize.literal("CURRENT_TIMESTAMP") > booking.startDate){
+    const err = new Error();
+    err.status = 403;
+    err.message = "Bookings that have been started can't be deleted";
+    return next(err);
+  }
+  await booking.destroy();
+  return res.json({ message: "Successfully deleted" });
+
 })
 
 /*******************************************
