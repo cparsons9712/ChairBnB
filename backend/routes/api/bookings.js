@@ -69,7 +69,7 @@ router.put('/:id', validateBooking, async (req, res, next) => {
       let EstartDate = new Date(dates.startDate)
       let EendDate = new Date(dates.endDate)
 
-      if(NstartDate >=  EstartDate && NstartDate <= EstartDate ){
+      if(NstartDate >  EstartDate && NstartDate < EstartDate || NstartDate === EstartDate || NstartDate === NendDate){
         const err = new Error()
         err.message = "Sorry, this spot is already booked for the specified dates";
         err.status = 403
@@ -77,7 +77,7 @@ router.put('/:id', validateBooking, async (req, res, next) => {
         err.errors = errors
         return next (err)
       }
-      if(NendDate >=  EstartDate && NendDate <= EstartDate){
+      if(NendDate >  EstartDate && NendDate < EstartDate || NendDate === EstartDate || NendDate === NendDate){
         const err = new Error()
         err.message = "Sorry, this spot is already booked for the specified dates";
         err.status = 403
