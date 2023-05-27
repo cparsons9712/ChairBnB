@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator');
+const { check } = require('express-validator');
 
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
@@ -20,6 +21,28 @@ const handleValidationErrors = (req, _res, next) => {
   next();
 };
 
-module.exports = {
+
+const validateBooking = [
+  check('startDate')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('startDate is required'),
+    check('endDate')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('startDate is required'),
+  check('startDate')
+    .isDate()
+    .withMessage('startDate must be in yyyy-mm-dd format'),
+  check('endDate')
+    .isDate()
+    .withMessage('endDate must be in yyyy-mm-dd format'),
+
   handleValidationErrors
+];
+
+
+module.exports = {
+  handleValidationErrors,
+  validateBooking
 };

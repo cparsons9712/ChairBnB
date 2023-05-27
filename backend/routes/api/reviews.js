@@ -59,10 +59,10 @@ router.put('/:id', validateReview,async (req,res, next)=>{
     }
 
 
-        const newReview = await oldreview.update({
-            review, stars
-        })
-        return res.json(newReview)
+    const newReview = await oldreview.update({
+        review, stars
+    })
+    return res.json(newReview)
 
 })
 
