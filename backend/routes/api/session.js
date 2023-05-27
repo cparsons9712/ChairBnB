@@ -212,8 +212,10 @@ router.get('/bookings', async (req,res) => {
       where: {refId: spot.id,  preview: true},
       raw:true
     })
+    if(previewImage){
+      spot.previewImage = previewImage.url
+    }
 
-    spot.previewImage = previewImage.url
 
     booking.Spot = spot
     formattedBookings.push({
