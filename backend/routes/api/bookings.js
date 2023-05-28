@@ -34,7 +34,7 @@ router.put('/:id', validateBooking, async (req, res, next) => {
     return next(err);
   }
 
-  if (endDate < startDate) {
+  if (endDate <= startDate) {
     const err = new Error();
     err.status = 400;
     err.message = "Bad Request";
@@ -44,9 +44,9 @@ router.put('/:id', validateBooking, async (req, res, next) => {
   }
 
   const currentDate = new Date();
-  const oldStart = new Date(oldBooking.startDate);
+  const oldEnd = new Date(oldBooking.endDate);
 
-  if(oldStart < currentDate){
+  if(oldEnd < currentDate){
     const err = new Error();
     err.status = 403;
     err.message = "Past bookings can't be modified";
