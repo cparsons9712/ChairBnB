@@ -86,7 +86,7 @@ router.post('/:id/images', async (req, res, next)=> {
 
         if (review) {
 // count the number of images the review currently has, throw error if 10 or more
-            const numImages = await Image.findAndCountAll({where: {refId: req.params.id}})
+            const numImages = await Image.findAndCountAll({where: {refId: req.params.id, type: 'Review'}})
             const {count} = numImages
             if(count >= 10){
                 const err = new Error();
