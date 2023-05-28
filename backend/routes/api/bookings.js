@@ -38,7 +38,7 @@ router.put('/:id', validateBooking, async (req, res, next) => {
     const err = new Error();
     err.status = 400;
     err.message = "Bad Request";
-    let errors = { endDate: "endDate cannot be on or before startDate" };
+    let errors = { endDate: "endDate cannot come before startDate" };
     err.errors = errors;
     return next(err);
   }
@@ -77,7 +77,7 @@ router.put('/:id', validateBooking, async (req, res, next) => {
         err.errors = errors
         return next (err)
       }
-      if(NendDate >=  EstartDate && NendDate <= EendDate ){
+      if(NendDate >=  EstartDate && NendDate <= EendDate || EstartDate > NstartDate && EstartDate < NendDate ){
         const err = new Error()
         err.message = "Sorry, this spot is already booked for the specified dates";
         err.status = 403
