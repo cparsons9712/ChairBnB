@@ -417,7 +417,13 @@ router.post("/:id/images", async (req, res, next) => {
       type: "Spot",
       refId: +req.params.id,
     });
-    res.json(newImage);
+
+    const resObj = {
+      id: newImage.id,
+      url: newImage.url,
+      preview: newImage.preview
+    }
+    res.json(resObj);
   }
 });
 
@@ -467,7 +473,7 @@ router.post('/:id/bookings',validateBooking,async(req, res, next)=>{
       let EstartDate = new Date(dates.startDate)
       let EendDate = new Date(dates.endDate)
 
-      if(NstartDate >  EstartDate && NstartDate < EstartDate || NstartDate === EstartDate || NstartDate === NendDate){
+      if(NstartDate >=  EstartDate && NstartDate <= EendDate){
         const err = new Error()
         err.message = "Sorry, this spot is already booked for the specified dates";
         err.status = 403
@@ -475,7 +481,7 @@ router.post('/:id/bookings',validateBooking,async(req, res, next)=>{
         err.errors = errors
         return next (err)
       }
-      if(NendDate >  EstartDate && NendDate < EstartDate || NendDate === EstartDate || NendDate === NendDate){
+      if(NendDate >=  EstartDate && NendDate <= EendDate){
         const err = new Error()
         err.message = "Sorry, this spot is already booked for the specified dates";
         err.status = 403
@@ -483,7 +489,7 @@ router.post('/:id/bookings',validateBooking,async(req, res, next)=>{
         err.errors = errors
         return next (err)
       }
-    
+
   }
 
 let newBooking = await Booking.create({
