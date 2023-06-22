@@ -45,8 +45,7 @@ router.post(
 
       const existingemail = await User.findOne({where: {email}})
       const existingUsername = await User.findOne({where: {username}})
-      console.log(existingUsername)
-      console.log(existingUsername)
+
       if( existingUsername || existingemail){
 
         errors = {}

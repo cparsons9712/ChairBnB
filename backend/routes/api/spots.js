@@ -241,22 +241,22 @@ router.get("/:spotId/reviews", async (req, res, next) => {
     GET BOOKINGS BY SPOT ID
 ******************************************/
 router.get('/:id/bookings', async (req, res, next) => {
+// check that there is a user signed in
   if (!req.user) {
     const autherr = new Error();
     autherr.status = 401;
     autherr.message = "Authentication required";
     return next(autherr);
   }
-
+// find the spot and check it exist
   let spot = await Spot.findByPk(req.params.id);
-
   if (!spot) {
     let err = new Error();
     err.status = 404;
     err.message = "Spot couldn't be found";
     return next(err);
   }
-
+// return data for users that do not own the spot
   if (spot.ownerId !== req.user.id) {
     let bookings = await Booking.findAll({
       where: { spotId: req.params.id },
@@ -267,21 +267,21 @@ router.get('/:id/bookings', async (req, res, next) => {
   }
 
   let formatted = [];
-
+  // find bookings for spot
   let bookings = await Booking.findAll({
     where: { spotId: req.params.id },
     raw: true
   });
-
+// formatt all the bookings
   for (let booking in bookings) {
     let spotObj = {};
-
+// get user data for the booking
     let user = await User.findOne({
       where: { id: bookings[booking].userId },
       attributes: ['id', 'firstName', 'lastName'],
       raw: true
     });
-
+// format the data for the booking
     spotObj.User = user;
     spotObj.id = bookings[booking].id;
     spotObj.spotId = bookings[booking].spotId;
@@ -293,11 +293,9 @@ router.get('/:id/bookings', async (req, res, next) => {
 
     formatted.push(spotObj);
   }
-
+// return the data for owner of spot
   return res.json({ "Bookings": formatted });
 });
-
-
 
 /*******************************************
     CREATE A SPOT
@@ -501,8 +499,6 @@ let newBooking = await Booking.create({
 return res.json(newBooking)
 })
 
-
-
 /*******************************************
     EDIT A SPOT
 ******************************************/
@@ -579,7 +575,6 @@ router.delete("/:id", async (req, res, next) => {
 /*******************************************
     DELETE A SPOT IMAGE
 ******************************************/
-
 router.delete("/images/:id", async (req, res, next) => {
   // Throw an error if a user is not signed in
   if (!req.user) {

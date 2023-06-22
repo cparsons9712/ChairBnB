@@ -10,30 +10,33 @@ const { Op } = require('sequelize');
 EDIT A BOOKING
 ******************************************/
 router.put('/:id', validateBooking, async (req, res, next) => {
-  let { startDate, endDate } = req.body;
 
+  //grab the new info from the client
+  let { startDate, endDate } = req.body;
+// check if a user is signed in
   if (!req.user) {
     const err = new Error();
     err.status = 401;
     err.message = "Authentication required";
     return next(err);
   }
-
+// find the current booking
   let oldBooking = await Booking.findByPk(req.params.id);
+// if the booking doesn't exist throw an error
   if (!oldBooking) {
     const err = new Error();
     err.status = 404;
     err.message = "Booking couldn't be found";
     return next(err);
   }
-
+// if the booking doesn't belong to the signed in user throw error
   if (oldBooking.userId !== req.user.id) {
     const err = new Error();
     err.status = 403;
     err.message = "Forbidden";
     return next(err);
   }
-
+// prevent end date from being on or before start date
   if (endDate <= startDate) {
     const err = new Error();
     err.status = 400;
@@ -42,7 +45,7 @@ router.put('/:id', validateBooking, async (req, res, next) => {
     err.errors = errors;
     return next(err);
   }
-
+// check that the booking is in the future
   const currentDate = new Date();
   const oldEnd = new Date(oldBooking.endDate);
 
@@ -53,7 +56,7 @@ router.put('/:id', validateBooking, async (req, res, next) => {
     return next(err);
   }
 
-
+// check that the new dates are avaliable
   const existingBookings = await Booking.findAll({
     where: { spotId: oldBooking.spotId },
     attributes: ['startDate', 'endDate', 'id'],
@@ -87,7 +90,7 @@ router.put('/:id', validateBooking, async (req, res, next) => {
       }
     }
   }
-
+// save the new dates in the booking
   const startDateFormatted = startDate.substring(0, 10); // Extract the first 10 characters (yyyy-mm-dd)
   const endDateFormatted = endDate.substring(0, 10); // Extract the first 10 characters (yyyy-mm-dd)
 
