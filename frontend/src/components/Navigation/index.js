@@ -1,46 +1,28 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import ProfileButton from "./ProfileButton";
-import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import "./Navigation.css";
-import SignupFormModal from "../SignupFormModal";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import ProfileButton from './ProfileButton';
 
-function Navigation({ isLoaded }) {
-  const sessionUser = useSelector((state) => state.session.user);
+import logo from '../../img/house.png'
 
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = (
-      <li>
-        <ProfileButton user={sessionUser} />
-      </li>
-    );
-  } else {
-    sessionLinks = (
-      <li>
-        <OpenModalButton
-          buttonText="Log In"
-          modalComponent={<LoginFormModal />}
-        />
-        <OpenModalButton
-            buttonText="Sign Up"
-            modalComponent={<SignupFormModal />}
-        />
-      </li>
-    );
-  }
+
+function Navigation({ isLoaded }){
+  const sessionUser = useSelector(state => state.session.user);
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">
-          Home
-        </NavLink>
-      </li>
-      {isLoaded && sessionLinks}
-    </ul>
+    <div className='bar'>
+      <div id='homeLogo'>
+        <NavLink exact to="/"><img src={logo} alt='Home' id='logo'/></NavLink>
+      </div>
+
+      <h2 id='title'>Creepy Hauntings At Incredible Rates</h2>
+
+      {isLoaded && (
+        <div className='userButton'>
+          <ProfileButton user={sessionUser} />
+        </div>
+      )}
+    </div>
   );
 }
 

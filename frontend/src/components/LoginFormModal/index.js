@@ -1,14 +1,15 @@
 // frontend/src/components/LoginFormModal/index.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import "./LoginForm.css";
+
 
 function LoginFormModal() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
+  const [disable, setDisable] = useState(true)
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -25,10 +26,32 @@ function LoginFormModal() {
       });
   };
 
+  const loginDemo= () =>{
+    setCredential('FakeUser1')
+    setPassword('password1')
+    return dispatch(sessionActions.login({ credential, password }))
+      .then(closeModal)
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        }
+      });
+
+  }
+
+  useEffect(()=>{
+    if(credential.length >=4 && password.length >=6){
+    setDisable(false)
+  }}, [credential, password])
+
   return (
     <>
-      <h1>Log In</h1>
+
       <form onSubmit={handleSubmit}>
+      <button className = 'close' onClick={closeModal}>X</button>
+        <h1>Log In</h1>
+
         <label>
           Username or Email
           <input
@@ -50,7 +73,8 @@ function LoginFormModal() {
         {errors.credential && (
           <p>{errors.credential}</p>
         )}
-        <button type="submit">Log In</button>
+        <button type="submit" disabled={disable}>Log In</button>
+        <button className="demo" onClick={loginDemo}>DEMO USER</button>
       </form>
     </>
   );

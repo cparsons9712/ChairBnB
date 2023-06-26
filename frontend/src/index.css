@@ -1,1 +1,159 @@
 /* TODO Add site wide styles */
+/*****************************************
+ELEMENT DEFAULTS
+*******************************************/
+li{
+    list-style: none;
+  }
+
+body {
+    font-family: 'Georgia', serif;
+    background-color: #000000;
+   background-image: url('./img/background.jpg');
+    height: 100vb; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+  }
+
+  h1 {
+    color: #952f04;
+    text-shadow: 2px 1px #000000df;
+
+    text-align: center;
+    font-family: 'Georgia', serif;
+  }
+  h2{
+    color: #952f04;
+    text-shadow: 2px 1px #000000df;
+    text-align: center;
+    font-family: 'Georgia', serif;
+  }
+
+  form {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 30%;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px 0px rgba(2,2,0,0.5);
+    text-align: center;
+  }
+
+  form label {
+    font-size: 1.2em;
+    color: #000000;
+    display: block;
+    margin-top: 20px;
+    margin-right: 20px;
+    font-family: 'Georgia', serif;
+
+  }
+
+  form input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px 0px rgba(54, 1, 1, 0.25);
+    margin-top: 10px;
+    background-color: #000000;
+    color: #952f04;
+  }
+
+  button {
+    background-color: black;
+    color: #f4f1f1;
+    height: auto;
+
+    padding: 5px;
+    font-size: 10px;
+
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Georgia', serif;
+  }
+
+  button:hover {
+    background-color: #952f04;
+  }
+
+  button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+
+.close{
+    float: right;
+    position: relative;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    font-size: x-small;
+    border-radius: 0%;
+}
+
+/***********************************
+Navigation Bar
+************************************/
+.userMenu {
+    background-color: aliceblue;
+    height: auto;
+    width: auto;
+    position: relative;
+    top: 75px;
+    float: right;
+    padding: 5px;
+
+}
+.bar {
+    margin: 0;
+    background-color: #f6f8f45d;
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    left: 5px;
+    height: 62px;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+  }
+
+.userButton{
+    margin: 8px;
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+
+}
+.user {
+    cursor: pointer;
+    display: flex;
+    align-content: flex-end;
+    text-align: center;
+}
+
+#homeLogo {
+    float: left;
+    margin-top: 0px;
+    margin-left: 5px;
+    padding-top: 5px;
+    padding-left: 10px;
+    width: 45px;
+
+}
+#homeLogo :hover{
+    background-color: #952f04
+}
+
+.login{
+    float: right;
+}
+
+#title{
+    margin-top: auto;
+}
