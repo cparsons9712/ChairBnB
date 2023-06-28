@@ -103,15 +103,16 @@ Navigation Bar
     background-color: aliceblue;
     height: auto;
     width: auto;
-    position: relative;
+    position: fixed;
     top: 75px;
-    float: right;
+    right: 5px;
     padding: 5px;
+
 
 }
 .bar {
     margin: 0;
-    background-color: #f6f8f45d;
+    background-color: rgba(63, 59, 65, 0.902);
     position: fixed;
     top: 5px;
     right: 5px;
@@ -120,6 +121,7 @@ Navigation Bar
     display: flex;
     justify-content: space-between;
     align-content: space-between;
+    z-index: 1000;
   }
 
 .userButton{
@@ -137,6 +139,15 @@ Navigation Bar
     text-align: center;
 }
 
+.submit{
+  height: 30px;
+  width: 80px;
+  font-size: 15px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+
 #homeLogo {
     float: left;
     margin-top: 0px;
@@ -146,14 +157,59 @@ Navigation Bar
     width: 45px;
 
 }
+#logo{
+  height: 50px;
+}
 #homeLogo :hover{
     background-color: #952f04
 }
 
 .login{
     float: right;
+
+}
+
+.modalButton{
+  width: 75px;
+
 }
 
 #title{
     margin-top: auto;
+}
+
+/**************************************
+LANDING PAGE
+*************************************/
+
+#landingCont{
+  position: relative;
+  top: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  width: 100%
+
+
+}
+
+.tile {
+  background-color: rgba(0, 0, 0, 0.94);
+  height: 300px;
+  width: 250px;
+  margin: 30px;
+
+  box-shadow: 5px 5px 2px grey;
+}
+.previewIMG{
+  width: 250px
+}
+.hidden {
+  display: none;
+  background-color: #f4f1f1;
+  width: 250px;
+}
+.tile:hover > div {
+  display: block;
 }

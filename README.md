@@ -9,7 +9,7 @@ URL LINK:
 https://dbdiagram.io/d/645181a6dca9fb07c4645429
 
 
-![Database Schema](/SchemaChairBnB.png)
+![Database Schema](/images/SchemaChairBnB.png)
 
 ## API Documentation
 
