@@ -18,7 +18,7 @@ function ProfileButton({ user }) {
           </>
         ) : (
           <>
-            <li>
+            <li >
               <OpenModalButton
                 buttonText="Log In"
                 modalComponent={<LoginFormModal />}
