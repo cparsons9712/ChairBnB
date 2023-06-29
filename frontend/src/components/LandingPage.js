@@ -30,9 +30,12 @@ function LandingPage() {
 
         {spots.map((spot) => {
           return (
+
             <NavLink key={spot.name} to={`/spots/${spot.id}`}>
+
               <div className="tile">
-                <div className="hidden">{spot.name}</div>
+              <div className="hidden">{spot.name}</div>
+
                 <img
                   src={spot.previewImage}
                   alt="HOUSE"

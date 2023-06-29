@@ -1,6 +1,7 @@
 // Action Variables
 const LOAD = 'spot/LOAD';
 const LOADONE = 'spot/LOAD/ONE'
+const LOADREV = 'spot/LOAD/REVIEWS'
 // ACTIONS
 
 const loadAll = spots => ({
@@ -11,6 +12,11 @@ const loadAll = spots => ({
 const loadOne = spot => ({
     type: LOADONE,
     spot
+})
+
+const loadRev = revs => ({
+    type: LOADREV,
+    revs
 })
 
 //THUNKS
@@ -29,6 +35,13 @@ export const getOneSpot = (id) => async dispatch => {
         dispatch(loadOne(spot))
     }
 }
+export const getSpotReviews = (id) => async dispatch => {
+    const response = await fetch(`/api/spots/${id}/reviews`)
+    if(response.ok) {
+        const reviews = await response.json()
+        dispatch(loadRev(reviews))
+    }
+}
 
 
 
@@ -40,6 +53,8 @@ const spotReducer = (state = initialState, action) => {
             return {...state, ...action.spots}
         case LOADONE:
             return {...state, ...action.spot}
+        case LOADREV:
+            return {...state, ...action.revs}
 
         default:
             return state;
