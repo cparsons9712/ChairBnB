@@ -9,407 +9,600 @@ module.exports = {
     options.tableName = 'Images';
     return queryInterface.bulkInsert(options, [
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7zete-EzOtfEgHBz?e=QAwIqN',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/1/1a.jpg',
         preview: true,
         type: 'Spot',
         refId: 1
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7zoIm3m4lfUj8lBj?e=Rv8BJy',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/1/1b.jpg',
         preview: false,
+        type: 'Spot',
         refId: 1
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7z679dMzzfX6N6b3?e=oFFplc',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/1/1d.jpg',
         preview: false,
+        type: 'Spot',
         refId: 1
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/03/visiting-bear.jpg',
-        type: 'Review',
-        refId: 4
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/1/1f.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 1
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7zy4xGcY8dN8QlJc?e=ZVm4c5',
-        type: 'Review',
-        refId: 3
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/1/1g.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 1
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/05/photo_74546864-1500x1000-1.jpg',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/2/2a.jpg',
         preview: true,
         type: 'Spot',
         refId: 2
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/05/photo_74546861-1500x1000-1.jpg',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/2/2b.jpg',
         preview: false,
+        type: 'Spot',
         refId: 2
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/05/photo_70971165-1500x1000-1.jpg',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/2/2c.jpg',
         preview: false,
+        type: 'Spot',
         refId: 2
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/05/photo_70971157-1500x1000-1.jpg',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/2/2d.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 2
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/2/2e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 2
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/2/spot2rev1.jpg',
+        preview: false,
         type: 'Review',
-        refId: 5
+        refId: 1
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7x2nuBGV9MUfwrxs?e=cSMvbM',
-        preview:true,
-        type: 'Spot',
-        refId: 3
-      },
-      {
-        url: 'https://specialfinds.com/wp-content/uploads/2021/11/promontory-aa7.png',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/2/spt2rev1.jpg',
         preview: false,
-        refId: 3
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7xz_hKqpDf-V6Oe3?e=wwDAZe',
-        type: 'Spot',
-        preview: false,
-        refId: 3
-      },
-      {
-        url: 'https://specialfinds.com/wp-content/uploads/2021/11/promontory-ab1.png',
         type: 'Review',
-        refId: 8
+        refId: 1
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yDRbYSp0q3IFDUM?e=PmorBD',
-        type: 'Spot',
-        preview: true,
-        refId: 4
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yE6dD9fJlUZcjCd?e=1iEkeT',
-        type: 'Spot',
-        preview: false,
-        refId: 4
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yIYlnreRCeq4f5q?e=KkBoQ4',
-        type: 'Spot',
-        preview: false,
-        refId: 4
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7x_Q4BxdcHZvbMdj?e=ea7WjU',
-        type: 'Spot',
-        preview: false,
-        refId: 4
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yVHPvdJKbX7BU_B?e=iqlL6V',
-        type: 'Review',
-        refId: 10
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7ymiTDrmhJXZMaG7?e=E4rTS9',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/3/3a.jpg',
         preview: true,
         type: 'Spot',
-        refId: 5
+        refId: 3
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/04/kitchenarea.jpg',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/3/3b.jpg',
         preview: false,
-        refId: 5
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yo5od4bHYXj_hTr?e=SOxrE7',
         type: 'Spot',
-        preview: false,
-        refId: 5
+        refId: 3
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7ytb3uZShsnfZl4Y?e=aDUpYJ',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/3/3c.jpg',
+        preview: false,
         type: 'Spot',
-        preview: false,
-        refId: 5
+        refId: 3
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7yxhwPDFOsCSyUa-?e=EJYlzI',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/3/3d.jpg',
+        preview: false,
         type: 'Spot',
-        preview: false,
-        refId: 5
+        refId: 3
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7y0OMOcn4nrElo8R?e=xFU445',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/3/3e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 3
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/3/spot3rev2.jpg',
+        preview: false,
         type: 'Review',
-        refId: 12
+        refId: 2
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/03/sw-15th-st-bell-fl-4.jpg',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/4/4a.jpg',
+        preview: true,
+        type: 'Spot',
+        refId: 4
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/4/4b.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 4
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/4/4c.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 4
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/4/4d.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 4
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/4/4e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 4
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/5/5a.jpg',
+        preview: true,
+        type: 'Spot',
+        refId: 5
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/5/5b.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 5
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/5/5c.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 5
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/5/5d.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 5
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/5/5e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 5
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/5/rev3spot5.jpg',
+        preview: false,
+        type: 'Review',
+        refId: 3
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/5/rev3spot5B.jpg',
+        preview: false,
+        type: 'Review',
+        refId: 3
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/6/rev4spot6.jpg',
+        preview: false,
+        type: 'Review',
+        refId: 4
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/6/6a.jpg',
         preview: true,
         type: 'Spot',
         refId: 6
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/03/sw-15th-st-bell-fl-a1.jpg',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/6/6b.jpg',
         preview: false,
+        type: 'Spot',
         refId: 6
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7zPe3Ar94rI9j6bn?e=t1IKvP',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/6/6c.jpg',
         preview: false,
+        type: 'Spot',
         refId: 6
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr70ONpRf5Kr6Az-7s?e=mqmRwn',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/6/6d.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 6
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/6/6e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 6
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/7/7a.jpg',
         preview: true,
         type: 'Spot',
         refId: 7
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr70RcByp5Wl1bKBbp?e=QZFlbg',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/7/7b.jpg',
         preview: false,
+        type: 'Spot',
         refId: 7
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr70Z3-T1k-mE6zGsh?e=83443c',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/7/7c.jpg',
         preview: false,
+        type: 'Spot',
         refId: 7
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr70hPgNDU9S6SPImj?e=zcx5AY',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/7/7d.jpg',
         preview: false,
+        type: 'Spot',
         refId: 7
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr70vAbtZIa9i4KH_k?e=exgeT0',
-        preview: true,
-        type: 'Spot',
-        refId: 8
-      },
-      {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/03/interiors-1.jpg',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/7/7e.jpg',
         preview: false,
-        refId: 8
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7013KExtkhytuCIH?e=lZgEQ2',
         type: 'Spot',
-        preview: false,
-        refId: 8
+        refId: 7
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr7013KExtkhytuCIH?e=O0UdSz',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/7/rev5spot7.jpg',
         preview: false,
-        refId: 8
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr70_EOCg5DplJjT0M?e=7eGtCF',
-        type: 'Spot',
-        preview: false,
-        refId: 8
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr71AWkmJQEcveZ1Ao?e=syeG3V',
         type: 'Review',
-        refId: 19
+        refId: 5
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr71OMY2-TWAfdgp2R?e=y2xGuj',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/7/rev5spot7b.jpeg',
+        preview: false,
+        type: 'Review',
+        refId: 5
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/8/8a.jpg',
+        preview: true,
+        type: 'Spot',
+        refId: 8
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/8/8b.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 8
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/8/8c.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 8
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/8/8d.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 8
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/8/8e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 8
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/8/rev6spot8.jpg',
+        preview: false,
+        type: 'Review',
+        refId: 6
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/9/9a.jpg',
         preview: true,
         type: 'Spot',
         refId: 9
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr71d03hVd3wA3vjlO?e=j1KpGf',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/9/9b.jpg',
         preview: false,
+        type: 'Spot',
         refId: 9
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr71nvp-K-HlGLqmRi?e=NwtEA9',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/9/9c.jpg',
         preview: false,
+        type: 'Spot',
         refId: 9
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr71zNPRYcygoWrSgN?e=1V3d5g',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/9/9d.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 9
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/9/9e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 9
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/10/10a.jpg',
         preview: true,
         type: 'Spot',
         refId: 10
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr72CIuF8IGRBD0xp1?e=Yd7oNP',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/10/10b.jpg',
         preview: false,
+        type: 'Spot',
         refId: 10
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/02/d3s0237.jpg',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/10/10c.jpg',
         preview: false,
+        type: 'Spot',
         refId: 10
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr71_QAHVOYXwN_k8R?e=H1Nm13',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/10/10d.jpg',
         preview: false,
+        type: 'Spot',
         refId: 10
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr712Lejzfbbov-I1O?e=X54sA0',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/10/10e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 10
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/10/rev7spot10.jpg',
+        preview: false,
         type: 'Review',
-        refId: 23
+        refId: 7
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr71701pcni4oTxf19?e=SvJPip',
-        type: 'Review',
-        refId: 24
-      },
-      {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr72dMfvcLkKHyHeFL?e=cHc69s',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/11/11a.jpg',
         preview: true,
         type: 'Spot',
         refId: 11
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/01/p1010174-scaled.webp',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/11/11b.jpg',
         preview: false,
+        type: 'Spot',
         refId: 11
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/01/p1010403-1-scaled.webp',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/11/11c.jpg',
         preview: false,
+        type: 'Spot',
         refId: 11
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/01/p1010422shadows-scaled.webp',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/11/11d.jpg',
         preview: false,
+        type: 'Spot',
         refId: 11
       },
       {
-        url: 'https://specialfinds.com/wp-content/uploads/2023/01/p1010459-scaled.webp',
-        type: 'Review',
-        refId: 27
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/11/11e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 11
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr720GJonVT9ksVAHg?e=9wbkbr',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/12/12a.jpg',
         preview: true,
         type: 'Spot',
         refId: 12
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr72nzb3fFam4Mls-a?e=PnvJa0',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/12/12b.jpg',
         preview: false,
+        type: 'Spot',
         refId: 12
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr72p7FrgyoQ-M4ak6?e=ukpk53',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/12/12c.jpg',
         preview: false,
+        type: 'Spot',
         refId: 12
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr72yft_qog73-RSIY?e=5WDhHU',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/12/12d.jpg',
         preview: false,
+        type: 'Spot',
         refId: 12
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr72u7wMkt6p3WfJZx?e=8jc3xp',
-        type: 'Review',
-        refId: 31
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/12/12e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 12
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr72_zB10dgykFUax3?e=X0qlix',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/13/13a.jpg',
         preview: true,
         type: 'Spot',
         refId: 13
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr73ATmd6mujPRtt4I?e=dQv9dc',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/13/13b.jpg',
         preview: false,
+        type: 'Spot',
         refId: 13
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr73Hhvl6OEElN_5ig?e=irbrvn',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/13/13c.jpg',
         preview: false,
+        type: 'Spot',
         refId: 13
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr73TZQoY0HPuFRA6x?e=CP64EL',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/13/13d.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 13
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/14/14a.jpg',
         preview: true,
         type: 'Spot',
         refId: 14
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr73bNa4e7_u3E2_8y?e=gdvQeu',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/14/14b.jpg',
         preview: false,
+        type: 'Spot',
         refId: 14
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr73Ul8GHYK--guFqy?e=OucrB3',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/14/14c.jpg',
         preview: false,
+        type: 'Spot',
         refId: 14
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr73c6930y9Kg-Vrpp?e=bCxlIH',
-        type: 'Review',
-        refId: 37
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/14/14d.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 14
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr73kxxT81WSkjp7gE?e=IwwfGx',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/14/14e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 14
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/15/15a.jpg',
         preview: true,
         type: 'Spot',
         refId: 15
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr73ofjvgKFrclotXz?e=gxuOEj',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/15/15b.jpeg',
         preview: false,
+        type: 'Spot',
         refId: 15
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr73ysHp-kUHurXjZR?e=7dfWti',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/15/15c.jpg',
         preview: false,
+        type: 'Spot',
         refId: 15
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr734a_JtW1a9ZQTXN?e=l6b4qb',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/15/15d.jpg',
         preview: false,
+        type: 'Spot',
         refId: 15
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr8ABBVIUw1NRY4tMU?e=xWMTsi',
-        type: 'Spot',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/15/15e.jpg',
         preview: false,
+        type: 'Spot',
         refId: 15
       },
       {
-        url: 'https://1drv.ms/i/s!AoCHtlc83mlr8AKW1gcJaakUb2Ez?e=jE32Cw',
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/16/16a.png',
+        preview: true,
         type: 'Spot',
-        preview: false,
-        refId: 15
+        refId: 16
       },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/16/16b.png',
+        preview: false,
+        type: 'Spot',
+        refId: 16
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/16/16c.png',
+        preview: false,
+        type: 'Spot',
+        refId: 16
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/16/16d.png',
+        preview: false,
+        type: 'Spot',
+        refId: 16
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/16/16e.png',
+        preview: false,
+        type: 'Spot',
+        refId: 16
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/17/17a.jpg',
+        preview: true,
+        type: 'Spot',
+        refId: 17
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/17/17b.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 17
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/17/17c.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 17
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/17/17d.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 17
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/17/17e.jpg',
+        preview: false,
+        type: 'Spot',
+        refId: 17
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/18/18a.png',
+        preview: true,
+        type: 'Spot',
+        refId: 18
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/18/18b.png',
+        preview: false,
+        type: 'Spot',
+        refId: 18
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/18/18c.png',
+        preview: false,
+        type: 'Spot',
+        refId: 18
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/18/18d.png',
+        preview: false,
+        type: 'Spot',
+        refId: 18
+      },
+      {
+        url: 'https://cparsonsawsbucket.s3.amazonaws.com/hauntedplaces/18/18e.png',
+        preview: false,
+        type: 'Spot',
+        refId: 18
+      },
+
     ])
   },
 

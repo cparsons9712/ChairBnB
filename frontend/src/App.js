@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import './index.css'
 import LandingPage from "./components/LandingPage";
+import SpotDetails from "./components/SpotDetails";
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
       <Switch>
         <Route exact path={'/'}>
           <LandingPage />
+        </Route>
+        <Route exact path={'/spots/:id'}>
+          <SpotDetails />
         </Route>
 
       </Switch>}

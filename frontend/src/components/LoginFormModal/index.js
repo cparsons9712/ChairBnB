@@ -48,7 +48,7 @@ function LoginFormModal() {
   return (
     <>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id='logInModal'>
       <button className = 'close' onClick={closeModal}>X</button>
         <h1>Log In</h1>
 

@@ -9,175 +9,240 @@ module.exports = {
     options.tableName = 'Spots';
     return queryInterface.bulkInsert(options, [
       {
+        //1
       ownerId: 1,
-      address: '1280 Dunn Lake Rd',
-      city: 'Clearwater',
-      state: 'British Columbia',
-      country: 'Canada',
-      lat: 51.6511,
-      lng: 120.0382,
-      name: 'Shiloh Springs',
-      description: 'Welcome to Shiloh Springs, your very own whimsical haven nestled within the heart of 55 acres of picturesque mountain land. This enchanting country home, tucked away in the breathtaking landscapes of British Columbia, Canada, invites you to experience the epitome of cozy luxury, with a special focus on our exceptional seating and chairs.Step into our meticulously designed retreat and immerse yourself in the tranquility of a private forest, where each tree whispers secrets of ancient tales, and every pathway leads you to a comfortable seating nook. Our plush, inviting chairs await, ready to cradle you in their embrace as you unwind and soak in the awe-inspiring vistas that surround you.Picture yourself sinking into the soft cushions of our fireside seating area, nestled by the crackling fireplace. The gentle warmth kisses your cheeks as you indulge in a cup of steaming cocoa, perfectly balanced on the armrest of our meticulously crafted armchair. From this cozy vantage point, you can marvel at the breathtaking valley view that stretches before you, while feeling the gentle sway of nature\'s rhythm through the rocking chair that awaits your leisure.Beyond the walls of your enchanting abode, our extensive natural playground beckons. Meander through the tranquil forest paths, where charming seating nooks and benches invite you to pause and reflect, enveloped in the melodies of chirping birds and rustling leaves. Take a seat in our whimsical garden, where a swing suspended from a majestic tree entices you to soar amidst the splendor of nature\'s artwork.Whether you seek a peaceful moment of solitude, desire a cozy gathering space to share stories with loved ones, or yearn to lose yourself in a good book in the comfort of our carefully chosen chairs, Shiloh Springs offers an invitation to experience the perfect blend of country charm and whimsical magic, with a special emphasis on providing you with exceptional seating options. Come, indulge your senses, and let the enchantment of this extraordinary getaway unfold before you, one chair at a time.',
-      price: 500
-     },
-     {
-      ownerId: 2,
-      address: '1222 Route 23',
-      city: 'Wantage',
-      state: 'New Jersey',
+      address: '804 Carolina Avenue',
+      city: 'North Augusta',
+      state: 'SC',
       country: 'USA',
-      lat: 39.833851,
-      lng: 74.4057,
-      name: 'Creek Side Converted Church',
-      description: 'Since 1877, this pretty church in Wantage, NJ has stood as a timeless testament to vintage granny-style seatings, exuding nostalgic charm at every turn. Nestled on a choice corner parcel, the church holds a cherished place in the hearts of the community, while offering a truly unique experience for those seeking a step back in time. As you approach the church, you\'ll be captivated by the sight of a meticulously maintained 1.06-acre property, adorned with blooming flowers and a babbling brook that gracefully meanders through its grounds. Step onto the walking bridge that spans two yards, transporting you to a serene oasis, perfect for indulging in picnics, quiet meditation, or tending to your very own garden of cherished memories.Within the fenced portion of the yard, a collection of vintage granny-style seatings beckons you to take a seat and immerse yourself in the gentle embrace of nostalgia. Imagine settling into a cozy rocking chair, gently swaying to the rhythm of the flowing brook, as you relish in the peaceful ambiance that surrounds you. The well-worn cushions of our heirloom armchairs provide a sense of comfort that only time can bestow, while invoking a longing for days gone by.While the church itself holds historical significance, it is the vintage granny-style seatings that truly steal the show. Delicate lace doilies grace the armrests of our intricately carved wooden chairs, transporting you to an era where afternoon tea and heartfelt conversations were the order of the day. Close your eyes, and you can almost hear the echoes of laughter and whispered secrets that have graced these cherished seats for generations.Whether you seek solace in the embrace of a cherished memory, desire to create new moments of connection, or simply wish to immerse yourself in the enchanting allure of vintage granny-style seatings, this historic church invites you to step back in time and experience a truly unique journey. Embrace the beauty of yesteryear and let the whispers of nostalgia guide you through an unforgettable escape that transcends time itself.',
-      price: 350
-     },
-     {
-      ownerId: 3,
-      address: '1643 Promontory Dr',
-      city: 'Cedar Hill',
-      state: 'Texas',
-      country: 'USA',
-      lat: 32.5885,
-      lng: 96.9561,
-      name: 'Hilltop Waterview',
-      description: 'Sitting majestically on 24+ acres atop a hill, this extraordinary home, nestled securely behind not one, but two security gates, offers a private and serene sanctuary like no other. Inspired by the iconic designs of Frank Lloyd Wright, every element of this architectural masterpiece has been meticulously crafted to embrace and showcase the breathtaking views that surround it.As you step into this unique home, you\'ll immediately be captivated by the seamless integration with nature, where floor-to-ceiling windows and open spaces invite the outside in, and every room takes full advantage of the awe-inspiring vistas that unfold before you. The grandeur of the almost 7500 square feet of air-conditioned space, harmoniously blended with over 12,000 square feet under roof, ensures that every corner of this residence is a testament to both design and comfort.Perched 250 feet above the rolling landscapes, this hilltop abode offers an unparalleled perspective, overlooking the vast expanse of Joe Pool Lake\'s sprawling 7740 acres. Imagine reclining in one of the thoughtfully placed seating areas, strategically positioned to capture the panoramic beauty that stretches as far as the eye can see. Whether basking in the warmth of the sun on a chaise lounge by the pool or savoring a quiet moment on a vintage-inspired rocking chair on the expansive veranda, the vistas that unfold before you are a constant reminder of the harmony between architecture and nature.In this secluded retreat, privacy and security are paramount. Behind the two security gates, you can embrace a sense of tranquility and seclusion, knowing that you have found your very own sanctuary, shielded from the world beyond. Whether you seek solace in the quietude of your luxurious living spaces or venture outdoors to explore the vastness of your expansive estate, the unique design and pristine surroundings will continually inspire and captivate your senses.This home is not just a dwelling; it is a testament to the art of living, where the timeless beauty of Frank Lloyd Wright\'s influence merges seamlessly with the grandeur of nature. Come, immerse yourself in the splendor of this hilltop retreat and experience a lifestyle where every seat offers a front-row view to the wonders that unfold around you.',
-      price: 750
-     },
-     {
-      ownerId: 4,
-      address: '55 Eagle View Drive',
-      city: 'Pine Hill',
-      state: 'New Mexico',
-      country: 'USA',
-      lat: 35.5885,
-      lng: 108.9561,
-      name: 'Cabin',
-      description: 'Welcome to 55 Eagle View Drive, a whimsical cabin nestled in the charming town of Pine Hill, New Mexico, USA. This cozy retreat transports you to a world where the sky meets the earth, and the views are nothing short of enchanting. Step onto the nice deck that extends from the cabin, offering you a front-row seat to nature\'s grand spectacle. As you sip your morning coffee or indulge in a soothing evening tea, the panoramic vistas unfold before you, stretching as far as the eye can see. Feel the gentle breeze caress your cheeks and let your imagination soar amidst the vast expanse of the sky. Just outside the sliding glass doors of the living room, a magical space awaits. Here, you can fire up the BBQ and embark on a culinary adventure amidst nature\'s embrace. Imagine the sizzling sounds, the tantalizing aromas, and the laughter shared with loved ones as you create delicious memories under the open sky. This cabin is more than just a place to stay—it\'s your very own peaceful paradise. Let the cozy interior wrap you in warmth and tranquility, inviting you to unwind and embrace the whimsical charm that permeates every corner. Snuggle up on the comfortable furnishings, surrounded by soft textures and inviting colors, as you bask in the soothing ambiance that fills the air.Whether you seek a moment of solitude in the serenity of the surroundings or wish to embark on exciting adventures in the heart of nature, this cabin offers the perfect blend of comfort and enchantment. Come, make this your haven, where the sky is your constant companion and the peacefulness of the landscape transports you to a world of whimsy.',
-      price: 150
-     },
-     {
-      ownerId: 5,
-      address: '5396 East Camino Cielo',
-      city: 'Santa Barbara',
-      state: 'California',
-      country: 'USA',
-      lat: 34.4885,
-      lng: 119.6961,
-      name: 'Historic Cielo Store Transformed',
-      description: 'Welcome to the Historic Cielo Store Transformed, a whimsical haven located a mere 10 minutes from the vibrant city of Santa Barbara, California. This remarkable property not only offers a verdant oasis but also showcases a delightful array of seating options that exude whimsy and cozy vibes, creating endless possibilities for unforgettable experiences.Immerse yourself in the lush surroundings, where organic farming thrives and the scent of blooming flowers fills the air. As you explore the property, you\'ll discover charming seating nooks scattered throughout, each inviting you to pause, relax, and embrace the enchantment of this extraordinary place. Picture yourself sinking into a cushioned wicker chair, nestled under a blooming canopy of vines, as the gentle breeze whispers through the leaves, carrying with it the tantalizing aromas of the surrounding organic gardens.For the gourmet chefs, foodies, and wine enthusiasts, this oasis offers a dreamlike setting to indulge in your passions. Find yourself seated at a rustic wooden table, adorned with whimsical tableware and surrounded by cozy benches draped in soft, inviting fabrics. Here, you can gather with fellow epicureans, savoring delectable culinary creations prepared by skilled hands, while engaging in lively conversations and relishing in the art of gastronomy. For those seeking a retreat for the mind, body, and soul, the Historic Cielo Store Transformed provides a serene ambiance where peace and relaxation are at the forefront. Discover cozy seating areas tucked away amidst the verdant landscape, perfect for meditation, contemplation, or simply basking in the tranquility of nature. Imagine sitting on a charming vintage swing, gently swaying back and forth as you lose yourself in the serenity of your surroundings, feeling your cares melt away. This remarkable property is not just a destination; it\'s a magical tapestry of whimsy and comfort. It offers a sanctuary for those seeking respite from the world, a place where seating options are thoughtfully designed to immerse you in a cozy embrace. Whether you\'re a wine connoisseur, a culinary enthusiast, or simply someone in search of a place to unwind and reconnect, the Historic Cielo Store Transformed invites you to experience the wonders of this idyllic setting, where whimsy and cozy vibes abound at every turn.',
-      price: 425
-     },
-     {
-      ownerId: 6,
-      address: '1710 SW 15th St',
-      city: 'Bell',
-      state: 'Florida',
-      country: 'USA',
-      lat: 29.7555,
-      lng: 82.8626,
-      name: 'Fly-in Farm',
-      description: 'Welcome to the whimsical world of Fly-in Farm, a hidden gem nestled in the heart of Florida. While the house may boast a standard suburban design, it is the enchanting touches and cozy seating spots that set this place apart from the ordinary. Step into a realm where imagination takes flight and everyday life becomes a magical adventure. As you approach Fly-in Farm, prepare to embark on a unique experience unlike any other. Imagine the thrill of flying your plane right to the front door, landing with grace and excitement. The property offers a private hangar, where you can safely park your aircraft, ensuring that your journeys seamlessly blend with the comfort of home. Inside the house, discover delightful seating nooks that invite you to unwind and immerse yourself in the whimsy that surrounds you. Picture yourself sinking into a cozy armchair, strategically placed near a large window that offers breathtaking views of the expansive skies above. From this vantage point, you can watch as planes gracefully take off and land, inspiring dreams of future adventures and fostering a sense of wonder. The backyard of Fly-in Farm holds its own surprises. Explore the well-tended gardens and discover hidden seating areas scattered throughout. Picture yourself sitting beneath the shade of a majestic tree, on a charming bench adorned with colorful cushions and whimsical decorations. Here, you can let your imagination soar, finding solace and inspiration in the beauty of nature. Beyond the traditional suburban façade, Fly-in Farm is a place where the ordinary becomes extraordinary. It invites you to embrace the joy of flight, the wonders of exploration, and the comfort of cozy seating areas that invite you to sit back, relax, and dream. Come, immerse yourself in this whimsical escape and let your imagination take flight at Fly-in Farm. ',
-      price: 350
-     },
-     {
-      ownerId: 7,
-      address: '3434 Tanners Ridge Road',
-      city: 'Stanley',
-      state: 'Virginia',
-      country: 'USA',
-      lat: 38.5754,
-      lng: 78.5025,
-      name: 'Church Museum ',
-      description: 'Welcome to the Church Museum, a truly enchanting destination that offers a once-in-a-lifetime opportunity to step into history. Nestled within the grounds of the historic site "Tanners Ridge Mission (1921-1966)," this extraordinary place combines the charm of a bygone era with whimsical elements that will capture your imagination. As you arrive at the Church Museum, you\'ll immediately feel the weight of history in the air. The grounds, spanning over 2.75 acres, have been transformed into a vibrant Sculpture Garden, reminiscent of a fantastical museum brought to life. Set foot on this artistic haven and embark on a captivating journey as you meander among the breathtaking sculptures that adorn the landscape. Each step unveils a new surprise, as vibrant and expressive sculptures capture your attention and ignite your sense of wonder. Picture yourself strolling along meandering pathways, surrounded by a kaleidoscope of colors and shapes that come to life in this whimsical outdoor gallery. Take a seat on one of the carefully placed benches, whimsically designed to blend seamlessly with the artistry that surrounds them. Allow yourself to be transported to a realm where creativity knows no bounds and where the ordinary becomes extraordinary. Beyond the artistic allure, the Church Museum itself stands as a testament to the rich history that unfolded within its walls. As you explore the interior, take a moment to pause and reflect in the cozy seating areas that invite you to immerse yourself in the stories that echo through time. Picture yourself sitting in a vintage church pew, adorned with plush cushions, as you soak in the atmosphere of this hallowed space. Feel the warmth and comfort envelop you, allowing the weight of the past to guide your thoughts and spark your creativity. The Church Museum is more than just a place to visit; it\'s an immersive experience that takes you on a journey through art, history, and whimsy. It invites you to become a part of its tapestry, as you uncover the secrets of the past and allow your imagination to soar amidst the vibrant sculptures that bring the landscape to life. Come, lose yourself in this extraordinary destination, where art and history intertwine, and where every moment is infused with a touch of magic..',
-      price: 225
-     },
-     {
-      ownerId: 8,
-      address: '1991 CR 502',
-      city: 'Beeville',
-      state: 'Texas',
-      country: 'USA',
-      lat: 28.4064,
-      lng: 97.7417,
-      name: 'European Plantation',
-      description: 'Welcome to the European Plantation, a magnificent work of art nestled in the charming city of Beeville, Texas, USA. This extraordinary 6211 square foot home exudes the timeless elegance of European Plantation Style, immersing you in a world where every detail is crafted with precision and whimsical charm. As you step inside this architectural masterpiece, be prepared to be captivated by the intricate plasterwork that adorns the walls, showcasing the craftsmanship of a bygone era. The milled flooring beneath your feet invites you to explore the sun-filled rooms, where rays of light dance playfully through the windows, casting a warm and inviting glow. The European Plantation embraces the concept of whimsical seating, creating spaces that beckon you to relax and embrace the serene ambiance of your surroundings. Imagine yourself sinking into a plush armchair, nestled by a cozy fireplace, where you can curl up with a captivating book or engage in delightful conversations with loved ones. Every seating area is thoughtfully designed to create an atmosphere of comfort and charm, allowing you to unwind and indulge in moments of pure relaxation. The elegance of the European Plantation extends beyond its architectural beauty. Delicate lighting fixtures grace the rooms, casting a soft, ethereal glow that enhances the ambiance and adds a touch of enchantment to every space. Imagine the warm golden hues illuminating the intricacies of the plasterwork, creating a mesmerizing interplay of light and shadow that adds depth and character to the home. This European-inspired haven invites you to experience the beauty and grace of a bygone era, where attention to detail and whimsical charm merge effortlessly. From the elaborate plasterwork to the milled flooring, every element has been carefully curated to transport you to a world of timeless elegance and enchantment. Welcome to the European Plantation, where artistry meets comfort, and whimsy intertwines with grandeur. Step into a realm where the past and present coexist, inviting you to indulge in the beauty that surrounds you and create cherished memories in an oasis of European-inspired splendor.',
-      price: 650
-     },
-     {
-      ownerId: 9,
-      address: '1418 South Rocky Hill Rd',
-      city: 'Galena',
-      state: 'Illinois',
-      country: 'USA',
-      lat: 42.4167,
-      lng: 90.4290,
-      name: 'Overlooking the Mississippi',
-      description: 'Welcome to "Overlooking the Mississippi," a captivating retreat designed to embrace the ever-present beauty of the majestic Mississippi River. This open-concept contemporary home is not only a feast for the eyes but also a whimsical haven that sets the stage for unforgettable moments of entertainment and relaxation. As you step into this remarkable dwelling, prepare to be mesmerized by the panoramic views that greet you from every corner. The thoughtful design of the home ensures that the stunning vistas of the Mississippi River take center stage, captivating your senses and creating a serene ambiance throughout. Whether you find yourself in the spacious living area, the inviting dining space, or the gourmet kitchen, the ever-changing views of the river become an integral part of the experience, enchanting you with their timeless allure. In this whimsical abode, entertaining becomes an art form. Imagine gathering with loved ones in the open-concept living area, where plush seating arrangements invite you to sink into their cozy embrace. Delight in lively conversations, laughter, and shared moments as you bask in the beauty of the surroundings. The spacious layout and seamless flow between indoor and outdoor spaces create the perfect backdrop for hosting gatherings and creating memories that will last a lifetime. From the carefully chosen furnishings to the whimsical décor accents, every element of the home has been thoughtfully curated to enhance the sense of wonder and comfort. Picture yourself reclining on a plush sofa, gazing out through expansive floor-to-ceiling windows, as you lose yourself in the mesmerizing dance of sunlight on the water. The contemporary design elements seamlessly blend with touches of whimsy, creating an ambiance that is both modern and inviting."Overlooking the Mississippi" is more than just a home; it\'s a sanctuary that celebrates the beauty of nature and the joy of entertaining. It invites you to immerse yourself in its contemporary charm, where every detail is designed to enhance your connection with the river and create an atmosphere of comfort and whimsy. Come, embrace the ever-present views, let the enchantment of the Mississippi River captivate your soul, and create unforgettable moments in this haven of contemporary elegance.',
-      price: 550
-     },
-     {
-      ownerId: 10,
-      address: '4 New Mountain Road',
-      city: 'Johannesburg',
-      state: 'Gauteng',
-      country: 'South Africa',
-      lat: 26.2041,
-      lng: 28.0473,
-      name: 'Earth Connected',
-      description: 'Welcome to "Earth Connected," a remarkable retreat that harmoniously blends with its natural surroundings. Nestled into the side of the mountain on Linksfield Ridge in Johannesburg, South Africa, this exceptional house not only showcases exquisite engineering but also embodies a deep commitment to environmental sustainability. Step into this architectural marvel, where every element has been meticulously designed to honor the connection between the home and the earth. The house seamlessly integrates into the landscape, allowing you to immerse yourself in the beauty of the surrounding mountains and lush greenery. Picture yourself standing on the terrace, marveling at the breathtaking views that stretch out before you, as you feel an indescribable sense of oneness with nature. "Earth Connected" is a testament to the power of sustainable living. From the carefully selected materials to the innovative design features, this house exemplifies a commitment to preserving and protecting the environment. Within its walls, you will find a sanctuary of comfort and tranquility, thoughtfully crafted to provide an inviting space for relaxation and reflection. Take a moment to envision yourself lounging in one of the cozy seating areas, strategically placed to capture the best views of the surrounding landscape. Whether you choose a plush armchair bathed in natural light or a cushioned nook tucked against a panoramic window, each seating spot invites you to unwind and embrace the serenity of your surroundings. Here, you can reconnect with nature, allowing the gentle breeze and the soothing sounds of the earth to lull you into a state of blissful contentment. As you explore "Earth Connected," you will discover that sustainable living and whimsical charm go hand in hand. Delight in the unique architectural features that seamlessly blend with nature, creating a sense of wonder at every turn. From living roofs adorned with native plant life to playful touches of whimsy in the interior decor, this house invites you to embrace a lifestyle that nurtures both the earth and the soul. Welcome to "Earth Connected," a sanctuary that invites you to reconnect with nature, embrace sustainable living, and find solace in the beauty of the earth. Step into a world where engineering meets enchantment, and where every moment is a reminder of our profound connection to the planet we call home.',
-      price: 375
-     },
-     {
-      ownerId: 1,
-      address: 'Ensenada Cruiseport Village Marina',
-      city: 'Ensenada',
-      state: 'B.C.',
-      country: 'Mexico',
-      name: 'Coconut the Boat House',
-      description: 'Welcome to "Coconut the Boat House," a whimsical haven that embodies simplicity, ease, and uncomplicated living. Just like a coconut bobbing in the ocean, life aboard this enchanting dwelling is a delightful escape from the complexities of everyday life. Embrace the serenity of floating on the water, bask in the sun\'s warm embrace on the deck, and let the gentle waves lull you into a state of utter relaxation. With cleverly designed features and whimsical decorations, Coconut surprises and delights at every turn. Step aboard this magical retreat, where the ordinary becomes extraordinary, and embrace a carefree lifestyle that sparks joy and ignites the imagination. Welcome to "Coconut the Boat House," where simplicity and enchantment intertwine. Experience the magic of life on the water, where every moment is a treasure waiting to be discovered. From the serene sway of the boat to the cozy seating area offering panoramic views, Coconut invites you to unwind and embrace a carefree existence. With its whimsical touches and hidden surprises, this floating haven promises a delightful escape from the complexities of life. Step aboard and embark on an extraordinary journey, where the bells and whistles of whimsy are beyond your wildest imagination.',
-      price: 125
-     },
-     {
-      ownerId: 2,
-      address: '12974 Wood Harbour Drive',
-      city: 'Montgomery',
-      state: 'Texas',
-      country: 'USA',
-      name: 'Walden Waterfront',
-      description: 'Welcome to "Walden Waterfront," a captivating retreat nestled between the lush greenery of hole #8 on the Championship Walden Golf Course and the expansive waters of Lake Conroe. This idyllic location offers a harmonious blend of serene landscapes and breathtaking views, inviting you to immerse yourself in a world of tranquility and natural beauty. Whether you\'re an avid golfer seeking the perfect swing or a nature enthusiast yearning for waterfront adventures, "Walden Waterfront" is a haven that caters to your every desire.',
-      price: 1200
-     },
-     {
-      ownerId: 3,
-      address: '1790 River Rd',
-      city: 'Solon',
-      state: 'Maine',
-      country: 'USA',
-      name: 'Converted Chapel',
-      description: 'Welcome to the pristine chapel tucked away within the shadowed depths of the wooded property in Solon, Maine. A place where time stands still and secrets whisper in the breeze. As you step through its ancient doors, a shiver dances down your spine, a subtle reminder that you are not alone. Gaze upon the meticulously carved pews, each one seemingly imbued with an eerie presence, inviting you to take a seat and embrace the mystery that surrounds you. The ethereal light filtering through stained glass windows casts hauntingly beautiful patterns upon the weathered floor, as if delicate specters are watching your every move. Within the hallowed halls of this chapel, echoes of the past linger, hinting at stories yet untold. The air is pregnant with an otherworldly energy, leaving you with a sense of being both captivated and observed. As you find your place among the silent congregation, the creaking of wood and the soft rustling of unseen whispers envelop you, conjuring a feeling of being in the presence of something beyond the realm of the living. Amidst the chilling ambiance, there is an undeniable allure that draws you deeper into this enigmatic space. The seats beckon, their plush cushions inviting you to sink into their embrace, while a sense of being watched from unseen corners adds an exhilarating touch of intrigue. Whether you are seeking solace or embracing the thrill of the unknown, this chapel offers an experience that transcends the ordinary. Welcome to the pristine chapel, where the line between the living and the spectral blurs, and where every seat holds a tale yet to be revealed. Be cautious as you take your place, for the eyes of the unseen may be upon you, watching as you unravel the mysteries woven within the walls of this hauntingly enchanting sanctuary.',
+      lat: 33.49,
+      lng: -81.97,
+      name: 'Rosemary Hall',
+      description: 'Rosemary Hall was built around 1902 and is said to be home to a resident ghost who watches over the inn. The spirit is thought to be Mrs. Jackson, the wife of the original owner of Rosemary Hall, a Mr. James U Jackson \n Mrs. Jackson is most often spotted in Room number 205, although she has also been seen walking up and down the main staircase of the inn. \n Guests have reported a number of strange, unexplained things happening in the property including objects disappearing only to turn up somewhere completely different, hearing phantom footsteps and televisions turning on and off by themselves.',
       price: 75
      },
      {
-      ownerId: 4,
-      address: 'Nhn 5900 Road South',
-      city: 'Conrad',
-      state: 'Montana',
-      country: 'USA',
-      name: 'Montana Quonset',
-      description: 'Welcome to the unique custom-built three-level, 1800 square foot steel Montana Quonset Residence, a haven where comfort and preparedness intertwine. Step into a world of carefully crafted seating options, each thoughtfully placed to offer respite as you await the uncertain future that looms ahead. Amidst the compact confines of this dwelling, discover cozy nooks and inviting chairs, providing a sense of familiarity and solace in the face of potential disaster. As you descend into the depths of this subterranean abode, you\'ll find an 8-foot by 8-foot walk-in vault, a fortress designed to safeguard not only your possessions but also your peace of mind. Adjacent to this secure enclave, a series of comfortable seating areas beckon, inviting you to relax and gather your thoughts. Sink into plush cushions, enveloped in a sense of security, as you ponder the mysteries of what may lie beyond these steel walls. Venturing outside, an enormous metal barn stands tall, its vast interior offering endless possibilities. Amidst the practicality of its purpose, find moments of respite amidst rows of chairs, ready to accommodate weary souls seeking solace in the face of uncertainty. Picture yourself sitting beneath the sheltering roof, contemplating the resilience of the human spirit while finding comfort in the presence of loved ones. While the doomsday bunker aesthetic lingers, there is a unique charm within these confined walls. Embrace the art of anticipation, surrounded by seating options that invite conversation, contemplation, and a sense of togetherness. As you wait for the unknown to unfold, find solace in the warmth of the chairs that cradle you, providing a sanctuary amidst the chaos that may or may not come..',
-      price: 50
-     },
-     {
-      ownerId: 5,
-      address: '1646 Eastport Terrace',
-      city: 'Atlanta',
-      state: 'Georgia',
-      country: 'USA',
-      name: 'Unicorn House',
-      description: 'Welcome to a realm where enchantment awaits, deep in the embrace of nature. Step into a world that captures your imagination, where each room tells a story through one-of-a-kind artwork, reminiscent of fairytales come to life. This charming masterpiece is crafted from reclaimed and recycled materials, once part of historic buildings that shaped Atlanta\'s past, now transformed into a magical haven. As you enter this whimsical abode, a sense of wonder surrounds you, drawing you into a realm where the ordinary gives way to the extraordinary. Quirky and captivating, each room becomes a canvas, adorned with artwork that sparks the imagination and stirs the soul. It\'s a place where the walls themselves seem to whisper secrets of the past, while the furnishings exude character and charm. Traverse the enchanting halls, where the spirit of Atlanta\'s history is reborn in every corner. Reclaimed wood, weathered by time, now adorns the walls, offering a glimpse into the city\'s vibrant heritage. Immerse yourself in the present moment, as you find solace amidst the one-of-a-kind treasures that grace this extraordinary dwelling. Embrace the serenity of the deep woods that envelop this magical retreat, where you can unwind in cozy nooks adorned with cushions and throws, inviting you to relax and let your imagination roam free. Every room offers a unique sanctuary, where inspiration finds its home and creativity knows no bounds. Welcome to a place where art, history, and nature converge, inviting you to embark on a journey of enchantment. Discover the allure of this fairytale-like haven, where every detail whispers of a realm where dreams are woven into reality. Allow yourself to be captivated by the magic that unfolds within these walls, as you create your own story amidst the charm of this extraordinary retreat.',
-      price: 125
-     }
+      //2
+    ownerId: 2,
+    address: '13 Heath St',
+    city: 'Ararat',
+    state: 'VIC',
+    country: 'Australia',
+    lat: 37.28,
+    lng: 142.93,
+    name: 'Aradale Mental Hospital',
+    description: 'Aradale, also known as the Ararat Lunatic Asylum and the Ararat Hospital for the Insane, together with its two sister asylums at Kew and Beechworth, were commissioned to accommodate a growing number of "lunatics" in the colony of Victoria. Construction began in 1865 and was opened for patients in 1867. It was closed as an asylum in 1993. At its height, Aradale provided a secure treatment facility housing over 1000 patients. /n You never know what kind of encounters you might have. Will it be an eerie sound with no obvious source? A blur of motion or signs of movement around you? An unsettling smell indicative of previous occupants? Join us at the Aradale mental asylum and hunt for the patients that still roam these halls.',
+    price: 35
+   },
+   {
+    //3
+  ownerId: 3,
+  address: '397 01 Písek',
+  city: 'Zvíkovské',
+  state: 'Podhradí ',
+  country: 'Czechia',
+  lat: 49.43,
+  lng: 14.19,
+  name: 'Zvíkov Castle',
+  description: `A very persistent tale inextricably linked to Zvíkov is that it is inhabited by a supernatural creature from Slavic folklore called a Zvíkovský Rarášek, which is a sort of nasty imp or trickster spirit. The imp has been reported here for hundreds of years, and is most active in two of the castles towers. One of these is the tower called Markomanka, which is notable for its mysterious and cryptic stone markings, or runes, and another is the tower called Hlíza, also called “The Black Tower,” which is enormous structure with thick walls and also happens to be the oldest preserved structure in the castle complex. The imp itself is infamous for carrying out all sorts of paranormal mischief, including pushing, poking, or tripping visitors, causing electronic equipment to malfunction or stop working, moving objects, blowing out flames, creating electromagnetic disturbances, and even appearing as a diminutive, troll-like apparition.`,
+  price: 80
+ },
+ {
+  //4
+ownerId: 4,
+address: '64367 Mühltal',
+city: 'Burg',
+state: 'Frankenstein',
+country: 'Germany',
+lat: 49.47,
+lng: 8.40,
+name: 'Frankenstein Castle',
+description: `This castle  was built around 1250 and is the birthplace of Johann Dippel, who was a scientist that performed alchemy. Some of his expirements involved body parts that were stolen from a cemetary. He is rumored to be the inspiration for Mary Shelley's famous fictional Dr.Frankenstien. \n In 2008 the castle was investigated on a popular ghost hunting show. The team found signifigant paranormal activity including a recording of disembodied voice saying "ArBo Is HeRe ...`,
+price: 75
+},
+{
+  //5
+ownerId: 5,
+address: 'JI. Pemuda No.160',
+city: 'Semarang',
+state: 'Central Java',
+country: 'Indonesia',
+lat: 6.59,
+lng: 110.24,
+name: 'Lawang Sewu',
+description: `Once the home of the Dutch East Indies railroad company this beautiful building has been host to a number of atrocities. During World War II the Japanese invaded Indonesia and took over Lewang Sewu to turn it into a prison. Here they tortured and executed prisoners, throwing the severed heads into a corner of the basement. These days the halls are walked by the beheaded ghost of a Dutch woman said to have been killed by the Japanese during the war. Locals also believe the location to be home to a Kuntilanak, or a ghost of a woman who died during childbirth. She wears a white dress covered in blood, has glowing red eyes and can turn into a beautiful woman who preys on men. `,
+price: 55
+},
+{
+  //6
+ownerId: 6,
+address: 'R93 RF80',
+city: 'Palatine',
+state: 'Carlow',
+country: 'Ireland',
+lat: 52.85,
+lng: 6.81,
+name: "Duckett's Grove",
+description: ` It is said that William Duckett was having an affair with a young, local woman. One day, when riding across the estate together, she fell from her horse and was killed. In her grief, the woman’s mother placed a Piseóg upon the Duckett family and their property. This was a curse intended to bring misfortune and eventual ruin. Since the spell was cast, the wailing of a banshee has sometimes been heard echoing through the ruins of the house and warning those who hear her cries of impending personal tragedy. Her cries have been speculatively linked to at least two deaths in recent times. `,
+price: 70
+},
+{
+  //7
+ownerId: 7,
+address: '30100 Venezia VE',
+city: 'Venice',
+state: 'Venice',
+country: 'Italy',
+lat: 45.22,
+lng: 12.19,
+name: "Poveglia",
+description: ` This island has a rich history ranging from a refuge for people fleeing wars and a quarantine for the bubonic plague. Things get spicy when an asylum was built here where doctors experimented on their patients. It is said that one doctor committed suicide after being haunted by ghost of those he murdered. These days the island is only inhabited by those who passed long ago and legend says they sabotage any attempt to revitalize the island.  `,
+price: 15
+},
+{
+  //8
+ownerId: 8,
+address: '14300 Nibong',
+city: 'Tebal',
+state: 'Penang',
+country: 'Malaysia',
+lat: 5.9,
+lng: 100.28,
+name: "99 Door Mansion",
+description: ` This mansion was build by a wealthy family on their rubber tree plantation. Later, the entire family was killed in the house and the mansion was left abandoned. It is rumored after it was abondonded a witch practicing dark arts squatted in the house. She opened a portal here to the other side where one could contact the dead. This portal opened at midnight in the form of a new, 100th door. Through this door dark and evil spirits enter our realm.  `,
+price: 45
+},
+{
+  //9
+ownerId: 9,
+address: '4P6V + F9',
+city: 'Alpendurada',
+state: 'Juncosa',
+country: 'Portugal',
+lat: 41.11,
+lng: -8.25,
+name: "Quinta da Juncosa",
+description: ` Up in Penafiel in the Porto region, the Quinta da Juncosa is said to be haunted by the Baron of Lages and his family. Suspecting that his wife was unfaithful, the baron tied her to one of his horse’s legs and dragged her to death. After discovering that she was innocent, he went on to kill his children and himself. Not surprisingly, it is said the Baron’s guilt keeps him from resting in peace and locals have reported seeing the ghosts of the baron and his wife several times over the years.`,
+price: 10
+},
+{
+  //10
+ownerId: 10,
+address: '1670 Loop Road',
+city: 'St Bathans',
+state: 'St Bathans',
+country: 'New Zealand',
+lat: 44.87,
+lng: 169.81,
+name: "Vulcan Hotel",
+description: ` Said to be New Zealand’s most haunted hotel. In the 1880’s a lady of the night named Rose lived in a room here. One fateful night a client got too rough and Rose lost her life. He dumped her body into the lake and Rose was never seen alive again. To this day Rose still lives in room one and if you’re a man be prepared to have a very fateful encounter. `,
+price: 85
+},
+{
+  //11
+ownerId: 1,
+address: 'Strada General Traian Moșoiu 24',
+city: 'Bran',
+state: 'Brașov',
+country: 'Romania',
+lat: 45.30,
+lng: 25.22,
+name: "Bran Castle",
+description: ` More commonly known as Dracula’s castle, this historic castle is often incorrectly correlated with either Dracula or Vlad the Impaler. Neither of which has any real connection to the castle. It is, in reality, known as one of the MOST haunted castles in the world. The forest surrounding the castle is steeped in paranormal activity, often called the Bermuda Triangle of Romania.  `,
+price: 40
+},
+{
+  //12
+ownerId: 2,
+address: '333 E Wonderview Ave',
+city: 'Estes Park',
+state: 'CO',
+country: 'USA',
+lat: 40.38,
+lng: -105.51,
+name: "Stanley Hotel",
+description: ` This haunted hotel was the origin of the Shing. Author Steven King was staying the night when he had a nightmare of a firehose coming to life and chasing his screaming son and thus the outline of the shining was born. But that is only the tip of the iceburg of this creepy accommodations. In 1911 an accidental gas explosion killed a maid and she is said to still roam the halls to this day. The builder Stanley and his wife may be seen from time to time. Stanley died in 1940. Another ghost, a child with autism is said to enjoy playing with guest’s hair. Beloved pets laid to rest on the on-site pet cemetery are also known to make an appearance from time to time. If you suddenly smell baked goods, odds are that the ghost of a pasty chef is walking by you. In room 401 woman have been sexually assaulted by ghost and in room 407 theres a lovely spectral that might tuck you in at night. A cowboy in room 428 likes to do late night redecorating by moving furniture. This hotel is sure to make even the most devout skeptics into believers.   `,
+price: 95
+},
+{
+  //13
+ownerId: 2,
+address: '1 Homestead Lane',
+city: 'Junee',
+state: 'NSW',
+country: 'Australia',
+lat: 34.86,
+lng: 147.57,
+name: "Monte Cristo",
+description: `In 1910 the wealthy owner of this estate passed away due to blood poisoning. His distraught wife struggled with her grief. In the attic she made a small chapel where she spent most of her time until 1933 when her appendix ruptured, killing her. The house was abandoned for more than a decade until 1963 the Ryans purchased it. The Ryans had many terrible experiences, such as waking up to find all of their chickens strangled, their parrot choked to death, and a litter of kittens brutally killed. Both the Crawleys are said to still walk the halls. In addition to the original owners there are two maids who are said to have been impregnated by Crawly. The first maid committed suicide while pregnant, the second gave birth to a son who was severely disabled in an accident. Due to his disabilities he was chained to his mother’s bed. If you hear chains dragging, chances are you are about to encounter this poor soul. In the coach house a stable boy was feeling ill and laid down. His master found him asleep and thinking to teach the boy a lesson he lit the straw mattress on fire. The boy was too ill to move and ended up burning to death. The Crawlys infant granddaughter died when she was dropped down the stairs by a careless nursemaid. In 1960 a caretaker was shot dead on the front porch. The string of deaths have lead to an intensely haunted location and many spirits trapped.  `,
+price: 60
+},
+{
+  //14
+ownerId: 2,
+address: '16 Pavement',
+city: 'York',
+state: 'YO1 9UP',
+country: 'United Kingdom',
+lat: 53.95,
+lng: -1.07,
+name: "The Golden Fleece",
+description: `It is claimed that at least 15 ghost haunt the golden fleece. There is Lady Pickett who will  move furniture around to suit her taste better. A Candadian airman who committed suicide appears on the third floor in his uniform glaring at guest. In the pub you might encounter one eyed jack or the grumpy man. If you approach the grumpy man he will probably cuss you out before disappearing. A Victorian boy said to have been trampled by a horse will sometimes play harmless pranks. You’ll know its him if you hear the soft giggling of a child. Roman soldies have been seen in the cellar, though they never interact with the living. `,
+price: 85
+},
+{
+  //15
+ownerId: 2,
+address: '13241 E23 County Home Rd',
+city: 'Monticello',
+state: 'IA',
+country: 'USA',
+lat: 42.13,
+lng: -91.13,
+name: "Edinburgh Manor",
+description: `This location in Iowa was originally a ‘poor farm’ or a place for the poor and destitute to work and have shelter. It was demolished in 1910 and replaced with the current building where it was used to house the insane, disabled, poor, and elderly until 2010 until it was deemed unsuitable for inhabitation. There were plans to turn it into a bed and breakfast but plans were scrapped when it was determined to be too much work. It is now open for overnight paranormal encounters. While most ghostly residents are harmless this is not true for the basement where you might encounter ‘the Joker’. He is often seen in a padded room and people who experience him tend to have trouble breathing and have red marks appear on their necks.  `,
+price: 55
+},
+{
+  //16
+ownerId: 2,
+address: 'Houska 1',
+city: 'Houska',
+state: 'Doksy',
+country: 'Czechia',
+lat: 50.49,
+lng: 14.62,
+name: "Houska Castle",
+description: `This castle was constructed in the 13th century over a huge bottomless pit on a cliff that locals believed to be a gateway to hell. A chapel was placed directly over the pit, as if to block the evil entities from escaping. People claim to hear screams and cries coming from the floor of the chapel. In WWII the castle was used by the nazis to perform experiments on living people. Today many see various ghost and demonic entities here.  `,
+price: 25
+},
+{
+  //17
+ownerId: 2,
+address: 'Borgvattnet 760',
+city: 'Borgvattnet',
+state: 'Stogun',
+country: 'Sweden',
+lat: 63.42,
+lng: 15.82,
+name: "Borgvattnet Vicarage",
+description: `Said to be Swedens most haunted place. Tales of this place begin in 1927. It started with clothes being torn from the laundry line and escalated from there. Things have moved, screams have been heard, shadow people have been seen, and the old rocking chair keeps on rocking. The legends surrounding the origins of the haunting tell of abused maids and even of babies buried in the backyard although it is now also said that the old vicars themselves haunt the house.`,
+price: 65
+},
+{
+  //18
+ownerId: 2,
+address: '7747 US-61',
+city: 'St Francisville',
+state: 'LA',
+country: 'USA',
+lat: 30.80,
+lng: -91.38,
+name: "Myrtles Plantation",
+description: `While this location might look like a dream, the history is nothing short of a nightmare. It begins with a cruel slaveowner cutting off the ear of one of his slaves. In revenge the slave poisoned the family, earning retribution from the other local slaveowners who brutally murdered her. The next family to take residence of the home all died from tuberculosis on the property. The next owner was murdered while teaching Sunday school at the house. It is now a bed and breakfast renown for its strong paranormal activity.`,
+price: 85
+},
+
      ])
   },
 

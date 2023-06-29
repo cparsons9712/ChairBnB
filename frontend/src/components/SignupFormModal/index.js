@@ -57,7 +57,7 @@ function SignupFormModal() {
   return (
     <>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="signUpModal">
       <button className = 'close' onClick={closeModal}>X</button>
         <h1>Sign Up</h1>
         <label>

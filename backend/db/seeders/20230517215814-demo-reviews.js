@@ -8,246 +8,91 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     options.tableName = 'Reviews';
     return queryInterface.bulkInsert(options, [
-      {
-        spotId: 1,
-        userId: 2,
-        review: "The chairs has a country home feel to them. Sitting in them made me feel at home",
+      { //1
+        spotId: 2,
+        userId: 5,
+        review: "This place is really scary. I took a walk outside at night and saw a ghostly shadow in one of the windows!!",
         stars: 4
       },
-      {
-        spotId: 1,
-        userId: 3,
-        review: "Super worn out seating. Smelled like farts",
-        stars: 1
-      },
-      {
-        spotId: 1,
-        userId: 4,
-        review: "Found peace in the attic sitting under a sunlight. Even had a coffee bar nearby!",
-        stars: 5
-      },
-      {
-        spotId: 1,
-        userId: 5,
-        review: "I saw a BEAR!!!!",
-        stars: 5
-      },
-      {
-        spotId: 2,
-        userId: 6,
-        review: "Felt like a mix between my grandma's house and a church.",
-        stars: 2
-      },
-      {
-        spotId: 2,
-        userId: 7,
-        review: "The seating was NOT comfy!!!!!",
-        stars: 1
-      },
-      {
+      { //2
         spotId: 3,
-        userId: 8,
-        review: "Crazy Nice view and the couch was such a relaxing place to sit!",
-        stars: 5
-      },
-      {
-        spotId: 3,
-        userId: 9,
-        review: "THAT VIEW THO!!!!!!",
-        stars: 5
-      },
-      {
-        spotId: 3,
-        userId: 10,
-        review: "The seating was okay. I'm here to SIT not LOOK!!!",
-        stars: 2
-      },
-      {
-        spotId: 4,
         userId: 1,
-        review: "THIS PLACE IS CREEPY AND DIRTY!! LOOK AT THIS ROOM!!!",
-        stars: 1
+        review: "I mean it honestly wasn't that spooky at all. I felt pretty at ease here. My insta pics are FIRE tho!",
+        stars: 3
       },
-      {
+      { //3
         spotId: 5,
-        userId: 2,
-        review: "I LOVED sitting outside in the garden!",
-        stars: 5
-      },
-      {
-        spotId: 5,
-        userId: 3,
-        review: "Curling up on the couch in front of the wood burning stove reading a book was a DREAM!!",
-        stars: 5
-      },
-      {
-        spotId: 5,
-        userId: 4,
-        review: "It was nice to sit at the bar area and drink by myself! I'm not an alcoholic .....",
-        stars: 5
-      },
-      {
-        spotId: 6,
-        userId: 5,
-        review: "I flew in on my private jet just to sit around like I'm middle class",
-        stars: 2
-      },
-      {
-        spotId: 6,
-        userId: 6,
-        review: "Too much plane noise!!!!",
-        stars: 1
-      },
-      {
-        spotId: 7,
         userId: 7,
-        review: "This place is so colorful and VIBRANT!!! My insta pictures look amazing!!",
+        review: "My team and I decided to do an investigation here. We got some good readings and even some recordings of disembodied voiced. At the very beggining we took a group picture and when we looked over it later we saw something behind us! ",
         stars: 5
       },
-      {
+      { //4
+        spotId: 6,
+        userId: 7,
+        review: "Holy He** this place is scary! I even got a clear as day photo of a ghost girl in a window. Never going back, great experience!",
+        stars: 5
+      },
+      { //5
         spotId: 7,
         userId: 8,
-        review: "The colors were overstimulating and the chairs weren't even comfortable",
-        stars: 2
+        review: "We did an investigation at this location and while we didn't get any good evidence this time it is clear to us that this place is haunted.We all felt deep feelings of despair and panic throughout the night.",
+        stars: 3
       },
-      {
+      { //6
         spotId: 8,
         userId: 3,
-        review: "BLAND AND PLAIN!!! ",
-        stars: 2
-      },
-      {
-        spotId: 8,
-        userId: 10,
-        review: "Wonderful library but the only place to sit was this super hard chair!!!",
-        stars: 1
-      },
-      {
-        spotId: 8,
-        userId: 9,
-        review: "I like sitting on the pedal chair and make zoom noises",
-        stars: 5
-      },
-      {
-        spotId: 9,
-        userId: 2,
-        review: "I liked being able to wake up and immediately sit down.",
-        stars: 5
-      },
-      {
-        spotId: 9,
-        userId: 3,
-        review: "The views from the couch was stunning!!",
+        review: "What a hauntingly beautiful place!",
         stars: 4
       },
-      {
+      { //7
         spotId: 10,
-        userId: 4,
-        review: "After sitting here I know why the caged bird sings",
-        stars: 3
+        userId: 8,
+        review: "CHECK OUT THIS CREEPY PICTURE!! YOOO WTF!!!",
+        stars: 4
       },
-      {
+      { //8
         spotId: 10,
-        userId: 5,
-        review: "Just look at the view from this patio! I loved sitting out here in the morning drinking my coffee!!",
+        userId: 8,
+        review: "I got my covid shot at Dracula's Castle!! this place is AMAZING!!",
         stars: 5
       },
-      {
-        spotId: 10,
+      { //9
+        spotId: 12,
         userId: 6,
-        review: "I loved feeling like I was a part of the earth. Perfect location to meditate and focus on self-improvement",
+        review: "Yeah This place is legit creepy. I was taking a picture of the stairs and later saw theres a freakin lady in it?! WTF!!",
         stars: 5
       },
-      {
-        spotId: 10,
-        userId: 7,
-        review: "it was okay",
-        stars: 3
-      },
-      {
-        spotId: 11,
-        userId: 8,
-        review: "who wants to sit right infront of the TV?!",
-        stars: 3
-      },
-      {
-        spotId: 11,
-        userId: 9,
-        review: "I loved visiting Ms. Coconut! Sitting on a boat on the water was something so unique and special",
-        stars: 5
-      },
-      {
-        spotId: 11,
-        userId: 10,
-        review: "What a lovely place to sit around browsing reddit!!!",
-        stars: 5
-      },
-      {
+      { //10
         spotId: 12,
-        userId: 10,
-        review: "I liked sitting on the porch and catcalling golfers as they rode by in thier tight tight pants",
+        userId: 4,
+        review: "We hosted a get togeather here and in one of our random pics theres a blurry THING with us. So creepy! ",
+        stars: 4
+      },
+      { //11
+        spotId: 13,
+        userId: 6,
+        review: "NOOO I have a picture of SOMETHING ON THE PORCH! WOW Ghost ARE real!!! ",
         stars: 5
       },
-      {
-        spotId: 12,
-        userId: 9,
-        review: "Sitting at the desk pretending to be a business man was so lit!",
-        stars: 5
-      },
-      {
-        spotId: 12,
-        userId: 8,
-        review: "I came for golfing but ended up just lounging on the couch the whole time. Excellent.",
-        stars: 5
-      },
-      {
-        spotId: 13,
-        userId: 7,
-        review: "I think this place is haunted .... ",
-        stars: 1
-      },
-      {
-        spotId: 13,
-        userId: 10,
-        review: "I felt like I was being watched and judged the entire time I sat around looking at 'educational' videos. Luckily I am into that ",
-        stars: 3
-      },
-      {
-        spotId: 13,
-        userId: 5,
-        review: "Yeah thats a no from me ",
-        stars: 1
-      },
-      {
+      { //12
         spotId: 14,
-        userId: 1,
-        review: "The living spaces were cramped and the seating was not great",
-        stars: 2
+        userId: 7,
+        review: "Saw the grumpy man at the bar. Super cool experience. ",
+        stars: 3
       },
-      {
-        spotId: 14,
-        userId: 9,
-        review: "I sat in a tractor!!!!",
-        stars: 2
-      },
-      {
-        spotId: 15,
-        userId: 9,
-        review: "I pretended to be a wood witch!!! ",
-        stars: 5
-      },
-      {
+      { //13
         spotId: 15,
         userId: 2,
-        review: "Lovely place to sit and think where did I go wrong in my life? ",
+        review: "THERES A GHOST IN OUR GROUP PIC!! ",
+        stars: 4
+      },
+      { //14
+        spotId: 18,
+        userId: 10,
+        review: "I caught an amazingly clear picture of a ghost!",
         stars: 5
       },
-      {
-        spotId: 15,
-        userId: 5,
-        review: "This place was so inspiring that it helped me write a book! I love it here!!!! ",
-        stars: 5
-      }
+
 
     ])
   },
