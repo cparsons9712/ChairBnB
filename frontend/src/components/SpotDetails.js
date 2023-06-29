@@ -51,7 +51,7 @@ const getNumRev = () =>{
 }
 
 const displayReviews = () => {
-  if(reviews.length > 0){
+  if(reviews && reviews.length > 0){
 
     return reviews.map((rev)=>{
       let date = rev.createdAt
