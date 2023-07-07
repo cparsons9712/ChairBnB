@@ -20,10 +20,6 @@ function UserInfoModal(){
     history.push('/')
   };
 
-
-
-
-
   return (
     <div className="userMenu" ref={ulRef}>
       <button className = 'close' onClick={closeModal}>X</button>

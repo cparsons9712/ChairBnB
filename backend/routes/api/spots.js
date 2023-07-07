@@ -11,19 +11,16 @@ const validateSpot = [
   check('address')
     .exists({ checkFalsy: true })
     .withMessage('Street address is required'),
-    check('city')
+  check('city')
     .exists({ checkFalsy: true })
     .withMessage('City is required'),
-    check('city')
-    .exists({ checkFalsy: true })
-    .withMessage('City is required'),
-    check('state')
+  check('state')
     .exists({ checkFalsy: true })
     .withMessage('State is required'),
-    check('country')
+  check('country')
     .exists({ checkFalsy: true })
     .withMessage('Country is required'),
-    check('lat')
+  check('lat')
     .custom((value, { req }) => {
       if( value > -90 && value < 90){
         return true
@@ -33,7 +30,7 @@ const validateSpot = [
       }
     })
     .withMessage('Latitude is not valid'),
-    check('lng')
+  check('lng')
     .custom((value, { req }) => {
       if( value > -180 && value < 180){
         return true
@@ -43,14 +40,23 @@ const validateSpot = [
       }
     })
     .withMessage('Longitude is not valid'),
-    check('name')
-    .exists({ checkFalsy: true })
+  check('name')
     .isLength({ max: 50 })
     .withMessage('Name must be less than 50 characters'),
-    check('description')
+  check('name')
     .exists({ checkFalsy: true })
-    .withMessage('Description is required'),
-    check('price')
+    .withMessage('Name is required'),
+  check('description')
+    .custom((value, { req }) => {
+      if( value.length > 30){
+        return true
+      }
+      else{
+        return false
+      }
+    })
+    .withMessage('Description needs a minumum of 30 characters'),
+  check('price')
     .exists({ checkFalsy: true })
     .withMessage('Price is required'),
 
@@ -330,7 +336,19 @@ router.post("/", validateSpot,async (req, res, next) => {
 /*******************************************
     ADD REVIEW FROM SPOT ID
 ******************************************/
-router.post("/:id/reviews", async (req, res, next) => {
+const validateReview = [
+  check('review')
+    .exists({ checkFalsy: true })
+    .withMessage('Review text is required'),
+  check('stars')
+    .exists({ checkFalsy: true })
+    .withMessage('Stars are required')
+    .isInt({min: 1, max: 5})
+    .withMessage('Stars must be an integer from 1 to 5'),
+
+    handleValidationErrors
+  ];
+router.post("/:id/reviews", validateReview, async (req, res, next) => {
   if (!req.user) {
     const aerror = new Error();
     aerror.status = 401;
@@ -374,11 +392,17 @@ router.post("/:id/reviews", async (req, res, next) => {
       return next (newerr)
 
   }
-  const newReview = await Review.create({
+  const payload = {    userId: +req.user.id,
+    spotId: +req.params.id,
+    review,
+    stars: +stars,}
+
+
+  let newReview = await Review.create({
     userId: +req.user.id,
     spotId: +req.params.id,
     review,
-    stars,
+    stars: +stars,
   });
   res.json(newReview);
 });

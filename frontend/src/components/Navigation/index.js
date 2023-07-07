@@ -17,11 +17,15 @@ function Navigation({ isLoaded }){
 
       <h2 id='title'>Creepy Hauntings At Incredible Rates</h2>
 
+
+
       {isLoaded && (
         <div className='userButton'>
           <ProfileButton user={sessionUser} />
         </div>
       )}
+     
+
     </div>
   );
 }

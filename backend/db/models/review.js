@@ -30,13 +30,8 @@ module.exports = (sequelize, DataTypes) => {
     spotId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     review: DataTypes.TEXT,
-    stars:{
-      type: DataTypes.INTEGER,
-      validate: {
-        min: 0,
-        max: 5
-      }
-    }
+    stars:DataTypes.INTEGER,
+
   }, {
     sequelize,
     modelName: 'Review',

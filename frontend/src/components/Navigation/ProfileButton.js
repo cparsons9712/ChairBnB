@@ -4,18 +4,25 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import UserInfoModal from "../UserInfoModal";
+import NewSpotModal from "../CreateSpotForm";
 
 function ProfileButton({ user }) {
 
   return (
     <>
         {user ? (
-          <>
+          <div id="rightNav">
             <OpenModalButton
-              buttonText= <i class="fa-solid fa-skull fa-3x"></i>
+            buttonText='Create a New Spot'
+            modalComponent={<NewSpotModal />}
+            />
+
+
+            <OpenModalButton
+              buttonText= <i className="fa-solid fa-skull fa-3x"></i>
               modalComponent={<UserInfoModal user={user}/>}
             />
-          </>
+          </div>
         ) : (
           <>
             <li >

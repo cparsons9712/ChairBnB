@@ -1,41 +1,29 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import OpenModalButton from "./OpenModalButton";
+import NewSpotModal from "./CreateSpotForm";
 import { NavLink } from "react-router-dom";
-import { getAllSpots } from "../store/spot";
 
+const SpotManagement= () => {
 
+    const getRev = (spot) => {
+        if(spot.avgRating){
+          return spot.avgRating
+        } else {
+          return 'New'
+        }
+      }
 
+    return(
+        <div id='SpotManageCont'>
+            <h2>Manage Your Spots</h2>
 
-function LandingPage() {
-  const dispatch = useDispatch();
+            <OpenModalButton
+            buttonText='Create a New Spot'
+            modalComponent={<NewSpotModal />}
+            />
 
-  useEffect(() => {
-    dispatch(getAllSpots());
-  }, [dispatch]);
-
-  const spots = useSelector((state) => state.spots.All);
-
-
-
-
-  const getRev = (spot) => {
-    if(spot.avgRating){
-      return spot.avgRating
-    } else {
-      return 'New'
-    }
-  }
-
-  return (
-
-  Object.values(spots).length ?
-
-
-
-      <div id="landingCont">
-
-        {Object.values(spots)
-        .map((spot) => { 
+            <div className="landingCont">
+            {Object.values(spots)
+        .map((spot) => {
           return (
 
             <NavLink key={spot.name} to={`/spots/${spot.id}`}>
@@ -57,10 +45,12 @@ function LandingPage() {
             </NavLink>
           );
         })}
-      </div>
 
-  :<div id='loading'>LOADING ...... </div>);
+            </div>
+
+        </div>
+    )
+
 }
 
-
-export default LandingPage;
+export default SpotManagement;

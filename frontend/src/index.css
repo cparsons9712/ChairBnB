@@ -43,7 +43,7 @@ body {
   form label {
     font-size: 1.2em;
     color: #000000;
-    display: block;
+
     margin-top: 20px;
     margin-right: 20px;
     font-family: 'Georgia', serif;
@@ -83,6 +83,11 @@ body {
   button:disabled {
     background-color: gray;
     cursor: not-allowed;
+  }
+
+  input{
+    max-width: 300px;
+    margin: 25px;
   }
 
 .close{
@@ -193,9 +198,27 @@ Navigation Bar
   background-color: aliceblue;
 }
 
+#rightNav{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#newSpotBtn{
+  height:25px;
+  margin: 5px;
+}
+
+
 /**************************************
 LANDING PAGE
 *************************************/
+#loading{
+  position: absolute;
+  top: 100px;
+  background-color: aliceblue;
+}
+
 
 #landingCont{
   position: relative;
@@ -225,8 +248,7 @@ LANDING PAGE
 }
 
 .tile:hover{
-  height: 325px;
-  width: 275px;
+
   box-shadow: 0px 0px 10px 5px #952f04;
 }
 .previewIMG{
@@ -240,7 +262,7 @@ LANDING PAGE
 .hidden {
   display: none;
   background-color: black;
-  width: 275px;
+  width: 250px;
   position: absolute;
   text-align: center;
   color: #952f04;
@@ -270,6 +292,7 @@ Spot Details
   display: flex;
   flex-direction: column;
   padding: 20px;
+  margin-bottom: 100px;
 
 
 }
@@ -346,4 +369,95 @@ Spot Details
 }
 #reserve >button {
   width: 90%
+}
+
+#postReviewButton{
+  align-self: flex-start;
+  margin-bottom: 10px;;
+}
+/**************************************
+Create New Spot Form
+*************************************/
+#newSpotModal{
+  position: absolute;
+  top: 0px;
+  width: 90%;
+  right: 10px;
+  left: 10px;
+  background-color: grey;
+  box-shadow: 0px 0px 20px  grey
+}
+#location{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center
+}
+.loclabel{
+  width: 25%;
+  padding: 10px;
+}
+#descNewSpot{
+  height: 300px;
+  width: 80%;
+  background-color: #000000;
+  color:#952f04
+}
+#nameprice{
+  display: flex;
+  flex-direction: row;
+}
+#spotName{
+  width: 50%;
+  margin: 25px;
+}
+#price{
+  width:50%;
+  margin: 25px;
+}
+
+#dolla{
+  display: grid;
+  grid-template-columns: 5% 95%;
+}
+
+#priceInputNew{
+  width:75%;
+
+}
+#dollarSign{
+font-size: 40px;
+}
+#submitNewSpot{
+  width: 200px;
+  height: 40px;
+  font-size: large;
+
+}
+
+.errors{
+  color: #952f04;
+  text-shadow: 1px 1px 1px black;
+}
+
+/*************************************
+Post A Review Modal
+************************************/
+#reviewform{
+  background-color:gray;
+  height: auto;
+  width: auto;
+  position: fixed;
+  top: 30%;
+  right: 30%;
+  padding: 5px;
+  box-shadow: 5px 5px 20px  black;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+#reviewText{
+  height: 200px;
+  width: 300px;
 }
