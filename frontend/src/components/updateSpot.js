@@ -1,73 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { addImages, createNewSpot } from "../store/spot";
+import {  editSpot, getOneSpot } from "../store/spot";
 import { useModal } from "../context/Modal";
 
 
-function NewSpotModal() {
+function UpdateSpotModal({id}) {
   const history = useHistory()
     const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.session.user);
     const [errors, setErrors] = useState({})
-    const [disabled, setDisabled] = useState(true)
     const {closeModal} = useModal()
 
-    const [country, setCountry] = useState('')
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [lat, setLat] = useState('')
-    const [lng, setLong] = useState('')
-    const [description, setDescription] = useState('')
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState('')
-    const [previewURL, setPreviewURL] = useState('')
-    const [url2, setUrl2] = useState('')
-    const [url3, setUrl3] = useState('')
-    const [url4, setUrl4] = useState('')
-    const [url5, setUrl5] = useState('')
+    useEffect(() => {
+        dispatch(getOneSpot(id));
+      }, [dispatch, id]);
+
+    const spot = useSelector((state) => state.spots.Current);
+
+
+    const [country, setCountry] = useState(spot.country)
+    const [address, setAddress] = useState(spot.address)
+    const [city, setCity] = useState(spot.city)
+    const [state, setState] = useState(spot.state)
+    const [lat, setLat] = useState(spot.lat)
+    const [lng, setLong] = useState(spot.lng)
+    const [description, setDescription] = useState(spot.description)
+    const [name, setName] = useState(spot.name)
+    const [price, setPrice] = useState(spot.price)
+
+
+
+
 
     const handleSubmit = async (e) => {
       e.preventDefault();
       const payload = { address, city, state, country, lat, lng, name, description, price };
 
-      let newSpot = await dispatch(createNewSpot(payload));
+     let newSpot = await dispatch(editSpot(id, payload));
 
         if(newSpot.id){
-          if(!previewURL){
-            return setErrors({...errors, previewImg:'Preview Image is required'})
-          }else {
-            await dispatch(addImages(newSpot.id,{
-            "url" :previewURL,
-            "preview": true
-          }))
-
-          if(url2){
-            await dispatch(addImages(newSpot.id,{
-              "url" :url2,
-              "preview": false
-          }))}
-          if(url3){
-            await dispatch(addImages(newSpot.id,{
-              "url" :url3,
-              "preview": false
-          }))}
-          if(url4){
-            await dispatch(addImages(newSpot.id,{
-              "url" :url4,
-              "preview": false
-          }))}
-          if(url5){
-            await dispatch(addImages(newSpot.id,{
-              "url" :url5,
-              "preview": false
-          }))}
-
           closeModal()
-          history.push(`spots/${newSpot.id}`)
+          history.push(`/spots/${newSpot.id}`)
         }
-          }else{
+          else{
             const res = await newSpot.json()
             setErrors(res.errors);
           }
@@ -81,7 +56,7 @@ function NewSpotModal() {
         <form onSubmit={handleSubmit} id="newSpotModal">
         <button className = 'close' onClick={closeModal}>X</button>
 
-        <h1>Create a new Spot</h1>
+        <h1>Update Your Spot</h1>
 
 
           <h4>Where's your place located?</h4>
@@ -187,57 +162,13 @@ function NewSpotModal() {
             <div className="errors">{errors?.price}</div>
         </div>
         </div>
-        <div id='addPhotos'>
-            <h4>Liven up your spot with photos</h4>
-            <p>Submit a link to at least one photo to publish your spot.</p>
-            <div id='urlInputs'>
-
-            <input
-              type="text"
-              value={previewURL}
-              onChange={(e) => setPreviewURL(e.target.value)}
-              placeholder="Preview Image URL"
-              key="previewURL"
-            />
-            <div className="errors">{errors?.previewImg}</div>
-            <input
-              type="text"
-              value={url2}
-              onChange={(e) => setUrl2(e.target.value)}
-              placeholder="Image URL"
-              key="URL2"
-            />
-            <input
-              type="text"
-              value={url3}
-              onChange={(e) => setUrl3(e.target.value)}
-              placeholder="Image URL"
-              key="URL3"
-            />
-            <input
-              type="text"
-              value={url4}
-              onChange={(e) => setUrl4(e.target.value)}
-              placeholder="Image URL"
-              key="URL4"
-            />
-            <input
-              type="text"
-              value={url5}
-              onChange={(e) => setUrl5(e.target.value)}
-              placeholder="Image URL"
-              key="URL5"
-            />
-            </div>
 
 
-        </div>
-
-          <button type="submit"  id='submitNewSpot'>Create Spot</button>
+          <button type="submit"  id='submitUpdateSpot'>Update Your Spot</button>
         </form>
       </>
     );
 
 }
 
-export default NewSpotModal
+export default UpdateSpotModal;

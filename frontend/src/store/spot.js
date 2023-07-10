@@ -9,6 +9,8 @@ const LOADREV = 'spot/LOAD/REVIEWS'
 const CREATESPOT = 'spot/create'
 const CREATEIMAGE = 'spot/create/image'
 const SUBMITREVIEW = 'spot/create/review'
+const LOADUSERSPOTS = 'spot/LOAD/USERS'
+const DELETESPOT = 'spot/DELETE'
 
 // ACTIONS
 
@@ -40,6 +42,16 @@ const createImage = image => ({
 const createReview = rev => ({
     type: SUBMITREVIEW,
     rev
+})
+
+const loadUserSpots = spots => ({
+    type: LOADUSERSPOTS,
+    spots
+})
+
+const deleteSpot = spot => ({
+    type:DELETESPOT,
+    spot
 })
 
 //THUNKS
@@ -80,7 +92,7 @@ export const createNewSpot = (spot) => async dispatch => {
 
         return newSpot
     }catch(e){
-        alert('Please fix errors')
+        
         return e
     }
 }
@@ -104,8 +116,6 @@ export const addImages = (id, image) => async dispatch => {
 }
 
 export const postReview = (id, review) => async dispatch =>{
-
-
     try{
         const response = await csrfFetch(`/api/spots/${id}/reviews`, {
             method: 'POST',
@@ -115,21 +125,45 @@ export const postReview = (id, review) => async dispatch =>{
             body: JSON.stringify(review)
         })
         const newReview= await response.json();
-        newReview.User =
-
-
         dispatch(createReview(newReview))
         return newReview
     }catch(e) {return e}
 }
 
+export const getUserSpots = () => async dispatch => {
+    const response = await fetch('/api/session/spots')
+    if(response.ok) {
+        const spots = await response.json()
+        dispatch(loadUserSpots(spots.Spots))
+    }
+}
+
+export const editSpot = (id, spot) => async dispatch => {
+
+    try{const response = await csrfFetch(`/api/spots/${id}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(spot)
+    })
+        const newSpot = await response.json();
+        dispatch(createSpot(newSpot))
+
+        return newSpot
+    }catch(e){
+        alert('Please fix errors')
+        return e
+    }
+}
+
 
 
 // reducer
-const initialState = {All:{}, Current: {Reviews: []}}
+const initialState = {All:{}, Current: {Reviews: []}, Users: {}}
 const spotReducer = (state = initialState, action) => {
 
-    const newState = {All:{...state.All}, Current:{...state.Current}}
+    const newState = {All:{...state.All}, Current:{...state.Current}, Users:{...state.Users}}
     switch (action.type){
         case LOAD:
             action.spots.forEach((spot)=>{
@@ -152,7 +186,11 @@ const spotReducer = (state = initialState, action) => {
         case SUBMITREVIEW:
             newState.Current.Reviews = [...newState.Current.Reviews, action.rev]
             return newState;
-
+        case LOADUSERSPOTS:
+            action.spots.forEach((spot)=>{
+                newState.Users[spot.id] = spot
+            })
+            return newState;
 
         default:
             return state;

@@ -40,7 +40,7 @@ const getOwner = () => {
 }
 
 const getAvg = () => {
-  if(spot.avgStarRating){return spot.avgStarRating}
+  if(spot.avgStarRating){return spot.avgStarRating.toFixed(1)}
   else{return 'New'}
 }
 
@@ -55,8 +55,6 @@ const getNumRev = () =>{
 const reserve = () => {
   alert("Feature Coming Soon")
 }
-
-
 
 
   if (spot) {

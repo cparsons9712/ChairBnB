@@ -20,7 +20,7 @@ function LandingPage() {
 
   const getRev = (spot) => {
     if(spot.avgRating){
-      return spot.avgRating
+      return spot.avgRating.toFixed(1)
     } else {
       return 'New'
     }
@@ -35,12 +35,12 @@ function LandingPage() {
       <div id="landingCont">
 
         {Object.values(spots)
-        .map((spot) => { 
+        .map((spot) => {
           return (
 
-            <NavLink key={spot.name} to={`/spots/${spot.id}`}>
+            <NavLink key={spot.name} className='homeSpotLink' to={`/spots/${spot.id}`}>
 
-              <div className="tile">
+              <div className="tile" title={spot.name}>
               <div className="hidden">{spot.name}</div>
 
                 <img

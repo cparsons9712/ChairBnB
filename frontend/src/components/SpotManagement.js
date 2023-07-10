@@ -1,48 +1,97 @@
 import OpenModalButton from "./OpenModalButton";
 import NewSpotModal from "./CreateSpotForm";
 import { NavLink } from "react-router-dom";
+import { getUserSpots } from "../store/spot";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import UpdateSpotModal from "./updateSpot"
+import DeleteSpotModal from "./DeleteSpotModal"
+
 
 const SpotManagement= () => {
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(getUserSpots());
+    }, [dispatch]);
+
+    const spots = useSelector((state) => state.spots.Users);
+    const spotArr = Object.values(spots)
+
     const getRev = (spot) => {
         if(spot.avgRating){
-          return spot.avgRating
+          return spot.avgRating.toFixed(1)
         } else {
           return 'New'
         }
       }
 
-    return(
-        <div id='SpotManageCont'>
-            <h2>Manage Your Spots</h2>
-
-            <OpenModalButton
+      const displayContents = () => {
+        if(!spotArr.length){
+          return <OpenModalButton
             buttonText='Create a New Spot'
             modalComponent={<NewSpotModal />}
             />
+        }
 
-            <div className="landingCont">
-            {Object.values(spots)
-        .map((spot) => {
-          return (
+      }
 
-            <NavLink key={spot.name} to={`/spots/${spot.id}`}>
 
-              <div className="tile">
-              <div className="hidden">{spot.name}</div>
+
+
+    return(
+        <div id='SpotManageCont'>
+            <div id='manageTitle'>
+            <h2>Manage Your Spots</h2>
+
+            {displayContents()}
+
+
+            </div>
+            <div className="tileCont">
+
+
+
+            {spotArr.map((spot) => {
+              return (
+                <div className="Mtile">
+                  <NavLink key={spot.name} className='spotLink' to={`/spots/${spot.id}`}>
+
+                  <div className="hidden">{spot.name}</div>
 
                 <img
                   src={spot.previewImage}
                   alt="HOUSE"
-                  className="previewIMG"
+                  className="MpreviewIMG"
                 ></img>
-                <p className="loc">
+                <p className="Mloc">
                   {spot.city}, {spot.state}
                 </p>
-                <p className="review"> ★ {getRev(spot)}</p>
-                <p className="cost">${spot.price} night</p>
+                <p className="Mreview"> ★ {getRev(spot)}</p>
+                <p className="Mcost">${spot.price} night</p>
+           </NavLink>
+
+              <div className="UpdateDeleteButtons">
+              <OpenModalButton
+                className="UDB"
+                buttonText='Update'
+                modalComponent={<UpdateSpotModal id = {spot.id}/>}
+              />
+              <OpenModalButton
+                className="UDB"
+                buttonText='Delete'
+                modalComponent={<DeleteSpotModal id = {spot.id}/>}
+              />
               </div>
-            </NavLink>
+
+              </div>
+
+
+
+
+
+
           );
         })}
 

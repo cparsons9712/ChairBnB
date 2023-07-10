@@ -14,12 +14,12 @@ function SpotReviews({ id }) {
     dispatch(getSpotReviews(id));
   }, [dispatch, id]);
 
-  const user = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session?.user);
   const owner = useSelector((state) => state.spots.Current.Owner);
   let reviews = useSelector((state) => state.spots.Current.Reviews);
 
   useEffect(() => {
-    if (owner && owner.id === user.id) {
+    if (user && owner && owner.id === user.id) {
       setIsOwner(true);
     }
   }, [user, owner]);

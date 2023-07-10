@@ -27,8 +27,8 @@ function LoginFormModal() {
   };
 
   const loginDemo= () =>{
-    setCredential('FakeUser1')
-    setPassword('password1')
+    setCredential('demoUser')
+    setPassword('password')
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
       .catch(async (res) => {
@@ -49,30 +49,42 @@ function LoginFormModal() {
     <>
 
       <form onSubmit={handleSubmit} id='logInModal'>
-      <button className = 'close' onClick={closeModal}>X</button>
-        <h1>Log In</h1>
+        <div className="logInSection">
+          <button className = 'close' onClick={closeModal}>X</button>
+          <h1>Log In</h1>
+        </div>
 
-        <label>
-          Username or Email
-          <input
-            type="text"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
         {errors.credential && (
           <p>{errors.credential}</p>
         )}
+        <div className="LogInSection">
+          <label id='logInUserName'>
+
+            <input
+              type="text"
+              value={credential}
+              onChange={(e) => setCredential(e.target.value)}
+              required
+              placeholder="Username or Email"
+            />
+          </label>
+        </div>
+
+
+        <div className="LogInSection">
+
+          <label>
+
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Password"
+            />
+          </label>
+        </div>
+
         <button type="submit" disabled={disable} className="submit">Log In</button>
         <button className="demo" onClick={loginDemo}>DEMO USER</button>
       </form>

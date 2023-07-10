@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import './index.css'
 import LandingPage from "./components/LandingPage";
 import SpotDetails from "./components/SpotDetails";
+import SpotManagement from "./components/SpotManagement";
 
 
 function App() {
@@ -23,10 +24,12 @@ function App() {
         <Route exact path={'/'}>
           <LandingPage />
         </Route>
+        <Route exact path={'/spots/current'}>
+          <SpotManagement />
+        </Route>
         <Route exact path={'/spots/:id'}>
           <SpotDetails />
         </Route>
-
       </Switch>}
     </>
   );
