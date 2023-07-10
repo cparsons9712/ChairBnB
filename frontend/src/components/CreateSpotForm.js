@@ -22,11 +22,8 @@ function NewSpotModal() {
     const [description, setDescription] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
-    const [previewURL, setPreviewURL] = useState('')
-    const [url2, setUrl2] = useState('')
-    const [url3, setUrl3] = useState('')
-    const [url4, setUrl4] = useState('')
-    const [url5, setUrl5] = useState('')
+    const [images, setImages] = useState([])
+
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -34,47 +31,28 @@ function NewSpotModal() {
 
       let newSpot = await dispatch(createNewSpot(payload));
 
-        if(newSpot.id){
-          if(!previewURL){
-            return setErrors({...errors, previewImg:'Preview Image is required'})
-          }else {
-            await dispatch(addImages(newSpot.id,{
-            "url" :previewURL,
-            "preview": true
-          }))
-
-          if(url2){
-            await dispatch(addImages(newSpot.id,{
-              "url" :url2,
-              "preview": false
-          }))}
-          if(url3){
-            await dispatch(addImages(newSpot.id,{
-              "url" :url3,
-              "preview": false
-          }))}
-          if(url4){
-            await dispatch(addImages(newSpot.id,{
-              "url" :url4,
-              "preview": false
-          }))}
-          if(url5){
-            await dispatch(addImages(newSpot.id,{
-              "url" :url5,
-              "preview": false
-          }))}
-
-          closeModal()
-          history.push(`spots/${newSpot.id}`)
-        }
-          }else{
-            const res = await newSpot.json()
-            setErrors(res.errors);
+      if (newSpot.id) {
+        if (images.length === 0) {
+          return setErrors({ ...errors, previewImg: 'Preview Image is required' });
+        } else {
+          for (let i = 0; i < images.length; i++) {
+            let preview = false;
+            if (i === 0) preview = true;
+            await dispatch(
+              addImages(newSpot.id, {
+                url: images[i],
+                preview
+              })
+            );
           }
-
+        }
+        closeModal();
+        history.push(`/spots/${newSpot.id}`);
+      } else {
+        const res = await newSpot.json();
+        setErrors(res.errors);
+      }
     };
-
-
 
     return (
       <>
@@ -187,44 +165,44 @@ function NewSpotModal() {
             <div className="errors">{errors?.price}</div>
         </div>
         </div>
-        <div id='addPhotos'>
+       <div id='addPhotos'>
             <h4>Liven up your spot with photos</h4>
             <p>Submit a link to at least one photo to publish your spot.</p>
             <div id='urlInputs'>
 
             <input
               type="text"
-              value={previewURL}
-              onChange={(e) => setPreviewURL(e.target.value)}
+
+              onChange={(e) => setImages([...images, e.target.value])}
               placeholder="Preview Image URL"
               key="previewURL"
             />
             <div className="errors">{errors?.previewImg}</div>
             <input
               type="text"
-              value={url2}
-              onChange={(e) => setUrl2(e.target.value)}
+
+              onChange={(e) =>  setImages([...images, e.target.value])}
               placeholder="Image URL"
               key="URL2"
             />
             <input
               type="text"
-              value={url3}
-              onChange={(e) => setUrl3(e.target.value)}
+
+              onChange={(e) =>  setImages([...images, e.target.value])}
               placeholder="Image URL"
               key="URL3"
             />
             <input
               type="text"
-              value={url4}
-              onChange={(e) => setUrl4(e.target.value)}
+
+              onChange={(e) =>  setImages([...images, e.target.value])}
               placeholder="Image URL"
               key="URL4"
             />
             <input
               type="text"
-              value={url5}
-              onChange={(e) => setUrl5(e.target.value)}
+
+              onChange={(e) =>  setImages([...images, e.target.value])}
               placeholder="Image URL"
               key="URL5"
             />

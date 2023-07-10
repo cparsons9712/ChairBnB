@@ -76,7 +76,7 @@ const SpotManagement= () => {
               <OpenModalButton
                 className="UDB"
                 buttonText='Update'
-                modalComponent={<UpdateSpotModal id = {spot.id}/>}
+                modalComponent={<UpdateSpotModal spot = {spot}/>}
               />
               <OpenModalButton
                 className="UDB"

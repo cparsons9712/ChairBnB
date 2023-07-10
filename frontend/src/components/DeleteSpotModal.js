@@ -1,21 +1,25 @@
 import { useModal } from "../context/Modal";
+import { removeSpot } from "../store/spot";
+import { useDispatch, } from "react-redux";
 
 const DeleteSpotModal = ({id}) => {
     const {closeModal} = useModal()
+    const dispatch = useDispatch();
 
-    const onDelete = (id) => {
-        alert('Spot will be DESTROYED. SEND IN THE NUKES')
+    const handleSubmit = async (e) => {
+        await dispatch(removeSpot(id))
+        closeModal()
     }
 
     return (
-        <div className="DeleteSpotCont">
+        <form className="DeleteSpotCont" onSubmit={handleSubmit}>
         <h2>Confirm Delete</h2>
         <p>Are you sure you want to delete this spot?</p>
         <div className="deleteConfirmButtonsCont">
-            <button id='yes' onClick={onDelete}>Yes (Delete Spot)</button>
+            <button id='yes' type='submit'>Yes (Delete Spot)</button>
             <button id='no' onClick={closeModal}>No (Keep Spot)</button>
         </div>
-        </div>
+        </form>
     )
 }
 

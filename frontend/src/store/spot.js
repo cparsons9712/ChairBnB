@@ -49,9 +49,9 @@ const loadUserSpots = spots => ({
     spots
 })
 
-const deleteSpot = spot => ({
+const deleteSpot = id => ({
     type:DELETESPOT,
-    spot
+    id
 })
 
 //THUNKS
@@ -92,7 +92,7 @@ export const createNewSpot = (spot) => async dispatch => {
 
         return newSpot
     }catch(e){
-        
+
         return e
     }
 }
@@ -157,13 +157,32 @@ export const editSpot = (id, spot) => async dispatch => {
     }
 }
 
+export const removeSpot = (id) => async dispatch => {
+    console.log("IN THE THUNK")
+
+        const response = await csrfFetch(`/api/spots/${id}`,{
+            method: 'DELETE',
+        })
+
+        if(response.ok){
+            console.log('%%%%% DELETING SPOT %%%%%')
+            dispatch(deleteSpot(id))
+        }
+        else{
+            alert('Spot not deleted')
+            console.log(response)
+        }
+
+}
+
 
 
 // reducer
 const initialState = {All:{}, Current: {Reviews: []}, Users: {}}
 const spotReducer = (state = initialState, action) => {
 
-    const newState = {All:{...state.All}, Current:{...state.Current}, Users:{...state.Users}}
+    const newState = {All:{...state.All}, Current:{...state.Current}, Users:{}}
+    
     switch (action.type){
         case LOAD:
             action.spots.forEach((spot)=>{
@@ -181,7 +200,7 @@ const spotReducer = (state = initialState, action) => {
                 newState.All[action.spot.id] = action.spot
             return newState;
         case CREATEIMAGE:
-            newState.Current.SpotImages = [...newState.Current.SpotImages, action.image]
+            newState.Current.SpotImages = [action.image]
             return newState;
         case SUBMITREVIEW:
             newState.Current.Reviews = [...newState.Current.Reviews, action.rev]
@@ -190,6 +209,9 @@ const spotReducer = (state = initialState, action) => {
             action.spots.forEach((spot)=>{
                 newState.Users[spot.id] = spot
             })
+            return newState;
+        case DELETESPOT:
+            delete newState[action.id];
             return newState;
 
         default:

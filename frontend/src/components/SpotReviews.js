@@ -30,6 +30,11 @@ function SpotReviews({ id }) {
     }
   }, [reviews]);
 
+  const getDeleteButton = (posterID) => {
+    if(user.id === posterID){
+      return <button>Delete</button>
+    }
+  }
 
 
   const displayPostReviewButton = () => {
@@ -64,10 +69,6 @@ function SpotReviews({ id }) {
   const displayReviews = () => {
     if (reviewsLoaded) {
       if (reviews && reviews.length > 0) {
-        console.log('before:')
-        console.log(reviews)
-        console.log('after:')
-        console.log(reviews)
         reviews = reviews.toReversed()
         return reviews.map((rev) => {
           let year = rev.createdAt.slice(0, 4);
@@ -93,6 +94,7 @@ function SpotReviews({ id }) {
                 {textMonth[month]} {year}
               </p>
               <p>{rev.review}</p>
+              {getDeleteButton(rev.userId)}
             </div>
           );
         });

@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {  editSpot, getOneSpot } from "../store/spot";
+import {  editSpot } from "../store/spot";
 import { useModal } from "../context/Modal";
 
 
-function UpdateSpotModal({id}) {
+function UpdateSpotModal({spot}) {
   const history = useHistory()
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({})
     const {closeModal} = useModal()
-
-    useEffect(() => {
-        dispatch(getOneSpot(id));
-      }, [dispatch, id]);
-
-    const spot = useSelector((state) => state.spots.Current);
+    const {id} = spot
 
 
     const [country, setCountry] = useState(spot.country)
