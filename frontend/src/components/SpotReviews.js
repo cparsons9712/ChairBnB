@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSpotReviews } from "../store/spot";
 import OpenModalButton from "./OpenModalButton";
 import PostReviewModal from "./PostReview";
+import DeleteReviewModal from "./DeleteReview";
 
 function SpotReviews({ id }) {
   const dispatch = useDispatch();
@@ -16,7 +17,8 @@ function SpotReviews({ id }) {
 
   const user = useSelector((state) => state.session?.user);
   const owner = useSelector((state) => state.spots.Current.Owner);
-  let reviews = useSelector((state) => state.spots.Current.Reviews);
+  let reviews = useSelector((state) => state.spots.Reviews);
+  reviews = Object.values(reviews)
 
   useEffect(() => {
     if (user && owner && owner.id === user.id) {
@@ -30,9 +32,12 @@ function SpotReviews({ id }) {
     }
   }, [reviews]);
 
-  const getDeleteButton = (posterID) => {
+  const getDeleteButton = (posterID, revID) => {
     if(user.id === posterID){
-      return <button>Delete</button>
+      return <OpenModalButton
+      buttonText="Delete"
+      modalComponent={<DeleteReviewModal id={revID} />}
+    />
     }
   }
 
@@ -94,7 +99,7 @@ function SpotReviews({ id }) {
                 {textMonth[month]} {year}
               </p>
               <p>{rev.review}</p>
-              {getDeleteButton(rev.userId)}
+              {getDeleteButton(rev.userId, rev.id)}
             </div>
           );
         });

@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { csrfFetch } from "./csrf";
 
 
@@ -11,6 +10,7 @@ const CREATEIMAGE = 'spot/create/image'
 const SUBMITREVIEW = 'spot/create/review'
 const LOADUSERSPOTS = 'spot/LOAD/USERS'
 const DELETESPOT = 'spot/DELETE'
+const DELETEREVIEW = 'spot/delete/review'
 
 // ACTIONS
 
@@ -51,6 +51,11 @@ const loadUserSpots = spots => ({
 
 const deleteSpot = id => ({
     type:DELETESPOT,
+    id
+})
+
+const deleteReview = id => ({
+    type: DELETEREVIEW,
     id
 })
 
@@ -158,31 +163,40 @@ export const editSpot = (id, spot) => async dispatch => {
 }
 
 export const removeSpot = (id) => async dispatch => {
-    console.log("IN THE THUNK")
+    const response = await csrfFetch(`/api/spots/${id}`,{
+        method: 'DELETE',
+    })
+    if(response.ok){
+        dispatch(deleteSpot(id))
+    }
+    else{
+        alert('Spot not deleted')
+        console.log(response)
+    }
+}
 
-        const response = await csrfFetch(`/api/spots/${id}`,{
-            method: 'DELETE',
-        })
-
-        if(response.ok){
-            console.log('%%%%% DELETING SPOT %%%%%')
-            dispatch(deleteSpot(id))
-        }
-        else{
-            alert('Spot not deleted')
-            console.log(response)
-        }
-
+export const removeReview = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${id}`,{
+        method: 'DELETE',
+    })
+    if(response.ok){
+        dispatch(deleteReview(id))
+    }
+    else{
+        alert('Review not deleted')
+        console.log(response)
+        return await response.json()
+    }
 }
 
 
 
 // reducer
-const initialState = {All:{}, Current: {Reviews: []}, Users: {}}
+const initialState = {All:{}, Current: {}, Reviews: {},Users: {}}
 const spotReducer = (state = initialState, action) => {
 
-    const newState = {All:{...state.All}, Current:{...state.Current}, Users:{}}
-    
+    const newState = {All:{...state.All}, Current:{...state.Current}, Users:{}, Reviews: {}}
+
     switch (action.type){
         case LOAD:
             action.spots.forEach((spot)=>{
@@ -193,7 +207,12 @@ const spotReducer = (state = initialState, action) => {
                 newState.Current = action.spot
             return newState;
         case LOADREV:
-            newState.Current.Reviews = [...action.revs.Reviews]
+            let reviews = action.revs.Reviews || [];
+            reviews.forEach((review)=>{
+                console.log(review)
+                console.log(newState.Reviews)
+                newState.Reviews[review.id] = review
+            })
             return newState
         case CREATESPOT:
                 newState.Current = action.spot;
@@ -203,7 +222,7 @@ const spotReducer = (state = initialState, action) => {
             newState.Current.SpotImages = [action.image]
             return newState;
         case SUBMITREVIEW:
-            newState.Current.Reviews = [...newState.Current.Reviews, action.rev]
+                newState.Reviews[action.rev.id] = action.rev
             return newState;
         case LOADUSERSPOTS:
             action.spots.forEach((spot)=>{
@@ -211,11 +230,14 @@ const spotReducer = (state = initialState, action) => {
             })
             return newState;
         case DELETESPOT:
-            delete newState[action.id];
+            delete newState.All[action.id];
             return newState;
-
+        case DELETEREVIEW:
+            delete newState.Reviews[action.id];
+            return newState;
         default:
             return state;
+
     }
 }
 
