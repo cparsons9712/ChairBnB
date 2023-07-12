@@ -60,7 +60,7 @@ function NewSpotModal() {
         <form onSubmit={handleSubmit} id="newSpotModal">
         <button className = 'close' onClick={closeModal}>X</button>
 
-        <h1>Create a new Spot</h1>
+        <h1>Create a New Spot</h1>
 
 
           <h4>Where's your place located?</h4>

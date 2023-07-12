@@ -17,7 +17,7 @@ const SpotDetails = () => {
   const spot = useSelector((state) => state.spots.Current);
   const images = useSelector((state) => state.spots.Current.SpotImages);
   const owner = useSelector((state)=> state.spots.Current.Owner)
-
+  const user = useSelector((state)=> state.session.user)
 
 
   const getimages = () => {
@@ -83,7 +83,7 @@ const reserve = () => {
           <h3>★ {getAvg()}  {getNumRev()} </h3>
         </div>
 
-        <SpotReviews id={id} />
+        <SpotReviews id={id} user={user} />
       </div>
 
     );

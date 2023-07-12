@@ -28,8 +28,8 @@ function LoginFormModal() {
 
   const loginDemo = () => {
     // Set credential and password for demo user login
-    setCredential('demoUser');
-    setPassword('password');
+    setCredential('FakeUser5');
+    setPassword('password5');
 
     // Dispatch the login action with the demo user's credential and password
     return dispatch(sessionActions.login({ credential, password }))
