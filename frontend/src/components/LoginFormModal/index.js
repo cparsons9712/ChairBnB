@@ -1,23 +1,23 @@
-// frontend/src/components/LoginFormModal/index.js
 import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 
-
 function LoginFormModal() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
-  const [disable, setDisable] = useState(true)
+  const [disable, setDisable] = useState(true);
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
+
+    // Dispatch the login action with the provided credential and password
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
+      .then(closeModal) // Close the modal after successful login
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -26,40 +26,45 @@ function LoginFormModal() {
       });
   };
 
-  const loginDemo= () =>{
-    setCredential('demoUser')
-    setPassword('password')
+  const loginDemo = () => {
+    // Set credential and password for demo user login
+    setCredential('demoUser');
+    setPassword('password');
+
+    // Dispatch the login action with the demo user's credential and password
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
+      .then(closeModal) // Close the modal after successful login
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
           setErrors(data.errors);
         }
       });
+  };
 
-  }
-
-  useEffect(()=>{
-    if(credential.length >=4 && password.length >=6){
-    setDisable(false)
-  }}, [credential, password])
+  useEffect(() => {
+    // Enable or disable the submit button based on the credential and password length
+    if (credential.length >= 4 && password.length >= 6) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  }, [credential, password]);
 
   return (
     <>
-
       <form onSubmit={handleSubmit} id='logInModal'>
         <div className="logInSection">
-          <button className = 'close' onClick={closeModal}>X</button>
+          <button className='close' onClick={closeModal}>X</button>
           <h1>Log In</h1>
         </div>
 
         {errors.credential && (
           <p>{errors.credential}</p>
         )}
+
         <div className="LogInSection">
           <label id='logInUserName'>
-
             <input
               type="text"
               value={credential}
@@ -70,11 +75,8 @@ function LoginFormModal() {
           </label>
         </div>
 
-
         <div className="LogInSection">
-
           <label>
-
             <input
               type="password"
               value={password}

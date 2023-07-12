@@ -65,17 +65,6 @@ function SignupFormModal() {
 
           <input
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            placeholder="Username"
-          />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
-        <label>
-
-          <input
-            type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
@@ -106,6 +95,17 @@ function SignupFormModal() {
         </label>
         {errors.email && <p>{errors.email}</p>}
 
+        <label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            placeholder="Username"
+          />
+        </label>
+        {errors.username && <p>{errors.username}</p>}
+        
         <label>
 
           <input

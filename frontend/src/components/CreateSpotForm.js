@@ -22,7 +22,7 @@ function NewSpotModal() {
     const [description, setDescription] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
-    const [images, setImages] = useState([])
+    const [images, setImages] = useState([null,null,null,null,null])
 
 
     const handleSubmit = async (e) => {
@@ -53,6 +53,7 @@ function NewSpotModal() {
         setErrors(res.errors);
       }
     };
+    let tempArr = []
 
     return (
       <>
@@ -173,7 +174,10 @@ function NewSpotModal() {
             <input
               type="text"
 
-              onChange={(e) => setImages([...images, e.target.value])}
+              onChange={(e) => {
+                tempArr[0] = e.target.value
+                setImages(tempArr)
+              }}
               placeholder="Preview Image URL"
               key="previewURL"
             />
@@ -181,28 +185,40 @@ function NewSpotModal() {
             <input
               type="text"
 
-              onChange={(e) =>  setImages([...images, e.target.value])}
+              onChange={(e) =>{
+                tempArr[1] = e.target.value
+                setImages(tempArr)
+              }}
               placeholder="Image URL"
               key="URL2"
             />
             <input
               type="text"
 
-              onChange={(e) =>  setImages([...images, e.target.value])}
+              onChange={(e) => {
+                tempArr[2] = e.target.value
+                setImages(tempArr)
+              }}
               placeholder="Image URL"
               key="URL3"
             />
             <input
               type="text"
 
-              onChange={(e) =>  setImages([...images, e.target.value])}
+              onChange={(e) =>  {
+                tempArr[3] = e.target.value
+                setImages(tempArr)
+              }}
               placeholder="Image URL"
               key="URL4"
             />
             <input
               type="text"
 
-              onChange={(e) =>  setImages([...images, e.target.value])}
+              onChange={(e) =>  {
+                tempArr[4] = e.target.value
+                setImages(tempArr)
+              }}
               placeholder="Image URL"
               key="URL5"
             />

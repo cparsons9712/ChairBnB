@@ -34,16 +34,21 @@ function UserInfoModal() {
   }, [closeModal]);
 
   return (
-    <div className="userMenu" ref={ulRef}>
-      <button className="close" onClick={closeModal}>
-        X
-      </button>
-      <h2>Hello {user.firstName}!</h2>
-      <h3>Username: {user.username}</h3>
-      <h3>Email: {user.email}</h3>
-      <NavLink to="/spots/current">Manage Spots</NavLink>
-      <button onClick={logout}>Sign Out</button>
-    </div>
+<div className="userMenu" ref={ulRef}>
+
+  <h2 className="userMenuItem">Hello {user.firstName}.</h2>
+
+  <h3 className="userMenuItem">{user.email}</h3>
+
+
+  <NavLink to="/spots/current" className="userMenuItem" id='manageSpotLink'>
+    Manage Spots
+  </NavLink>
+
+  <button id='logOutButton' onClick={logout}>
+    Log Out
+  </button>
+</div>
   );
 }
 

@@ -8,43 +8,54 @@ import DeleteReviewModal from "./DeleteReview";
 function SpotReviews({ id }) {
   const dispatch = useDispatch();
 
+  // State to track whether the current user is the owner of the spot
   const [isOwner, setIsOwner] = useState(false);
+  // State to track whether reviews have been loaded
   const [reviewsLoaded, setReviewsLoaded] = useState(false);
 
   useEffect(() => {
+    // Fetch spot reviews when the component mounts or the `id` prop changes
     dispatch(getSpotReviews(id));
   }, [dispatch, id]);
 
   const user = useSelector((state) => state.session?.user);
   const owner = useSelector((state) => state.spots.Current.Owner);
   let reviews = useSelector((state) => state.spots.Reviews);
-  reviews = Object.values(reviews)
+  reviews = Object.values(reviews);
 
   useEffect(() => {
+    // Check if the current user is the owner of the spot
     if (user && owner && owner.id === user.id) {
       setIsOwner(true);
     }
   }, [user, owner]);
 
   useEffect(() => {
+    // Set `reviewsLoaded` to `true` when reviews are available
     if (reviews) {
       setReviewsLoaded(true);
     }
   }, [reviews]);
 
   const getDeleteButton = (posterID, revID) => {
-    if(user.id === posterID){
-      return <OpenModalButton
-      buttonText="Delete"
-      modalComponent={<DeleteReviewModal id={revID} />}
-    />
+    // Render a delete button if the current user is the author of the review
+    if (user.id === posterID) {
+      return (
+        <OpenModalButton
+          buttonText="Delete"
+          modalComponent={<DeleteReviewModal id={revID} />}
+        />
+      );
+    } else {
+      return null;
     }
-  }
-
+  };
 
   const displayPostReviewButton = () => {
+    // Render the post review button based on the following conditions:
     if (reviewsLoaded) {
       if (!isOwner && reviews && reviews.length > 0) {
+        // Check if the current user has already posted a review
         const users = reviews.map((review) => review.User?.id);
         if (!users.includes(user.id)) {
           return (
@@ -57,6 +68,7 @@ function SpotReviews({ id }) {
           );
         }
       } else if (!isOwner && (!reviews || reviews.length === 0)) {
+        // Render the post review button if there are no reviews
         return (
           <div id="postReviewButton">
             <OpenModalButton
@@ -65,6 +77,8 @@ function SpotReviews({ id }) {
             />
           </div>
         );
+      } else {
+        return null;
       }
     }
 
@@ -74,8 +88,10 @@ function SpotReviews({ id }) {
   const displayReviews = () => {
     if (reviewsLoaded) {
       if (reviews && reviews.length > 0) {
-        reviews = reviews.toReversed()
+        // Reverse the order of reviews
+        reviews = reviews.reverse();
         return reviews.map((rev) => {
+          // Format the review creation date
           let year = rev.createdAt.slice(0, 4);
           let month = rev.createdAt.slice(5, 7);
           let textMonth = {
@@ -105,19 +121,22 @@ function SpotReviews({ id }) {
         });
       } else {
         if (!isOwner) {
+          // Display a message if there are no reviews and the user is not the owner
           return <h4>Be the first to post a Review!</h4>;
         }
       }
     } else {
+      // Display a loading message while reviews are being loaded
       return <h4>Loading Reviews ....</h4>;
     }
   };
 
-  // Add a check to render nothing if the data hasn't loaded yet
   if (!reviewsLoaded || !owner || !user) {
+    // Return null if reviews, owner, or user information is not available
     return null;
   }
 
+  // Render the component with post review button and reviews
   return (
     <div>
       {displayPostReviewButton()}

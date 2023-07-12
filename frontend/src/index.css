@@ -13,6 +13,7 @@ body {
     background-position: center; /* Center the image */
     background-repeat: repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
+    max-width: 1700px;
   }
   h1 {
     color: #952f04;
@@ -78,28 +79,65 @@ body {
     position: absolute;
     top: 0;
     right: 0;
-    height: 20px;
+    height: 25px;
     width: 20px;
     font-size: x-small;
     border-radius: 0%;
     margin: 5px 5px;
 }
+#root{
+max-width: 1700px;
+}
+
+
 
 
 /***********************************
 Navigation Bar
 ************************************/
 .userMenu {
-    background-color: aliceblue;
-    height: auto;
-    width: auto;
-    position: fixed;
-    top: 75px;
-    right: 5px;
-    padding: 5px;
-
-
+  background-color: gray;
+  height: auto;
+  width: auto;
+  position: fixed;
+  top: 75px;
+  right: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border: ridge 2px #000000
 }
+.userMenuItem{
+  color: black;
+  text-shadow: 1px 1px  1px #952f04;
+  font-size: medium;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  text-decoration: none;
+  margin: 4px;
+}
+#manageSpotLink{
+  border-top: ridge 2px #000000;
+  border-bottom: ridge 2px #000000;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+#manageSpotLink:hover{
+  background-color: #952f04;
+  font-size: large;
+  text-shadow: 1px 1px  1px #979595;
+}
+#logOutButton{
+  width: 100%;
+  font-size: small;
+  text-align: center;
+  font-family: 'Georgia', serif;
+}
+#logOutButton:hover{
+  font-size: medium;
+  text-shadow: 1px 1px  1px black;
+}
+
 .bar {
     margin: 0;
     background-color: rgba(63, 59, 65, 0.902);
@@ -112,6 +150,7 @@ Navigation Bar
     justify-content: space-between;
     align-content: space-between;
     z-index: 1000;
+    max-width: 1700px;
   }
 .userButton{
     margin: 8px;
@@ -235,9 +274,8 @@ LANDING PAGE
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  width: 100%
-
-
+  width: 100%;
+  max-width: 1800px;
 }
 
 .tile {
