@@ -44,7 +44,7 @@ function SpotReviews({ id , user}) {
       return (
         <OpenModalButton
           buttonText="Delete"
-          modalComponent={<DeleteReviewModal id={revID} />}
+          modalComponent={<DeleteReviewModal revId={revID} spotId={id} />}
         />
       );
     } else {

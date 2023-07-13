@@ -17,8 +17,7 @@ export const getSpotReviews = (id) => async dispatch => {
     const response = await fetch(`/api/spots/${id}/reviews`)
     if(response.ok) {
         const reviews = await response.json()
-        console.log('!!!!!!! REVIEWS !!!!!!')
-        console.log(reviews)
+
         dispatch(loadRev(reviews, id))
     }
 }
@@ -27,8 +26,7 @@ export const getSpotReviewsUsers = (id) => async dispatch => {
     const response = await fetch(`/api/spots/${id}/reviews`)
     if(response.ok) {
         const reviews = await response.json()
-        console.log('!!!!!!! REVIEWS !!!!!!')
-        console.log(reviews)
+
         dispatch(loadRev(reviews))
     }
 }

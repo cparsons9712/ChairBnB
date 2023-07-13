@@ -33,7 +33,7 @@ router.put('/:id', validateReview,async (req,res, next)=>{
         return next(aerror)
     }
     const oldreview = await Review.findByPk(req.params.id)
-    console.log(oldreview)
+    
 
     if(!oldreview){
         const rerror = new Error()

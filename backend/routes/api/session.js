@@ -107,7 +107,7 @@ router.get("/spots", async (req, res, next) => {
   // go threw each spot to formatt correctly
   for (let spot of spots) {
     spot = spot.toJSON();
-    console.log("LOOP");
+
     // get the average rating
     let starsum = await Review.sum("stars", { where: { spotId: spot.id } }); // add up all star values for spot
     let { count } = await Review.findAndCountAll({
@@ -156,7 +156,7 @@ router.get("/reviews", async (req, res) => {
 
   for (let review of reviews) {
     review = review.toJSON();
-    console.log(review);
+    
     // get user information
     let user = {
       id: req.user.id,

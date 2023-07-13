@@ -132,7 +132,9 @@ export const postReview = (id, review) => async dispatch =>{
         const newReview= await response.json();
         dispatch(createReview(newReview))
         return newReview
-    }catch(e) {return e}
+    }catch(e) {
+        console.log("THUNK FOR POST REVIEW WENT TO ERROR RESPONSE" + e)
+        return e}
 }
 
 export const getUserSpots = () => async dispatch => {
@@ -209,8 +211,6 @@ const spotReducer = (state = initialState, action) => {
         case LOADREV:
             let reviews = action.revs.Reviews || [];
             reviews.forEach((review)=>{
-                console.log(review)
-                console.log(newState.Reviews)
                 newState.Reviews[review.id] = review
             })
             return newState

@@ -1,5 +1,5 @@
 import { useModal } from "../context/Modal";
-import { removeSpot } from "../store/spot";
+import { removeSpot , getUserSpots} from "../store/spot";
 import { useDispatch, } from "react-redux";
 
 const DeleteSpotModal = ({id}) => {
@@ -7,7 +7,9 @@ const DeleteSpotModal = ({id}) => {
     const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
+        e.preventDefault()
         await dispatch(removeSpot(id))
+        await dispatch(getUserSpots())
         closeModal()
     }
 

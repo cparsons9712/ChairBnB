@@ -18,18 +18,20 @@ function PostReviewModal({id}) {
 
 
     const handleSubmit = async (e) => {
-        
+        e.preventDefault()
         const payload = {review, stars}
         setErrors({})
         const newRev = await dispatch(postReview(id, payload))
-       if(newRev.ok){
+
+       if(newRev.id){
+        console.log("HIT THE SUCCESS STATEMENT!!!!!!")
         dispatch(getSpotReviews(id))
         closeModal()
-        history.push(`spots/${id}`)
+        // history.push(`spots/${id}`)
        }else{
-        console.log(newRev)
-        //const res = await newRev.json()
-        //setErrors(res.errors)
+        console.log('!!!HandleSubmit post reviewwent to else statment!!!')
+        const res = await newRev.json()
+        setErrors(res.errors)
        }
     }
 
@@ -49,9 +51,11 @@ function PostReviewModal({id}) {
                 <button className = 'close' onClick={closeModal}>X</button>
 
                 <h2>How was your stay?</h2>
+                {Object.values(errors)?.map((error)=>{
+                    return <div>{error}</div>
+                })}
 
-                <div className="errors">{errors?.stars}</div>
-                <div className="errors">{errors?.review}</div>
+
             </div>
 
             <textarea value={review} placeholder="Leave your review here ..." id='reviewText'onChange={(e) => setReview(e.target.value)} />
