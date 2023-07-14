@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { useModal } from "../context/Modal";
 import { postReview } from "../store/spot";
-import { getSpotReviews } from "../store/spot";
+import { getSpotReviews, getOneSpot } from "../store/spot";
 
 
 function PostReviewModal({id}) {
     const dispatch = useDispatch()
-    const history = useHistory()
+
 
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
@@ -24,12 +23,13 @@ function PostReviewModal({id}) {
         const newRev = await dispatch(postReview(id, payload))
 
        if(newRev.id){
-        console.log("HIT THE SUCCESS STATEMENT!!!!!!")
+
         dispatch(getSpotReviews(id))
+        dispatch(getOneSpot(id))
         closeModal()
         // history.push(`spots/${id}`)
        }else{
-        console.log('!!!HandleSubmit post reviewwent to else statment!!!')
+
         const res = await newRev.json()
         setErrors(res.errors)
        }
@@ -62,6 +62,7 @@ function PostReviewModal({id}) {
 
             <label className='reviewStars'>
                 <input
+                id='stars'
                     type="number"
                     value={stars}
                     onChange={(e) => setStars(parseInt(e.target.value))}
@@ -69,6 +70,8 @@ function PostReviewModal({id}) {
                 Stars
 
             </label>
+
+
 
             <button type="submit" disabled={disable}  id='submitNewReview'>Submit Your Review</button>
 

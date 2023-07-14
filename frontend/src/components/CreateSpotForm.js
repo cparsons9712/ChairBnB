@@ -28,20 +28,26 @@ function NewSpotModal() {
     const[image3, setImage3] = useState(null)
     const[image4, setImage4] = useState(null)
     const[image5, setImage5] = useState(null)
+    const [attempt, setAttempt] =useState(false)
 
     useEffect(()=>{
       setImages([image1,image2,image3,image4, image5])
+      
     }, [image1,image2,image3,image4, image5])
 
     const handleSubmit = async (e) => {
       e.preventDefault();
+
+
       const payload = { address, city, state, country, lat, lng, name, description, price };
 
       let newSpot = await dispatch(createNewSpot(payload));
 
+
       if (newSpot.id) {
-        if (images.length === 0) {
-          return setErrors({ ...errors, previewImg: 'Preview Image is required' });
+
+        if (image1 === null) {
+          return setErrors({ previewImg: 'Preview Image is required' });
         } else {
           for (let i = 0; i < images.length; i++) {
             let preview = false;
@@ -61,12 +67,6 @@ function NewSpotModal() {
         setErrors(res.errors);
       }
     };
-
-
-    useEffect(()=>{
-      console.log('IMAGE ARRAY:::::')
-      console.log(images)
-    },[images])
 
     return (
       <>
@@ -170,20 +170,23 @@ function NewSpotModal() {
         <div id='price'>
             <h4>Set a base price for your spot</h4>
             <p>Competitive pricing can help your listing stand out and rank higher in search results</p>
-            <div id='dolla'> <div id='dollarSign'>$ </div><input id='priceInputNew'
+            <div id='dolla'>
+              <div id='dollarSign'>$ </div>
+              <input id='priceInputNew'
               type="text"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               placeholder="Price per night (USD)"
-            /></div>
+              />
+            </div>
             <div className="errors">{errors?.price}</div>
         </div>
         </div>
        <div id='addPhotos'>
             <h4>Liven up your spot with photos</h4>
             <p>Submit a link to at least one photo to publish your spot.</p>
+            <div className="errors">{errors?.previewImg}</div>
             <div id='urlInputs'>
-
             <input
               type="text"
               value={image1}
@@ -191,7 +194,7 @@ function NewSpotModal() {
               placeholder="Preview Image URL"
               key="previewURL"
             />
-            <div className="errors">{errors?.previewImg}</div>
+
             <input
               type="text"
               value={image2}

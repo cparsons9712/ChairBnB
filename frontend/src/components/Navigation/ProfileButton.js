@@ -11,7 +11,7 @@ function ProfileButton({ user }) {
   return (
     <>
         {user ? (
-          <div id="rightNav">
+          <div id="rightNav" >
             <OpenModalButton
             buttonText='Create a New Spot'
             modalComponent={<NewSpotModal />}

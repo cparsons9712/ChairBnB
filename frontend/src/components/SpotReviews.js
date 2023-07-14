@@ -7,15 +7,12 @@ import DeleteReviewModal from "./DeleteReview";
 
 function SpotReviews({ id , user}) {
   const dispatch = useDispatch();
-
-  // State to track whether the current user is the owner of the spot
   const [isOwner, setIsOwner] = useState(false);
-  // State to track whether reviews have been loaded
   const [reviewsLoaded, setReviewsLoaded] = useState(false);
+  const[hasReview, setHasReview] = useState(false)
 
 
   useEffect(() => {
-    // Fetch spot reviews when the component mounts or the `id` prop changes
     dispatch(getSpotReviews(id));
   }, [dispatch, id]);
 
@@ -25,14 +22,14 @@ function SpotReviews({ id , user}) {
   reviews = Object.values(reviews);
 
   useEffect(() => {
-    // Check if the current user is the owner of the spot
     if (user && owner && owner.id === user.id) {
       setIsOwner(true);
+    }else{
+      setIsOwner(false)
     }
   }, [user, owner]);
 
   useEffect(() => {
-    // Set `reviewsLoaded` to `true` when reviews are available
     if (reviews) {
       setReviewsLoaded(true);
     }
@@ -42,34 +39,34 @@ function SpotReviews({ id , user}) {
     // Render a delete button if the current user is the author of the review
     if (user && user.id === posterID) {
       return (
+        <div id="deleteReviewButton">
         <OpenModalButton
           buttonText="Delete"
           modalComponent={<DeleteReviewModal revId={revID} spotId={id} />}
         />
+        </div>
       );
     } else {
       return null;
     }
   };
 
-  const displayPostReviewButton = () => {
-    // Render the post review button based on the following conditions:
-    if (reviewsLoaded && user) {
-      if (!isOwner && reviews && reviews.length > 0) {
-        // Check if the current user has already posted a review
-        const users = reviews.map((review) => review.User?.id);
+  useEffect(()=>{
+    if(user){
+    const users = reviews.map((review) => review.User?.id);
         if (!users.includes(user.id)) {
-          return (
-            <div id="postReviewButton">
-              <OpenModalButton
-                buttonText="Post Your Review"
-                modalComponent={<PostReviewModal id={id} />}
-              />
-            </div>
-          );
+          setHasReview(false)
+        }else{
+          setHasReview(true)
         }
-      } else if (!isOwner && (!reviews || reviews.length === 0)) {
-        // Render the post review button if there are no reviews
+    }
+  },[reviews, user, id])
+
+  const displayPostReviewButton = () => {
+    if (reviewsLoaded && user) {
+      if(isOwner || hasReview){
+        return null
+      }else{
         return (
           <div id="postReviewButton">
             <OpenModalButton
@@ -77,13 +74,8 @@ function SpotReviews({ id , user}) {
               modalComponent={<PostReviewModal id={id} />}
             />
           </div>
-        );
-      } else {
-        return null;
-      }
+      )}
     }
-
-    return null;
   };
 
   const displayReviews = () => {
