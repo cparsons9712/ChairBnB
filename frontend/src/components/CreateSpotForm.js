@@ -17,8 +17,8 @@ function NewSpotModal() {
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
-    const [lat, setLat] = useState('')
-    const [lng, setLong] = useState('')
+    const [lat, setLat] = useState(null)
+    const [lng, setLong] = useState(null)
     const [description, setDescription] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
@@ -32,7 +32,7 @@ function NewSpotModal() {
 
     useEffect(()=>{
       setImages([image1,image2,image3,image4, image5])
-      
+
     }, [image1,image2,image3,image4, image5])
 
     const handleSubmit = async (e) => {
