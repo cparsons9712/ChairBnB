@@ -20,26 +20,6 @@ const validateSpot = [
   check('country')
     .exists({ checkFalsy: true })
     .withMessage('Country is required'),
-  check('lat')
-    .custom((value, { req }) => {
-      if( value > -90 && value < 90){
-        return true
-      }
-      else{
-        return false
-      }
-    })
-    .withMessage('Latitude is not valid'),
-  check('lng')
-    .custom((value, { req }) => {
-      if( value > -180 && value < 180){
-        return true
-      }
-      else{
-        return false
-      }
-    })
-    .withMessage('Longitude is not valid'),
   check('name')
     .isLength({ max: 50 })
     .withMessage('Name must be less than 50 characters'),
