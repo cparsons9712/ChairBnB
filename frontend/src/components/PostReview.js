@@ -3,11 +3,14 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../context/Modal";
 import { postReview } from "../store/spot";
 import { getSpotReviews, getOneSpot } from "../store/spot";
+import StarRating from "./starRating";
+import { FaStar } from 'react-icons/fa'
 
 
 function PostReviewModal({id}) {
     const dispatch = useDispatch()
-
+    const [rating, setRating] = useState(null);
+    const [hover, setHover] = useState(null)
 
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
@@ -36,7 +39,7 @@ function PostReviewModal({id}) {
     }
 
     useEffect(()=>{
-        if(stars !== '' && review.length > 9){
+        if(stars && review.length > 9){
             setDisable(false)
         }else{
             setDisable(true)
@@ -60,18 +63,29 @@ function PostReviewModal({id}) {
 
             <textarea value={review} placeholder="Leave your review here ..." id='reviewText'onChange={(e) => setReview(e.target.value)} />
 
-            <label className='reviewStars'>
-                <input
-                    id='stars'
-                    min={1}
-                    max={5}
-                    type="number"
-                    value={stars}
-                    onChange={(e) => setStars(parseInt(e.target.value))}
-                />
-                Stars
+            <div id='stars'>
+                {[...Array(5)].map((star, i)=>{
+                    const ratingValue = i + 1;
 
-            </label>
+                    return <label>
+                        <input
+                            type="radio"
+                            name="rating"
+                            value={ratingValue}
+                            onClick={() => setStars(ratingValue)}
+                        />
+
+                        <FaStar
+                            className="star"
+                            color={ratingValue <= (hover || stars) ? "#ffc107 " : "#e4e5e9"}
+                            onMouseEnter={()=>setHover(ratingValue)}
+                            onMouseLeave={()=> setHover(null)}
+                        />
+                    </label>
+                })}
+                <p id='starLabel'> Stars </p>
+
+            </div>
 
 
 

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "react-icons": "^4.10.1",
     "react-tooltip": "^5.16.1"
   },
   "name": "chairbnb",
@@ -16,7 +17,6 @@
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
     "start": "npm start --prefix backend",
     "build": "npm run build --prefix backend"
-
   },
   "keywords": [],
   "author": "",

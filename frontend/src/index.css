@@ -556,10 +556,27 @@ Post A Review Modal
   margin: 10px;
 }
 
-#stars{
-  width: 30px;
-  margin: 20px;
+#stars {
+  width: 100%;
+  
   font-size: large;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+  margin: 2px;
+}
+#starLabel{
+  margin-left: 10px;
 }
 
 /*********************************************
