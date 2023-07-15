@@ -62,7 +62,9 @@ function PostReviewModal({id}) {
 
             <label className='reviewStars'>
                 <input
-                id='stars'
+                    id='stars'
+                    min={1}
+                    max={5}
                     type="number"
                     value={stars}
                     onChange={(e) => setStars(parseInt(e.target.value))}
