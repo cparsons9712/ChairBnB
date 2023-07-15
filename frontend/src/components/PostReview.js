@@ -23,11 +23,11 @@ function PostReviewModal({id}) {
         const newRev = await dispatch(postReview(id, payload))
 
        if(newRev.id){
-
-        dispatch(getSpotReviews(id))
         dispatch(getOneSpot(id))
+        dispatch(getSpotReviews(id))
         closeModal()
-        // history.push(`spots/${id}`)
+
+
        }else{
 
         const res = await newRev.json()

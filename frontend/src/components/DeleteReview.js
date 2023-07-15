@@ -9,9 +9,12 @@ const DeleteReviewModal = ({revId, spotId}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         dispatch(removeReview(revId))
-        dispatch(getSpotReviews(spotId))
         dispatch(getOneSpot(spotId))
+        dispatch(getSpotReviews(spotId))
+
         closeModal()
+
+
     }
 
     return (

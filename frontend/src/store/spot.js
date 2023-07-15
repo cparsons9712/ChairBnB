@@ -197,7 +197,7 @@ export const removeReview = (id) => async dispatch => {
 const initialState = {All:{}, Current: {}, Reviews: {},Users: {}}
 const spotReducer = (state = initialState, action) => {
 
-    const newState = {All:{...state.All}, Current:{...state.Current}, Users:{}, Reviews: {}}
+    const newState = {All:{...state.All}, Current:{...state.Current}, Users:{}, Reviews: {...state.Reviews}}
 
     switch (action.type){
         case LOAD:
@@ -209,6 +209,7 @@ const spotReducer = (state = initialState, action) => {
                 newState.Current = action.spot
             return newState;
         case LOADREV:
+            newState.Reviews = {};
             let reviews = action.revs.Reviews || [];
             reviews.forEach((review)=>{
                 newState.Reviews[review.id] = review
