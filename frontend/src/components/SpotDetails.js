@@ -26,10 +26,8 @@ const SpotDetails = () => {
       const imageLinks = []
       for(let i = 0; i < images.length; i++){
         let id = idArr[i]
-
         imageLinks.push(<img key={images[i].id} src={images[i].url} alt="Spot" className="spotImage" id={id}/>)
       }
-
       return imageLinks
   }
 }

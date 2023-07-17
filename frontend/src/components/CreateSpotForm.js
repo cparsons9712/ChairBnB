@@ -38,34 +38,51 @@ function NewSpotModal() {
     const handleSubmit = async (e) => {
       e.preventDefault();
 
+      //validations
+      let errors = {}
+      if(!address)errors.address= "Address is Required"
+      if(!city) errors.city = "City is Required"
+      if(!state) errors.state = "State is Required"
+      if(!country) errors.country = "Country is Required"
+      if(!name) errors.name = "Name is Required"
+      if(!description || description.length < 30) errors.description = "Description must be at least 30 characters"
+      if(!price) errors.price = "Price is Required"
+      if (!image1) errors.previewImg =  'Preview Image is Required';
+      else if(/\.(jpg|jpeg|png)$/.test(image1) === false) errors.previewImg = "Images must end in jpg, jpeg, or png"
 
-      const payload = { address, city, state, country, lat, lng, name, description, price };
-
-      let newSpot = await dispatch(createNewSpot(payload));
 
 
-      if (newSpot.id) {
 
-        if (image1 === null) {
-          return setErrors({ previewImg: 'Preview Image is required' });
-        } else {
+        if(Object.values(errors).length > 0){
+          setErrors(errors)
+        } else{
+          const payload = { address, city, state, country, lat, lng, name, description, price };
+          const newSpot = await dispatch(createNewSpot(payload))
+          if (newSpot.id) {
+
           for (let i = 0; i < images.length; i++) {
             let preview = false;
             if (i === 0) preview = true;
+            if(images[i]){
             await dispatch(
               addImages(newSpot.id, {
                 url: images[i],
                 preview
-              })
-            );
+            }));
+            }
+
           }
-        }
+
         closeModal();
         history.push(`/spots/${newSpot.id}`);
       } else {
         const res = await newSpot.json();
         setErrors(res.errors);
       }
+
+
+        }
+
     };
 
     return (
@@ -186,6 +203,7 @@ function NewSpotModal() {
             <h4>Liven up your spot with photos</h4>
             <p>Submit a link to at least one photo to publish your spot.</p>
             <div className="errors">{errors?.previewImg}</div>
+            <div className="errors">{errors?.img}</div>
             <div id='urlInputs'>
             <input
               type="text"

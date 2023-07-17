@@ -104,6 +104,8 @@ export const createNewSpot = (spot) => async dispatch => {
 
 export const addImages = (id, image) => async dispatch => {
     try{
+
+
         const response = await csrfFetch(`/api/spots/${id}/images`, {
             method: 'POST',
             headers: {
@@ -115,6 +117,7 @@ export const addImages = (id, image) => async dispatch => {
         dispatch(createImage(newImage))
 
         return newImage
+   
     }catch(e) {
         return e
     }

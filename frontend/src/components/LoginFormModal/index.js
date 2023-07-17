@@ -12,16 +12,18 @@ function LoginFormModal() {
   const { closeModal } = useModal();
 
   const handleSubmit = (e) => {
+    // keep window from reloading
     e.preventDefault();
+    // make sure error is fresh and empty
     setErrors({});
 
     // Dispatch the login action with the provided credential and password
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal) // Close the modal after successful login
       .catch(async (res) => {
-        const data = await res.json();
+        const data = await res.json(); //formatt errors into readable data
         if (data && data.errors) {
-          setErrors(data.errors);
+          setErrors(data.errors); // set errors if they exist
         }
       });
   };
@@ -54,6 +56,7 @@ function LoginFormModal() {
   return (
     <>
       <form onSubmit={handleSubmit} id='logInModal'>
+        
         <div className="logInSection">
           <button className='close' onClick={closeModal}>X</button>
           <h1>Log In</h1>

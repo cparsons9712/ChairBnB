@@ -558,7 +558,6 @@ Post A Review Modal
 
 #stars {
   width: 100%;
-  
   font-size: large;
   display: flex;
   flex-direction: row;
@@ -594,7 +593,6 @@ Spot Management
   flex-direction: row;
   flex-wrap: wrap;
   padding-bottom: 50px;
-
 }
 
 #manageTitle{
